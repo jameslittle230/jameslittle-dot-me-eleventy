@@ -188,3 +188,12 @@ button.link:hover {
   margin-bottom: 0.2em;
   line-height: 1.1;
 }
+
+pre {
+  max-height: 50vh;
+  overflow-y: scroll;
+  background-color: #2d2d2d;
+  color: #ccc;
+  padding: 1em;
+	margin: .5em 0;
+}
