@@ -42,6 +42,7 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addFilter("dateformat", dateformat);
 
   eleventyConfig.addPassthroughCopy("content/styles/");
+  eleventyConfig.addPassthroughCopy({"content/static/": "/"});
 
   let markdownLib = mdit({html: true}).use(mditfootnote);
   markdownLib.renderer.rules.footnote_block_open = () =>
