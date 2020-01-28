@@ -1,0 +1,41 @@
+.post-listing {
+  padding: 0.7em;
+  margin: 0 -0.7em; /* keep this value the same as the padding so the text lines up with the margin */
+  transition: box-shadow 0.15s ease-out;
+}
+
+.post-listing:hover {
+  box-shadow: var(--shadow);
+}
+
+.post-listing-flex {
+  display: flex;
+  align-items: baseline;
+}
+
+.post-listing a {
+  color: currentColor;
+  text-decoration: none;
+}
+
+.post-listing p {
+  margin-top: 0;
+  margin-bottom: 0.3em;
+}
+
+.post-listing p:last-child {
+  margin-bottom: 0;
+}
+
+.post-listing .title {
+  font-size: 1.2em;
+}
+
+.post-listing .blurb {
+  font-size: 0.8em;
+}
+
+.post-listing .date {
+  margin-right: 1em;
+}
+

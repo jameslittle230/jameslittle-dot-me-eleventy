@@ -1,0 +1,45 @@
+---
+layout: base
+---
+
+<p><a href="/portfolio">&larr; Back to Portfolio</a></p>
+
+<h1 class="big-title">{{title}}</h1>
+
+<div class="metadata">
+    <p>{{blurb}}</p>
+    <p class="stats">{{platform}} <span>•</span> {{work}} <span>•</span> {{when}}</p>
+    {% if link %}
+    <p class="big-link">
+        <a href="{{link}}">{{link}}</a>
+    </p>
+    {% endif %}
+</div>
+
+{{ content | safe }}
+
+<style>
+.metadata {
+    opacity: 0.7;
+    text-align: center;
+    margin: 3em auto;
+    width: 80%;
+}
+
+.metadata p {
+    margin: 0;
+}
+
+.metadata .stats {
+    margin: 1em 0;
+    font-size: 0.8em;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+}
+
+.big-link {
+    font-size: 1.5em;
+    font-weight: bold;
+    }
+
+</style>

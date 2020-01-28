@@ -1,0 +1,103 @@
+--- 
+layout: base.njk 
+title: Home 
+---
+
+<link rel="stylesheet" href="/styles/post-listing.css"/>
+<link rel="stylesheet" href="/styles/portfolio-listing.css"/>
+
+<picture style="float: right; width: 40%; margin: 0 0 2em 2em;">
+    <source type="image/webp" srcset="https://files.jameslittle.me/images/headshot.webp">
+    <source type="image/jpeg" srcset="https://files.jameslittle.me/images/headshot.jpg">
+    <img src="https://files.jameslittle.me/images/headshot.jpg" alt="">
+</picture>
+
+<h1 style="margin-top: 0">Hi, I'm James Little!</h1>
+
+<p>I'm an iOS and web developer and designer from Boston, currently living in San Francisco, Calif.</p>
+
+<p>I'm currently working on
+    <a href="https://stripe.com/terminal">Terminal</a>, at
+    <a href="https://stripe.com">Stripe</a>, a company that builds financial infrastructure for the internet.</p>
+
+<p>I started there after graduating from
+    <a href="https://bowdoin.edu">Bowdoin College</a>
+    in Brunswick, Maine, where I majored in Computer Science, worked as the Digital Director for the
+    <a href="https://bowdoinorient.com">student newspaper</a>, and
+    <a href="https://www.youtube.com/watch?v=r7XT98HchBs">played with robots</a>.</p>
+
+<p>
+    <strong>I'm interested in how people interact with technology, and I want to make interfacing with the digital world simpler and more intuitive through the software I create.</strong>
+</p>
+
+
+
+<h2 style="clear: both">Recent Blog Posts</h2>
+
+<ul style="list-style-type: none; padding: 0;">
+    {% for post in collections.post | reverse %}
+        {% if loop.index <= 3 %}
+            {% include "post-listing.njk" %}
+        {% endif %}
+    {% endfor %}
+</ul>
+
+<p>
+    <a class="cta" href="/blog">See more posts &rarr;</a>
+</p>
+
+<h2>My Work</h2>
+
+<ul class="portfolio-list">
+    {% for project in collections.portfolio | reverse %}
+        {% if loop.index <= 3 %}
+            {% include "portfolio-listing.njk" %}
+        {% endif %}
+    {% endfor %}
+</ul>
+
+<p>
+    <a class="cta" href="/portfolio">See more projects &rarr;</a>
+</p>
+
+<h2>Contact</h2>
+
+<p>I'd love to get in touch. Shoot me an email at jameslittle230 (it's at gmail dot com). I'm also on various places on the internet, which are listed in the page's footer. &darr;</p>
+
+<style>
+    h2 {
+        margin-top: 3em;
+    }
+
+    .cta {
+        background: none;
+        padding: 1em;
+        width: 100%;
+        display: block;
+        border: none;
+        text-align: center;
+        font-size: 1rem;
+        font-weight: bold;
+        color: currentcolor !important;
+        text-decoration: none;
+        transition: box-shadow 0.15s ease-out;
+    }
+
+    .cta:hover {
+        box-shadow: var(--shadow);
+        cursor: pointer;
+    }
+
+    .cta:active {
+        box-shadow: 0.1em 0.1em 1em rgba(0, 0, 0, 0.7) inset,
+            0.5em 0.5em 3em rgba(0, 0, 0, 0.2) inset;
+    }
+
+    .portfolio-list {
+        list-style-type: none;
+        padding: 0;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-column-gap: 2em;
+    }
+</style>

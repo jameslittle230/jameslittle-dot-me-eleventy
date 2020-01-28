@@ -1,0 +1,60 @@
+.pre-article {
+  margin-bottom: 2em;
+}
+
+article {
+  line-height: 1.75;
+}
+
+article > * {
+  margin: 0;
+  margin-bottom: 1.5em;
+}
+
+.post-article {
+  margin-top: 2em;
+}
+
+.post-article > *:first-child {
+  margin-bottom: 1em;
+}
+
+.post-article .whoami-box {
+  background: var(--primary-color);
+  padding: 1em;
+  box-shadow: 0.1em 0.1em 0 var(--bg-color), 0.7em 0.7em 0 var(--secondary-color);
+}
+
+.post-article p {
+  margin: 0;
+}
+
+.post-article .whoami-text {
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-size: 0.8em;
+  margin-bottom: 0.3em;
+}
+
+.related-links {
+  display: flex;
+  background-color: var(--bg-color);
+  padding: 1.5em 3em;
+}
+
+.related-links a {
+  display: block;
+}
+
+.related-links .prev-article-link {
+  text-align: right;
+  margin-left: auto;
+  margin-right: 0.8em;
+  width: 40%;
+}
+
+.related-links .next-article-link {
+  margin-right: auto;
+  margin-left: 0.8em;
+  width: 40%;
+}

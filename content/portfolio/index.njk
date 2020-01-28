@@ -1,0 +1,24 @@
+--- 
+layout: base.njk 
+title: "Portfolio" 
+---
+
+<h1 class="big-title">Portfolio of Projects</h1>
+
+<link rel="stylesheet" href="/styles/portfolio-index.css"/>
+
+<ul class="portfolio-index">
+{%- for project in collections.portfolio | reverse -%}
+    {% include "portfolio-listing.njk" %}
+{%- endfor -%}
+</ul>
+
+<h1>Other projects</h1>
+<p>(that didn't deserve a whole writeup)</p>
+
+<ul>
+    <li><a href="https://rothrotterlaster.com">A website for a pediatric practice in Brookline, MA, built with Gatsby</a> (Summer 2019)</li>
+    <li><a href="https://directory.jameslittle.me">A Bowdoin Directory with live search and more information displayed</a> (Fall 2018)</li>
+    <li><a href="https://files.jameslittle.me/projects/ait-graphics-final/index.html">A Marble Blast Gold clone built with WebGL</a> (Spring 2018)</li>
+    <li><a href="https://github.com/jameslittle230/shortlink">A link shortening service that writes to a file instead of using a database</a> (Spring 2018)</li>
+</ul>

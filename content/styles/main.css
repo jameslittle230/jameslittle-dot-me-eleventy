@@ -1,0 +1,190 @@
+:root {
+  --primary-color: #3bef8f;
+  --secondary-color: #c5369a;
+  --font-color: #182b28;
+  --bg-color: #fff;
+  --heading-color: #163833;
+  --link-color: #007e76;
+  --visited-color: #9f10ac;
+  --shadow: 0 0.9px 2.1px rgba(0, 0, 0, 0.031),
+    0 2.1px 5.1px rgba(0, 0, 0, 0.039), 0 3.9px 9.7px rgba(0, 0, 0, 0.044),
+    0 6.9px 17.3px rgba(0, 0, 0, 0.048), 0 13px 32.7px rgba(0, 0, 0, 0.053),
+    0 31px 80px rgba(0, 0, 0, 0.07);
+}
+
+[data-theme="dark"] {
+  --primary-color: #078642;
+  --secondary-color: #af5995;
+  --font-color: #d7dfdd;
+  --bg-color: #25302e;
+  --heading-color: #abccc7;
+  --link-color: #50f0e5;
+  --visited-color: #e07fe9;
+}
+
+*,
+*:before,
+*:after {
+  position: relative;
+  box-sizing: border-box;
+}
+
+img {
+  max-width: 100%;
+}
+
+html,
+body {
+  background-color: var(--bg-color);
+}
+
+/* html {
+  font-size: 22px;
+} */
+
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol";
+  max-width: 45rem;
+  width: 96%;
+  margin: 0 auto;
+  color: var(--font-color);
+  line-height: 1.5;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--heading-color);
+}
+
+/* These need the article > hx selector to override the article > * selector in
+   post.css
+*/
+h1, article > h1,
+h2, article > h2,
+h3, article > h3,
+h4, article > h4,
+h5, article > h5,
+h6, article > h6 {
+  margin-bottom: 0.3em;
+  margin-top: 2.25em;
+}
+
+h1:first-child,
+h2:first-child,
+h3:first-child,
+h4:first-child,
+h5:first-child,
+h6:first-child {
+  margin-top: 0.3em;
+}
+
+code {
+  font-family: "jetbrains mono";
+}
+
+*:not(pre) > code {
+  background: var(--primary-color);
+  font-size: 0.9em;
+  padding: 0.1em 0.4em;
+}
+
+.tabl {
+  font-feature-settings: "tnum";
+}
+
+a:link {
+  color: var(--link-color);
+}
+
+a:visited {
+  color: var(--visited-color);
+}
+
+blockquote {
+  font-size: 0.85em;
+  line-height: 1.65;
+  padding: 0;
+  padding-left: 2em;
+  background: left 0 / 1.5em repeat-y
+    repeating-linear-gradient(
+      -30deg,
+      var(--primary-color),
+      var(--primary-color) 0.5em,
+      var(--bg-color) 0.5em,
+      var(--bg-color) 1em
+    );
+}
+
+.footbar {
+  text-align: center;
+  padding: 4em 0 2em;
+  font-size: 0.7em;
+  text-transform: uppercase;
+  letter-spacing: 0.035em;
+  line-height: 1.5;
+  clear: both;
+}
+
+.footbar p {
+  margin: 0.7em 0;
+}
+
+.footbar .links a {
+  margin: 0 0.5em;
+}
+
+.topbar {
+  padding: 1em;
+  background: var(--primary-color);
+  box-shadow: 0.1em 0.1em 0 var(--bg-color),
+    0.7em 0.7em 0 var(--secondary-color);
+  margin-bottom: 2em;
+  margin-top: 0.5em;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.topbar a {
+  margin: 0;
+  margin-right: 1.5em;
+  color: var(--font-color);
+  text-decoration: none;
+}
+
+.topbar a:hover {
+  text-decoration: underline;
+}
+
+.back-home {
+  font-weight: bold;
+}
+
+button.link {
+  background: none;
+  border: none;
+  font-family: inherit;
+  font-size: inherit;
+  text-transform: inherit;
+  letter-spacing: inherit;
+  color: var(--link-color);
+  text-decoration: underline;
+}
+
+button.link:hover {
+  cursor: pointer;
+}
+
+.big-title {
+  font-size: 3em;
+  letter-spacing: -0.03em;
+  margin: 0;
+  margin-top: 0.8em;
+  margin-bottom: 0.2em;
+  line-height: 1.1;
+}

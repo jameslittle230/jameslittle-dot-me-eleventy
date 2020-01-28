@@ -1,0 +1,13 @@
+<li class="post-listing">
+    <a href="{{ post.url }}" class="post-listing-flex">
+    <span class="tabl date">{{ post.date | dateformat }}</span>
+    <div>
+        <p class="title"><b>{{ post.data.title }}</b></p>
+        {% if post.data.blurb %}
+        <p class="blurb">{{ post.data.blurb }}</p>
+        {% else %}
+        {# <p class="blurb">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p> #}
+        {% endif %}
+    </div>
+    </a>
+</li>

@@ -1,0 +1,19 @@
+--- 
+layout: base.njk 
+title: "My Blog" 
+---
+
+<h1 class="big-title">Blog</h1>
+
+<link rel="stylesheet" href="/styles/post-index.css"/>
+
+{%- for year in collections.uniquePostYears | reverse -%}
+  <h2 class="year-listing">{{year}}</h2>
+  <ul>
+    {%- for post in collections.postsWithYears | reverse -%}
+      {% if year == post.year %}
+        {% include "post-listing.njk" %}
+      {% endif %}
+    {%- endfor -%}
+  </ul>
+{%- endfor -%}
