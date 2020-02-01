@@ -90,6 +90,7 @@ code {
 
 *:not(pre) > code {
   background: var(--primary-color);
+  color: var(--black-override);
   font-size: 0.9em;
   padding: 0.1em 0.4em;
 }

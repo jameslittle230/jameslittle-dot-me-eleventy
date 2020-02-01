@@ -1,4 +1,39 @@
 <!doctype html>
+<!-- Dark mode script has to go first -->
+<script>
+var jlGlobals = {};
+function recomputeComputedValue() {
+  const storedSetting = localStorage.getItem('theme')
+  const osThemeIsDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+  /*
+  Light by default
+  Dark if stored setting is null and OS is in dark mode
+  Whatever stored setting is if it exists
+
+                        | os dark       os light
+    ----------------------------------------------
+    stored setting dark  | dark          dark
+    ----------------------------------------------
+    stored setting light | light         light
+    ----------------------------------------------
+    stored setting null  | dark          light
+
+  */
+
+  jlGlobals.theme = storedSetting ? storedSetting : (osThemeIsDark ? "dark" : "light");
+  if (["light", "dark"].indexOf(jlGlobals.theme) === -1) { 
+    console.error("Could not determine theme");
+    /* Log */
+    jlGlobals.theme = "light"
+  }
+
+  document.documentElement.setAttribute('data-theme', jlGlobals.theme);
+}
+
+recomputeComputedValue()
+</script>
+
 <html lang="en" data-theme="light">
   <head>
     <meta charset="utf-8">

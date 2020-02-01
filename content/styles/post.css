@@ -20,6 +20,7 @@ article > * {
 }
 
 .post-article .whoami-box {
+  color: var(--black-override);
   background: var(--primary-color);
   padding: 1em;
   box-shadow: 0.1em 0.1em 0 var(--bg-color), 0.7em 0.7em 0 var(--secondary-color);
@@ -57,4 +58,36 @@ article > * {
   margin-right: auto;
   margin-left: 0.8em;
   width: 40%;
+}
+
+
+
+
+
+
+
+
+/**
+ * FOOTNOTES
+ */
+
+sup.footnote-ref {
+  vertical-align: initial;
+}
+
+[data-theme="dark"] .footnote-button {
+  background: rgba(233, 230, 230, 0.7)
+}
+
+[data-theme="dark"] .footnote-button:after, [data-theme="dark"] .footnote-button:hover:after {
+  color: var(--black-override);
+}
+
+[data-theme="dark"] .footnote-button:hover {
+  background: rgba(233, 230, 230, 1)
+}
+
+[data-theme="dark"] .bf-footnote {
+  background: #273126;
+  box-shadow: var(--shadow);
 }
