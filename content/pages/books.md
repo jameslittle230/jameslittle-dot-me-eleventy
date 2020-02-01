@@ -11,6 +11,7 @@ In January of 2014, inspired by [Jamie Todd Rubin](http://www.jamierubin.net), I
 
 - You Look Like a Thing and I Love You - Janelle Shane
 - Dark Matter - Blake Crouch
+- UNIX: A History and a Memoir - Brian Kernighan
 
 ## 2019
 
