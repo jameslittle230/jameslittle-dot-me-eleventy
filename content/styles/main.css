@@ -6,6 +6,8 @@
   --heading-color: #163833;
   --link-color: #007e76;
   --visited-color: #9f10ac;
+  --white-override: #ffffff;
+  --black-override: #182b28;
   --shadow: 0 0.9px 2.1px rgba(0, 0, 0, 0.031),
     0 2.1px 5.1px rgba(0, 0, 0, 0.039), 0 3.9px 9.7px rgba(0, 0, 0, 0.044),
     0 6.9px 17.3px rgba(0, 0, 0, 0.048), 0 13px 32.7px rgba(0, 0, 0, 0.053),
@@ -13,11 +15,9 @@
 }
 
 [data-theme="dark"] {
-  --primary-color: #078642;
-  --secondary-color: #af5995;
   --font-color: #d7dfdd;
-  --bg-color: #25302e;
-  --heading-color: #abccc7;
+  --bg-color: #273126;
+  --heading-color: #c4ddc8;
   --link-color: #50f0e5;
   --visited-color: #e07fe9;
 }
@@ -153,7 +153,7 @@ blockquote {
 .topbar a {
   margin: 0;
   margin-right: 1.5em;
-  color: var(--font-color);
+  color: var(--black-override);
   text-decoration: none;
 }
 
