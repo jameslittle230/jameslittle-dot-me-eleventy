@@ -11,9 +11,32 @@
   list-style-type: none;
 }
 
-@media (min-width: 750px) {
+
+@media (min-width: calc(45rem * 1.2 + 1em) /* [1] */) {
   .portfolio-index {
-    width: 80vw;
-    margin-left: calc(-40vw + 350px);
+    --element-width: 80vw;
+    width: var(--element-width);
+
+    /* Shift left by half the amount the index is overflowing its container */
+    margin-left: calc((var(--element-width) - 45em) * -0.5);
+  }
+}
+
+/**
+ * [1]: This calculation figures out (roughly) the viewport width when the index
+ *      is 45rem wide. We can see that again below, where we lock the element 
+ *      width at 90rem if it's going to get wider than that.
+ * 
+ *      The 1.2 is because we set the variable element width to 80vw.
+ * 
+ *      The 1em is because it didn't look right as-is (sigh)
+ * 
+ *      This is kind of hacky stuff. Sorry.
+ */
+
+
+@media (min-width: calc(90rem * 1.2 + 1em)) {
+  .portfolio-index {
+    --element-width: 90rem;
   }
 }
