@@ -5,12 +5,13 @@ title: Home
 
 <link rel="stylesheet" href="/styles/post-listing.css"/>
 <link rel="stylesheet" href="/styles/portfolio-listing.css"/>
+{% from "../includes/image-partial.njk" import img %}
 
-<picture style="float: right; width: 40%; margin: 0 0 2em 2em;">
-    <source type="image/webp" srcset="https://files.jameslittle.me/images/headshot.webp">
-    <source type="image/jpeg" srcset="https://files.jameslittle.me/images/headshot.jpg">
-    <img src="https://files.jameslittle.me/images/headshot.jpg" alt="">
-</picture>
+{{ img(
+    style="float: right; width: 40%; margin: 0 0 2em 2em",
+    ratio="150%",
+    urlbase="https://files.jameslittle.me/images/headshot" 
+) }}
 
 <h1 style="margin-top: 0">Hi, I'm James Little!</h1>
 

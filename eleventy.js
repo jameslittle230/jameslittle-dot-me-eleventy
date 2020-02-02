@@ -5,6 +5,8 @@ const format = require("date-fns/format");
 const mdit = require("markdown-it");
 const mditfootnote = require("markdown-it-footnote");
 
+const imagePartial = require("./includes/image-partial.js");
+
 function minifyHtml(content, outputPath) {
   if (outputPath.endsWith(".html")) {
     let minified = htmlmin.minify(content, {
@@ -43,6 +45,9 @@ module.exports = function(eleventyConfig) {
 
   eleventyConfig.addPassthroughCopy("content/styles/");
   eleventyConfig.addPassthroughCopy({"content/static/": "/"});
+
+  console.log(imagePartial);
+  eleventyConfig.addShortcode("img", imagePartial.img);
 
   let markdownLib = mdit({html: true}).use(mditfootnote);
   markdownLib.renderer.rules.footnote_block_open = () =>

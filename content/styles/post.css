@@ -91,3 +91,16 @@ sup.footnote-ref {
   background: #273126;
   box-shadow: var(--shadow);
 }
+
+
+
+
+
+
+/**
+ * IMAGES
+ */
+
+img {
+  background-color: var(--bg-color);
+}

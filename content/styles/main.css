@@ -33,6 +33,7 @@
 
 img {
   max-width: 100%;
+  margin: 0;
 }
 
 html,
@@ -190,6 +191,15 @@ button.link:hover {
   margin-top: 0.8em;
   margin-bottom: 0.2em;
   line-height: 1.1;
+}
+
+.picture-placeholder {
+  background-color: gray;
+}
+
+.over-placeholder {
+  position: absolute;
+  top: 0;
 }
 
 pre {
