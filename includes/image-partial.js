@@ -4,16 +4,12 @@ exports.img = function img(r, urlbase, classList, style) {
     var style = style;
     var urlbase = urlbase;
 
-    console.log(typeof r);
-
     if(typeof r == "object") {
         urlbase = r.urlbase;
         classList = r.classList;
         style = r.style
         ratio = r.ratio
     }
-
-    console.log(ratio, urlbase, classList, style);
 
     return `<div style="${style || ""}" class="${classList || ""}">
     <div class="picture-placeholder" style="padding-top: ${ratio}"></div>

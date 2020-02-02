@@ -24,5 +24,8 @@
     "gulp-ejs": "^5.0.0",
     "gulp-postcss": "^8.0.0",
     "postcss-modules": "^1.5.0"
+  },
+  "dependencies": {
+    "date-fns-tz": "^1.0.9"
   }
 }

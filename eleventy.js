@@ -1,7 +1,7 @@
 const htmlmin = require("html-minifier");
 const pluginRss = require("@11ty/eleventy-plugin-rss");
 const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
-const format = require("date-fns/format");
+const { zonedTimeToUtc, utcToZonedTime, format } = require("date-fns-tz");
 const mdit = require("markdown-it");
 const mditfootnote = require("markdown-it-footnote");
 
@@ -31,7 +31,8 @@ function extractPostSlug(value) {
 }
 
 function dateformat(value, fmtstring = "yyyy-MM-dd") {
-  return format(value, fmtstring);
+  let zonedDate = utcToZonedTime(value, "UTC");
+  return format(zonedDate, fmtstring);
 }
 
 module.exports = function(eleventyConfig) {
