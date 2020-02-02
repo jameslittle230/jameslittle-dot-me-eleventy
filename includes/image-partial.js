@@ -21,7 +21,6 @@ exports.img = function img(r, urlbase, classList, style) {
         <source type="image/webp" srcset="${urlbase}.webp">
         <source type="image/jpeg" srcset="${urlbase}.jpg">
         <img src="${urlbase}.jpg" alt="">
-        <img src="${urlbase}.png" alt="">
     </picture>
     </div>`;
 }
