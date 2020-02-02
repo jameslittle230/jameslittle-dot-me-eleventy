@@ -8,7 +8,10 @@ blurb: "An explainer describing what a Cross-Origin Resource Sharing error is, w
 
 "CORS" errors are a certain type of web development errors that can be pretty confusing. _Cross-Origin Resource Sharing_ related errors pop up when the web browser is trying to protect you from potential security vulnerabilities. When you don't expect them, though, they can be pretty irritating—the error messages don't make it entirely clear what you need to do to resolve the problem, and CORS itself is a complex enough topic that you won't find any quick resolution steps on the internet.
 
-![An image of a CORS error in the Firefox developer tools](/img/posts/cors/inspector-error.png)
+<figure>
+{% img "9.15%", "https://files.jameslittle.me/images/inspector-error" %}
+<figcaption>An image of a CORS error in the Firefox developer tools</figcaption>
+</figure>
 
 Why do CORS errors occur in the first place? You nearly always see them when the following three cases are true: when the browser is
 
@@ -38,10 +41,10 @@ What happens when you go to a website, like `https://jameslittle.me`? On a high 
 
 Every time a web page loads, several of these HTTP requests are sent: the first one is for the HTML document that was requested, and the rest are for any images, scripts, fonts, or stylesheets that the HTML document says is needed. The first one is directly related to the page you asked for in your browser's address bar; any others are automatically sent by the browser as specified by the first document the browser gets back. For each request that gets sent, the server to which it gets sent responds with the data the browser asked for. Those request/response pairs make up the contents of the web page, and control what your browser displays to you.
 
-<!-- <figure class="article-image--right">
-<img src="/img/posts/cors/inspector-headers.png">
-<figcaption>With the browser's web inspector, you can examine the HTTP request and corresponding response for any piece of content on a web page. This panel shows the HTTP headers for both the request (on the bottom) and the response (on the top).</figcaption>
-</figure> -->
+<figure>
+{% img "122.3%", "https://files.jameslittle.me/images/inspector-headers" %}
+<figcaption>The HTTP headers for both a request (on the bottom) and a response (on the top).</figcaption>
+</figure>
 
 We can dig into the request/response pairs in greater depth by looking at them in the Web Inspector.[^2] Each request and response has two parts: the _headers_ and the _payload_.
 

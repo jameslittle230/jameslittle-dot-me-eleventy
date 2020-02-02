@@ -8,10 +8,11 @@ blurb: "What do I use my Synology DS418j for? How did I get it all set up? What'
 
 I got, as a gift a few years back, a [Synology DiskStation DS418j](https://www.synology.com/en-us/products/DS418j) along with three Western Digital 8TB Red hard drives. This allowed me to put together a NAS (Network-Attached Storage): a relatively low-powered storage server that lives on my local network. Now that I've moved into an apartment, I've been able to tweak my setup to something relatively enjoyable.
 
-<!-- <figure>
-<img src="/img/posts/nas/synology.jpg">
+
+<figure>
+{% img "66%", "https://files.jameslittle.me/images/synology" %}
 <figcaption>I dusted it to take the photo, and the photo <em>still</em> looks like trash.</figcaption>
-</figure> -->
+</figure>
 
 # Prelude: Internet in General
 
