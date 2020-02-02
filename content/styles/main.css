@@ -18,7 +18,7 @@
 
 [data-theme="dark"] {
   --font-color: #d7dfdd;
-  --bg-color: #273126;
+  --bg-color: #262826;
   --heading-color: #c4ddc8;
   --link-color: #50f0e5;
   --visited-color: #e07fe9;
@@ -217,5 +217,5 @@ figcaption {
   text-transform: uppercase;
   opacity: 0.8;
   text-align: center;
-  letter-spacing: 0.02em;;
+  letter-spacing: 0.02em;
 }
