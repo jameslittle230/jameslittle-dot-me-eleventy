@@ -3,6 +3,7 @@ title:  "Learning and Making"
 date:   2018-06-24
 layout: post
 tags: post
+blurb: "What kinds of personal projects help you learn best? When can they stall learning? When should you build in order to learn, and when should you build in order to have something built at the end?"
 ---
 
 I’ve been working on a crossword puzzle creator for about three years, and I can’t tell whether it’s close to done or barely even started. 

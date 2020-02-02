@@ -3,6 +3,7 @@ title:  "Developing and Deploying bowdoinorient.com"
 date:   2018-09-14
 layout: post
 tags: post
+blurb: "An outline of the system I built to spin up temporary, easily-hacked-on versions of bowdoinorient.com"
 ---
 
 I moved the [Bowdoin Orient site](http://bowdoinorient.com) from a custom CMS to

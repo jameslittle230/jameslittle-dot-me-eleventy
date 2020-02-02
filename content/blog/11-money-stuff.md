@@ -3,6 +3,7 @@ title:  "Money Stuff"
 date:   2020-01-16
 layout: post
 tags: post
+blurb: "An overarching description of my financial setup, preceded by some of the concepts you need to know about in order to understand what you should do with your money. Meant to help someone go from basic saving to investing."
 ---
 
 > Note: I wrote this for my brother. Money decisions are intensely personal, and if you aren't my brother and you don't agree with what I've written here, note that your financial situation is likely different from that of my brother.

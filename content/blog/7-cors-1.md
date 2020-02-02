@@ -3,6 +3,7 @@ title:  "Why do we encounter CORS errors?"
 date:   2019-08-18
 layout: post
 tags: post
+blurb: "An explainer describing what a Cross-Origin Resource Sharing error is, why they exist, and how to fix one once you come across it."
 ---
 
 "CORS" errors are a certain type of web development errors that can be pretty confusing. _Cross-Origin Resource Sharing_ related errors pop up when the web browser is trying to protect you from potential security vulnerabilities. When you don't expect them, though, they can be pretty irritating—the error messages don't make it entirely clear what you need to do to resolve the problem, and CORS itself is a complex enough topic that you won't find any quick resolution steps on the internet.

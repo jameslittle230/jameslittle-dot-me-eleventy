@@ -3,6 +3,7 @@ title:  "Next"
 date:   2019-05-31
 layout: post
 tags: post
+blurb: "Starting work at Stripe."
 ---
 
 I'm heading back to [Stripe](https://stripe.com) in San Francisco to work on the [Terminal SDK team](https://stripe.com/terminal)!
