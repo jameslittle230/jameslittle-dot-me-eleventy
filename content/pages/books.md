@@ -7,6 +7,8 @@ slug: "books"
 
 In January of 2014, inspired by [Jamie Todd Rubin](http://www.jamierubin.net), I started compiling a list of all the books I've read. 2014 marked the end of my junior year in high school, so a lot of these are books I read for school. I count listening to an audiobook as having read it, but my reading setup consists of Audible, my Kindle, and actual dead-tree books.
 
+This explicitly _doesn't_ track things I read online—you might be interested in my [pinboard.in profile](https://pinboard.in/u:littleguy23) for that.
+
 ## 2020
 
 - You Look Like a Thing and I Love You - Janelle Shane
