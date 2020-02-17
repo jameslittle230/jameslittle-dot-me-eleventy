@@ -47,7 +47,6 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("content/styles/");
   eleventyConfig.addPassthroughCopy({"content/static/": "/"});
 
-  console.log(imagePartial);
   eleventyConfig.addShortcode("img", imagePartial.img);
 
   let markdownLib = mdit({html: true}).use(mditfootnote);
