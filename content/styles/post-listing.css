@@ -37,5 +37,16 @@
 
 .post-listing .date {
   margin-right: 1em;
+  flex-shrink: 0;
 }
 
+@media (max-width: 600px) {
+  .post-listing-flex {
+    flex-direction: column;
+  }
+
+  .post-listing .date {
+    font-size: 0.8em;
+    font-style: italic;
+  }
+}
