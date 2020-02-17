@@ -115,14 +115,25 @@ blockquote {
   line-height: 1.65;
   padding: 0;
   padding-left: 2em;
-  background: left 0 / 1.5em repeat-y
+  font-style: italic;
+}
+
+blockquote:before{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 1em;
+  content: "";
+  background: left repeat-y
     repeating-linear-gradient(
       -30deg,
       var(--primary-color),
       var(--primary-color) 0.5em,
       var(--bg-color) 0.5em,
-      var(--bg-color) 1em
+      var(--bg-color) 1.3em
     );
+  background-attachment: fixed;
 }
 
 .footbar {
