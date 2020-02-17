@@ -6,7 +6,10 @@ title: Home
 <link rel="stylesheet" href="/styles/post-listing.css"/>
 <link rel="stylesheet" href="/styles/portfolio-listing.css"/>
 
-{% img style="float: right; width: 40%; margin: 0 0 2em 2em", ratio="150%", urlbase="https://files.jameslittle.me/images/headshot" %}
+{% img style = "float: right; width: 40%; margin: 0 0 2em 2em",
+ratio = "150%",
+classList = "headshot",
+urlbase = "https://files.jameslittle.me/images/headshot" %}
 
 <h1 style="margin-top: 0">Hi, I'm James Little!</h1>
 
@@ -25,8 +28,6 @@ title: Home
 <p>
     <strong>I'm interested in how people interact with technology, and I want to make interfacing with the digital world simpler and more intuitive through the software I create.</strong>
 </p>
-
-
 
 <h2 style="clear: both">Recent Blog Posts</h2>
 
@@ -85,8 +86,7 @@ title: Home
     }
 
     .cta:active {
-        box-shadow: 0.1em 0.1em 1em rgba(0, 0, 0, 0.7) inset,
-            0.5em 0.5em 3em rgba(0, 0, 0, 0.2) inset;
+        box-shadow: 0.1em 0.1em 1em rgba(0, 0, 0, 0.7) inset, 0.5em 0.5em 3em rgba(0, 0, 0, 0.2) inset;
     }
 
     .portfolio-list {
@@ -95,5 +95,17 @@ title: Home
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         grid-column-gap: 2em;
+    }
+
+    @media (max-width: 800px) {
+        .portfolio-list {
+            display: block;
+        }
+    }
+
+    @media (max-width: 500px) {
+        .headshot {
+            display: none;
+        }
     }
 </style>
