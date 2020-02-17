@@ -19,7 +19,7 @@ h2.year-listing {
     display: block;
     border-top: 1px dashed var(--font-color);
     position: absolute;
-    width: 40%;
+    width: calc(50% - 2em);
     height: 100%;
 }
 
