@@ -1,0 +1,182 @@
+---
+layout: page.njk
+title: Guestbook
+slug: guestbook
+---
+
+<h1>Guestbook</h1>
+
+<p>We used to put guestbooks on personal sites. A little way for visitors to drop a note to webmasters saying "I made it, I'm here!" When you made software, you used to ask people to mail you postcards, and people would mail you postcards. The internet used to be a way to connect a person to another person—now it connects people to <em>the masses</em>.</p>
+
+<p>I made a guestbook. Leave your name. Your email, if you want. The URL of your website, if you have one. And leave a note. Please be nice—remember, you're dropping a note to another human.</p>
+
+<form>
+	<fieldset>
+		<label for="name" class="required">Name:</label>
+		<input type="text" id="name" name="name" />
+		
+		<label for="name">Email (never displayed):</label>
+		<input type="email" id="email" name="email" />
+		
+		<label for="name">URL:</label>
+		<input type="url" id="URL" name="URL" />
+		
+		<label for="message" class="required">Message:</label>
+		<textarea name="message" id="message"></textarea>
+		
+		<button type="submit">Submit &darr;</button>
+</form>
+
+<h2>83 signatures</h2>
+
+<ul class="guestbook">
+<li class="guestbook-entry">
+<div class="metadata">
+<div class="author">
+<span class="name">James Little</span>
+<!-- <span class="email">a@gmail.com</span> -->
+<span class="url"><a href="https://jameslittle.me">https://jameslittle.me</a></span>
+</div>
+<span class="timestamp">3 months ago <span class="absolute">2020-02-11</span></span>
+</div>
+<div class="message">
+<p>Officiis dolores dolor cum similique nobis. Dignissimos labore id expedita laborum non commodi ut. Ad velit deleniti cupiditate sapiente rerum alias. Cupiditate voluptas officia accusantium excepturi. Et voluptatibus aliquid eum perferendis. Quos nemo sint eos.</p>
+</div>
+</li>
+
+<li class="guestbook-entry">
+<div class="metadata">
+<div class="author">
+<span class="name">James Little</span>
+<!-- <span class="email">a@gmail.com</span> -->
+<span class="url"><a href="https://jameslittle.me">https://jameslittle.me</a></span>
+</div>
+<span class="timestamp" title="2020-02-11">3 months ago</span>
+</div>
+<div class="message">
+<p>Officiis dolores dolor cum similique nobis. Dignissimos labore id expedita laborum non commodi ut. Ad velit deleniti cupiditate sapiente rerum alias. Cupiditate voluptas officia accusantium excepturi. Et voluptatibus aliquid eum perferendis. Quos nemo sint eos.</p>
+</div>
+</li>
+</ul>
+
+<style>
+form {
+	max-width: 32em;
+	margin: 0 auto;
+}
+fieldset {
+	border: none;
+	padding: 0;
+}
+input, textarea {
+	display: block;
+	font-size: 1.2em;
+	width: 100%;
+	background: none;
+	border: 1px solid hsla(0, 0%, 50%, 0.7);
+	padding: 0.5em;
+	border-radius: 2px;
+	color: var(--font-color)
+}
+
+textarea {
+	font-size: 0.9em;
+	min-height: 5em;
+}
+
+label {
+	display: block;
+	opacity: 0.8;
+	text-transform: uppercase;
+	font-weight: bold;
+	font-size: 0.8em;
+	letter-spacing: 0.02em;
+	margin-top: 1.7em;
+}
+
+label.required:after {
+	content: "\2605";
+	color: var(--secondary-color);
+}
+
+button {
+	display: block;
+	width: 100%;
+	margin-top: 1.7em;
+	background: var(--secondary-color);
+	color: var(--white-override);
+	padding: 1em;
+	border: none;
+	font-size: 1em;
+	font-weight: bold;
+	border-radius: 5px;
+	transition: box-shadow 0.4s;
+}
+
+button:hover {
+	box-shadow: var(--shadow);
+}
+
+.guestbook {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+.guestbook-entry {
+	border: 1px solid hsla(0, 0%, 50%, 0.4);
+	border-radius: 2px;
+	margin-bottom: 2rem;
+	padding: 2rem;
+	overflow: hidden; /* for absolute timestamp transition */
+}
+
+.metadata {
+	display: flex;
+	justify-content: space-between;
+}
+
+.author {
+	display: flex;
+	flex-direction: column;
+}
+
+.name {
+	color: var(--primary-color);
+	font-weight: bold;
+	font-size: 1.3em;
+}
+
+.timestamp {
+	opacity: 0.8;
+	text-transform: uppercase;
+	font-weight: bold;
+	font-size: 0.8em;
+	letter-spacing: 0.02em;
+	transition: transform 0.4s;
+}
+
+.absolute {
+	display: inline-block;
+	padding-left: 1em;
+	transition: opacity 0.4s;
+	opacity: 0;
+}
+
+.timestamp:hover .absolute {
+	opacity: 1;
+	transform: translateX(0);
+}
+</style>
+
+<script>
+const timestamps = document.querySelectorAll('.timestamp');
+timestamps.forEach(ts => {
+	const absolute = ts.querySelector('.absolute');
+	if(absolute) {
+		ts.style.transform = `translateX(${absolute.offsetWidth}px)`;
+	}
+	ts.addEventListener('mouseenter', () => {ts.style.transform = `translateX(0)`})
+	ts.addEventListener('mouseleave', () => {ts.style.transform = `translateX(${absolute.offsetWidth}px)`})
+})
+</script>
