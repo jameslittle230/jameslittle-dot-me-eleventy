@@ -1,7 +1,25 @@
 <section class="topbar">
-  <a href="/" class="back-home">jameslittle.me</a>
-  <a href="/blog">blog</a>
-  <a href="/portfolio">portfolio</a>
-  <a href="/books">reading list</a>
+  <div>
+    <a href="/" class="back-home">jameslittle.me</a>
+    {# <p class="subhead">A personal site for a personal guy</p> #}
+  </div>
+  <div class="linked-list">
+    <a href="/blog">blog</a>
+    <a href="/portfolio">portfolio</a>
+    <a href="/books">reading list</a>
+  </div>
 </section>
 
+<style>
+.subhead {
+  margin: 0;
+  color: black;
+  font-size: 0.8em;
+  font-style: italic;
+}
+
+.linked-list {
+  overflow-x: scroll;
+  white-space: nowrap;
+}
+</style>
