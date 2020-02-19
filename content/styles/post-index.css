@@ -17,7 +17,7 @@ h2.year-listing {
 .year-listing::after, .year-listing::before {
     content: "";
     display: block;
-    border-top: 1px dashed var(--font-color);
+    border-top: 1px dashed var(--muted-color);
     position: absolute;
     width: calc(50% - 2em);
     height: 100%;

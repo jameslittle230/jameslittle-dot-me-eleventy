@@ -2,6 +2,7 @@
   --primary-color: #3bef8f;
   --secondary-color: #c5369a;
   --font-color: #182b28;
+  --muted-color: #535e5c;
   --bg-color: #fff;
   --heading-color: #163833;
   --link-color: #007e76;
@@ -18,6 +19,7 @@
 
 [data-theme="dark"] {
   --font-color: #d7dfdd;
+  --muted-color: #7d8885;
   --bg-color: #262826;
   --heading-color: #c4ddc8;
   --link-color: #50f0e5;
