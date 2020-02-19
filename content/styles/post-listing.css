@@ -1,6 +1,6 @@
 .post-listing {
   padding: 0.7em;
-  margin: 0 -0.7em; /* keep this value the same as the padding so the text lines up with the margin */
+  margin: 0 -0.7em 1em; /* keep this value the same as the padding so the text lines up with the margin */
   transition: box-shadow 0.15s ease-out;
 }
 
