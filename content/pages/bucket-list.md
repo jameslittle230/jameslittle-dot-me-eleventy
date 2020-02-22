@@ -10,9 +10,15 @@ slug: "bucket-list"
 - Manchester by the Sea
 - The Lighthouse (2019)
 - Your Name
+- 1917
+- Just Mercy
+- Ghostbusters Afterlife
+- Ready Player One
 
-## Restaurants
+## SF
 
+- [Arsicault Bakery](http://arsicault-bakery-san-francisco.sites.tablehero.com)
+- Visit The Letterform Archive in SF
 - Kokkari Estiatorio
 
 ## Bands to See Live
