@@ -45,11 +45,11 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addFilter("dateformat", dateformat);
 
   eleventyConfig.addPassthroughCopy("content/styles/");
-  eleventyConfig.addPassthroughCopy({"content/static/": "/"});
+  eleventyConfig.addPassthroughCopy({ "content/static/": "/" });
 
   eleventyConfig.addShortcode("img", imagePartial.img);
 
-  let markdownLib = mdit({html: true}).use(mditfootnote);
+  let markdownLib = mdit({ html: true }).use(mditfootnote);
   markdownLib.renderer.rules.footnote_block_open = () =>
     '<section class="footnotes"><ol class="footnotes-list">';
   eleventyConfig.setLibrary("md", markdownLib);
@@ -63,8 +63,8 @@ module.exports = function(eleventyConfig) {
         }
       }
       return output;
-    }
-    
+    };
+
     return collection
       .getFilteredByTag("post")
       .map(p => p.date)
@@ -72,14 +72,24 @@ module.exports = function(eleventyConfig) {
       .uniqued()
       .sort();
   });
-  
+
   eleventyConfig.addCollection("postsWithYears", function(collection) {
-    return collection
-      .getFilteredByTag("post")
-      .map(p => {
-        p.year = format(p.date, "yyyy");
-        return p;
-      });
+    var coll = collection.getFilteredByTag("post");
+
+    coll.map(p => {
+      p.year = format(p.date, "yyyy");
+      return p;
+    });
+
+    for (let i = 0; i < coll.length; i++) {
+      const prevPost = coll[i - 1];
+      const nextPost = coll[i + 1];
+
+      coll[i].data["prevPost"] = prevPost;
+      coll[i].data["nextPost"] = nextPost;
+    }
+
+    return coll;
   });
 
   return {

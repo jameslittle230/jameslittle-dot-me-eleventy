@@ -1,5 +1,5 @@
----
-permalink: "blog/{{page.date | dateformat: 'yyyy'}}/{{ page.fileSlug | extractPostSlug }}/index.html"
+--- 
+permalink: "blog/{{page.date | dateformat: 'yyyy'}}/{{ page.fileSlug | extractPostSlug }}/index.html" 
 layout: base.njk
 ---
 
@@ -7,34 +7,43 @@ layout: base.njk
 
 <div class="pre-article">
     <h1 class="big-title">{{title}}</h1>
-    <div class="metadata"><i>Written on {{date | dateformat}}</i></div>
+    <div class="metadata">
+        <i>Written on
+            {{date | dateformat}}</i>
+    </div>
 </div>
 
 <article>
-{{content | safe }}
+    {{content | safe }}
 </article>
 
 <div class="post-article">
-    {# <div class="related-links">
-        <div class="prev-article-link">
-            <strong>Prev</strong>
-            <a href="#">Previous Article</a>
-        </div>
-        <div class="next-article-link">
-            <strong>Next</strong>
-            <a href="#">Next Article</a>
-        </div>
-    </div> #}
+    <div class="related-links">
+            <div class="prev-article-link">
+        {% if prevPost.url %}
+                <strong>Previous Post</strong>
+                <a href="{{prevPost.url}}">{{prevPost.data.title}}</a>
+        {% endif %}
+            </div>
+            <div class="next-article-link">
+        {% if nextPost.url %}
+                <strong>Next Post</strong>
+                <a href="{{nextPost.url}}">{{nextPost.data.title}}</a>
+        {% endif %}
+            </div>
+    </div>
 
     <div class="whoami-box">
-        <p class="whoami-text"><strong>Who am I?</strong></p>
+        <p class="whoami-text">
+            <strong>Who am I?</strong>
+        </p>
         <p>I'm James Little, a web and iOS developer in San Francisco. I'm currently working on Stripe Terminal.</p>
     </div>
 </div>
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/philgruneich/barefoot/dist/css/barefoot.min.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/philgruneich/barefoot/dist/css/barefoot.min.css"/>
 <script src="https://cdn.jsdelivr.net/gh/philgruneich/barefoot/dist/js/barefoot.min.js"></script>
 <script>
-  lf = new BareFoot();
-  lf.init();
+    lf = new BareFoot();
+    lf.init();
 </script>
