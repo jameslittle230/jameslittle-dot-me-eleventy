@@ -14,6 +14,7 @@ This explicitly _doesn't_ track things I read online—you might be interested i
 - You Look Like a Thing and I Love You - Janelle Shane
 - Dark Matter - Blake Crouch
 - UNIX: A History and a Memoir - Brian Kernighan
+- Challenger Deep - Neal Shusterman
 
 ## 2019
 
