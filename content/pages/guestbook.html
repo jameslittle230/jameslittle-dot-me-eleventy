@@ -38,10 +38,10 @@ templateEngineOverride: false
 		<button type="submit">Submit &darr;</button>
 </form>
 
-<p style="text-align: center; font-size: 2em;" v-if="getEntriesState === 'loading'">Loading...</p>
+<p style="margin-top: 4rem; text-align: center; font-size: 1em; text-transform: uppercase; letter-spacing: 0.15em;" v-if="getEntriesState === 'loading'">Loading guestbook...</p>
 
 
-<div style="margin-top: 4em;" v-if="getEntriesState === 'success'">
+<div style="margin-top: 4rem;" v-if="getEntriesState === 'success'">
   <h2>{{header}}</h2>
 
   <ul class="guestbook">
