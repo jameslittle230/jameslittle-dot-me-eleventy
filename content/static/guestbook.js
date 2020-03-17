@@ -42,7 +42,6 @@ var app = new Vue({
           this.input = JSON.parse(JSON.stringify(BLANK_INPUT));
         })
         .catch(err => {
-          console.log(err.response.data.errorMessage);
           this.formSubmissionState = "error"
           this.formSubmissionErrorMessage = err.response.data.errorMessage;
         })
