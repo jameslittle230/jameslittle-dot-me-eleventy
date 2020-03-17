@@ -1,0 +1,187 @@
+---
+layout: page.njk
+title: Guestbook
+permalink: "guestbook/index.html"
+templateEngineOverride: false
+---
+
+<h1>Guestbook</h1>
+
+<p>We used to put guestbooks on websites. They were a way for visitors to drop a note to webmasters saying "I made it, I'm here!" The internet used to be a way to connect a person to another person—now it connects people to <em>the masses</em>.</p>
+
+<p>I want to bring us back to the mentality we had before. I want you, the visitor, to tell me you made it. I don't want to connect to an audience, I want to, through the power of the Internet, connect myself to you.</p>
+
+<p>So I made a guestbook, and I'd really like you to sign it. Leave your name. Your email, if you want. The URL of your website, if you have one. And leave a note. Please be nice—remember, you're dropping a note to another human.</p>
+
+<div id="app">
+
+<p class="form-submission-message" v-if="formSubmissionState === 'error'">{{formSubmissionErrorMessage}}</p>
+
+<p class="form-submission-message" v-if="formSubmissionState === 'loading'">Submitting...</p>
+
+<p class="form-submission-message" v-if="formSubmissionState === 'success'">Success!</p>
+
+<form v-on:submit.prevent="submitForm">
+	<fieldset>
+		<label for="name" class="required">Name:</label>
+		<input type="text" v-model="input.name" id="name" name="name" />
+		
+		<label for="name">Email (never displayed):</label>
+		<input type="email" v-model="input.email" id="email" name="email" />
+		
+		<label for="name">URL:</label>
+		<input type="url" v-model="input.url" id="URL" name="URL" />
+		
+		<label for="message" class="required">Message:</label>
+		<textarea name="message" v-model="input.message" id="message"></textarea>
+		
+		<button type="submit">Submit &darr;</button>
+</form>
+
+<p style="text-align: center; font-size: 2em;" v-if="getEntriesState === 'loading'">Loading...</p>
+
+
+<div style="margin-top: 4em;" v-if="getEntriesState === 'success'">
+  <h2>{{header}}</h2>
+
+  <ul class="guestbook">
+
+  <li class="guestbook-entry" v-for="entry in guestbook">
+    <div class="metadata">
+      <div class="author">
+        <span class="name">{{entry.name}}</span>
+        <span class="url"><a v-bind:href="entry.url">{{entry.url}}</a></span>
+      </div>
+      <span class="timestamp">{{entry.date | relative}} <span class="absolute">{{entry.date | toIso}}</span></span>
+    </div>
+    <div class="message">
+      <p>{{entry.message}}</p>
+    </div>
+  </li>
+
+  </ul>
+</div>
+</div>
+
+<style>
+
+form {
+	max-width: 32em;
+	margin: 0 auto;
+}
+fieldset {
+	border: none;
+	padding: 0;
+}
+input, textarea {
+	font-family: inherit;
+	display: block;
+	font-size: 1.2em;
+	width: 100%;
+	background: none;
+	border: 1px solid hsla(0, 0%, 50%, 0.7);
+	padding: 0.5em;
+	border-radius: 2px;
+	color: var(--font-color)
+}
+
+textarea {
+	font-size: 0.9em;
+	min-height: 5em;
+}
+
+label {
+	display: block;
+	opacity: 0.8;
+	text-transform: uppercase;
+	font-weight: bold;
+	font-size: 0.8em;
+	letter-spacing: 0.02em;
+	margin-top: 1.7em;
+}
+
+label.required:after {
+	content: "\2605";
+	color: var(--secondary-color);
+}
+
+button {
+	display: block;
+	width: 100%;
+	margin-top: 1.7em;
+	background: var(--secondary-color);
+	color: var(--white-override);
+	padding: 1em;
+	border: none;
+	font-size: 1em;
+	font-weight: bold;
+	border-radius: 5px;
+	transition: box-shadow 0.4s;
+	cursor: pointer;
+}
+
+button:hover {
+	box-shadow: var(--shadow);
+}
+
+.guestbook {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+.guestbook-entry {
+	border: 1px solid hsla(0, 0%, 50%, 0.4);
+	border-radius: 2px;
+	margin-bottom: 2rem;
+	padding: 2rem;
+	overflow: hidden; /* for absolute timestamp transition */
+}
+
+.metadata {
+	display: flex;
+	justify-content: space-between;
+}
+
+.author {
+	display: flex;
+	flex-direction: column;
+}
+
+.name {
+	color: var(--primary-color);
+	font-weight: bold;
+	font-size: 1.3em;
+}
+
+.timestamp {
+	opacity: 0.8;
+	text-transform: uppercase;
+	font-weight: bold;
+	font-size: 0.8em;
+	letter-spacing: 0.02em;
+	transition: transform 0.4s;
+}
+
+.absolute {
+	display: inline-block;
+	padding-left: 1em;
+	transition: opacity 0.4s;
+	opacity: 0;
+}
+
+.timestamp:hover .absolute {
+	opacity: 1;
+	transform: translateX(0);
+}
+
+.form-submission-message {
+  background-color: var(--secondary-color);
+  color: var(--white-override);
+  padding: 1em;
+}
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="/guestbook.js"></script>

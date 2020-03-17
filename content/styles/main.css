@@ -177,6 +177,10 @@ blockquote:before{
   text-decoration: none;
 }
 
+.topbar a:last-child {
+  margin-right: 0;
+}
+
 .topbar a:hover {
   text-decoration: underline;
 }
