@@ -15,41 +15,52 @@ templateEngineOverride: false
 
 <div id="app">
 
-<form>
+<p class="form-submission-message" v-if="formSubmissionState === 'error'">{{formSubmissionErrorMessage}}</p>
+
+<p class="form-submission-message" v-if="formSubmissionState === 'loading'">Submitting...</p>
+
+<p class="form-submission-message" v-if="formSubmissionState === 'success'">Success!</p>
+
+<form v-on:submit.prevent="submitForm">
 	<fieldset>
 		<label for="name" class="required">Name:</label>
-		<input type="text" id="name" name="name" />
+		<input type="text" v-model="input.name" id="name" name="name" />
 		
 		<label for="name">Email (never displayed):</label>
-		<input type="email" id="email" name="email" />
+		<input type="email" v-model="input.email" id="email" name="email" />
 		
 		<label for="name">URL:</label>
-		<input type="url" id="URL" name="URL" />
+		<input type="url" v-model="input.url" id="URL" name="URL" />
 		
 		<label for="message" class="required">Message:</label>
-		<textarea name="message" id="message"></textarea>
+		<textarea name="message" v-model="input.message" id="message"></textarea>
 		
 		<button type="submit">Submit &darr;</button>
 </form>
 
-<h2>{{message}}</h2>
+<p style="text-align: center; font-size: 2em;" v-if="getEntriesState === 'loading'">Loading...</p>
 
-<ul class="guestbook">
 
-<li class="guestbook-entry" v-for="entry in guestbook">
-  <div class="metadata">
-    <div class="author">
-      <span class="name">{{entry.name}}</span>
-      <span class="url"><a v-bind:href="entry.url">{{entry.url}}</a></span>
+<div style="margin-top: 4em;" v-if="getEntriesState === 'success'">
+  <h2>{{header}}</h2>
+
+  <ul class="guestbook">
+
+  <li class="guestbook-entry" v-for="entry in guestbook">
+    <div class="metadata">
+      <div class="author">
+        <span class="name">{{entry.name}}</span>
+        <span class="url"><a v-bind:href="entry.url">{{entry.url}}</a></span>
+      </div>
+      <span class="timestamp">{{entry.date | relative}} <span class="absolute">{{entry.date | toIso}}</span></span>
     </div>
-    <span class="timestamp">{{entry.date | relative}} <span class="absolute">{{entry.date}}</span></span>
-  </div>
-  <div class="message">
-    <p>{{entry.message}}</p>
-  </div>
-</li>
+    <div class="message">
+      <p>{{entry.message}}</p>
+    </div>
+  </li>
 
-</ul>
+  </ul>
+</div>
 </div>
 
 <style>
@@ -163,7 +174,14 @@ button:hover {
 	opacity: 1;
 	transform: translateX(0);
 }
+
+.form-submission-message {
+  background-color: var(--secondary-color);
+  color: var(--white-override);
+  padding: 1em;
+}
 </style>
 
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="/guestbook.js"></script>
