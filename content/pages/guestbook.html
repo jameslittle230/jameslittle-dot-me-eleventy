@@ -48,12 +48,10 @@ templateEngineOverride: false
 
   <li class="guestbook-entry" v-for="entry in guestbook">
     <div class="metadata">
-      <div class="author">
-        <span class="name">{{entry.name}}</span>
-        <span class="url"><a v-bind:href="entry.url">{{entry.url}}</a></span>
-      </div>
+		<span class="name">{{entry.name}}</span>
       <span class="timestamp">{{entry.date | relative}} <span class="absolute">{{entry.date | toIso}}</span></span>
-    </div>
+	</div>
+	<span class="url"><a v-bind:href="entry.url">{{entry.url}}</a></span>
     <div class="message">
       <p>{{entry.message}}</p>
     </div>
@@ -134,13 +132,18 @@ button:hover {
 	border: 1px solid hsla(0, 0%, 50%, 0.4);
 	border-radius: 2px;
 	margin-bottom: 2rem;
-	padding: 2rem;
+	padding: 1rem 2rem;
 	overflow: hidden; /* for absolute timestamp transition */
+}
+
+.guestbook-entry p {
+	margin: 0;
 }
 
 .metadata {
 	display: flex;
 	justify-content: space-between;
+	align-items: center;
 }
 
 .author {
@@ -152,6 +155,10 @@ button:hover {
 	color: var(--primary-color);
 	font-weight: bold;
 	font-size: 1.3em;
+}
+
+.url {
+	font-size: 0.8em;
 }
 
 .timestamp {

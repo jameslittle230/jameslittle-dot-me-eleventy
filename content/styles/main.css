@@ -20,11 +20,12 @@
 [data-theme="dark"] {
   --font-color: #d7dfdd;
   --muted-color: #7d8885;
-  --bg-color: #262826;
+  --bg-color: #1e201e;
+  --link-color: #26d5c9;
+  --visited-color: #ad7ed5;
   --heading-color: #c4ddc8;
-  --link-color: #50f0e5;
-  --visited-color: #e07fe9;
 }
+
 
 *,
 *:before,
@@ -43,10 +44,6 @@ body {
   background-color: var(--bg-color);
 }
 
-/* html {
-  font-size: 22px;
-} */
-
 body {
   font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
@@ -55,7 +52,7 @@ body {
   width: 96%;
   margin: 0 auto;
   color: var(--font-color);
-  line-height: 1.5;
+  line-height: 1.6;
 }
 
 h1,
