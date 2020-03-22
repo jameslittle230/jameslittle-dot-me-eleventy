@@ -8,7 +8,7 @@ layout: base
 
 <div class="metadata">
     <p>{{blurb}}</p>
-    <p class="stats">{{platform}} <span>•</span> {{work}} <span>•</span> {{when}}</p>
+    <p class="stats">{{platform}} <span>•</span> {{when}}</p>
     {% if link %}
     <p class="big-link">
         <a href="{{link}}">{{link}}</a>
@@ -21,8 +21,7 @@ layout: base
 <style>
 .metadata {
     opacity: 0.7;
-    text-align: center;
-    margin: 3em auto;
+    margin: 3em 0;
     width: 80%;
 }
 
@@ -40,6 +39,13 @@ layout: base
 .big-link {
     font-size: 1.5em;
     font-weight: bold;
-    }
+}
 
+.portfolio-image-small {
+display: block;
+max-width: 480px;
+margin: 1em auto;
+border: 1px solid hsla(0, 0%, 0%, 0.5);
+border-radius: 5px;
+}
 </style>

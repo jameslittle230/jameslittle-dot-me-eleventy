@@ -3,10 +3,11 @@ layout: portfolio-page
 title: "PenguinEgg: Encrypted Chat"
 blurb: "A real-time peer-to-peer encrypted online chat. Built with the goal of being as easy to use as Facebook Messenger is and as secure as Facebook Messenger isn't."
 platform: "Web"
-work: "Design and implementation"
 when: "2018"
 order: 5
 tags: portfolio
+thumbnail: "https://files.jameslittle.me/images/tmp/penguinegg-thumb.png"
+date: 2018-01-01
 ---
 
 _The final project for my Applied Cryptography course at [AIT-Budapest](http://www.ait-budapest.com/)._
@@ -17,7 +18,7 @@ I used Socket.io to build a real-time multi-party chat application in which mess
 
 The application sports several security features. The server administrator never has access to messages that users send. Encryption and decryption keys are rotated on every login. The encryption schema is designed to be fast while simultaneously encoding metadata about the sender, reciever, and message, all of which is verifiable on the client's end.
 
-## [Read the paper describing the app's cryptographic features.](https://files.jameslittle.me/projects/penguinegg-paper.pdf)
+_[Read the paper describing the app's cryptographic features. &rarr;](https://files.jameslittle.me/projects/penguinegg-paper.pdf)_
 
 <!-- <img src="/img/portfolio/penguinegg/2.png" class="portfolio-image-right"> -->
 

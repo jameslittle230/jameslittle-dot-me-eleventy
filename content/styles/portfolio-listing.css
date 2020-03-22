@@ -32,3 +32,16 @@
   letter-spacing: 0.02em;
   opacity: 0.7;
 }
+
+.github-link path {
+  fill: var(--muted-color);
+}
+
+.github-link:hover path {
+  fill: var(--font-color);
+}
+
+.ext-arrow {
+  color: var(--muted-color);
+  font-size: 0.8em
+}
