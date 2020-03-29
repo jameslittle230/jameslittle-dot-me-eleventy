@@ -18,6 +18,7 @@ This explicitly _doesn't_ track things I read online—you might be interested i
 - Watchmen - Alan Moore & Dave Gibbons
 - Creative Selection - Ken Kocienda
 - White Tears - Hari Kunzru
+- A Philosophy of Software Design - John Ousterhout
 
 ## 2019
 
