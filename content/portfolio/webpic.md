@@ -4,6 +4,7 @@ blurb: "An opinionated Mac application for processing and uploading images. Opti
 platform: "macOS & SwiftUI"
 link: "https://jameslittle.me/webpic"
 github: "https://jameslittle.me/webpic"
+thumbnail: "https://files.jameslittle.me/images/tmp/webpic-thumb.png"
 external: true
 when: "2020–"
 tags: portfolio
