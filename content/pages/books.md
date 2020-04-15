@@ -19,6 +19,7 @@ This explicitly _doesn't_ track things I read online—you might be interested i
 - Creative Selection - Ken Kocienda
 - White Tears - Hari Kunzru
 - A Philosophy of Software Design - John Ousterhout
+- Strangers in Budapest - Jessica Keener
 
 ## 2019
 
