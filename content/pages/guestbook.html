@@ -36,10 +36,10 @@ templateEngineOverride: false
 		<textarea name="message" v-model="input.message" id="message"></textarea>
 		
 		<button type="submit">Submit &darr;</button>
+	</fieldset>
 </form>
 
 <p style="margin-top: 4rem; text-align: center; font-size: 1em; text-transform: uppercase; letter-spacing: 0.15em;" v-if="getEntriesState === 'loading'">Loading guestbook...</p>
-
 
 <div style="margin-top: 4rem;" v-if="getEntriesState === 'success'">
   <h2>{{header}}</h2>
@@ -189,6 +189,6 @@ button:hover {
 }
 </style>
 
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="/guestbook.js"></script>

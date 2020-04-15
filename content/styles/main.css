@@ -156,7 +156,13 @@ blockquote:before{
 .topbar {
   padding: 1em;
   background: var(--primary-color);
-  box-shadow: 0.1em 0.1em 0 var(--bg-color),
+
+  /* The 3px and 3.5px values seem pretty magic-number-y,
+     but they look a whole lot better than what came before.
+     There's no reason these values should be derived from
+     the size of the typography.
+  */
+  box-shadow: 3px 3.5px 0 var(--bg-color),
     0.7em 0.7em 0 var(--secondary-color);
   margin-bottom: 2em;
   margin-top: 0.5em;
