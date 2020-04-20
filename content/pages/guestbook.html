@@ -7,186 +7,197 @@ templateEngineOverride: false
 
 <h1>Guestbook</h1>
 
-<p>People used to put guestbooks on websites. They were a way for visitors to drop a note to webmasters saying "I made it, I'm here!" The internet used to be a way to connect a person to another person—now it connects people to <em>the masses</em>.</p>
+<p>
+  Welcome to my website! A lot of websites long ago (like, 2007) had guestbooks:
+  a place to sign your name and write a note and let the webmaster (again, 2007)
+  know that you made it.
+</p>
 
-<p>I want to bring us back to the mentality we had before. I want you, the visitor, to tell me that you made it. I don't want to build things for an audience, I want to build things for specific people.</p>
+<p>
+  So I made my site a guestbook. If you made it here, whether I know you or not,
+  write something down!
+</p>
 
-<p>So I made a guestbook, and I'd really like you to sign it. Leave your name. Your email, if you want. The URL of your website, if you have one. And leave a note. Please be nice—remember, you're dropping a note to another human.</p>
+<p>I also wrote about <a href="/blog/2020/about-the-guestbook/">how I made this</a>, if you're into that sort of thing.</p>
 
 <div id="app">
+  <p class="form-submission-message" v-if="formSubmissionState === 'error'">
+    {{formSubmissionErrorMessage}}
+  </p>
 
-<p class="form-submission-message" v-if="formSubmissionState === 'error'">{{formSubmissionErrorMessage}}</p>
+  <p class="form-submission-message" v-if="formSubmissionState === 'loading'">
+    Submitting...
+  </p>
 
-<p class="form-submission-message" v-if="formSubmissionState === 'loading'">Submitting...</p>
+  <p class="form-submission-message" v-if="formSubmissionState === 'success'">
+    Success!
+  </p>
 
-<p class="form-submission-message" v-if="formSubmissionState === 'success'">Success!</p>
+  <form v-on:submit.prevent="submitForm">
+    <fieldset>
+      <label for="name" class="required">Name:</label>
+      <input type="text" v-model="input.name" id="name" name="name" />
 
-<form v-on:submit.prevent="submitForm">
-	<fieldset>
-		<label for="name" class="required">Name:</label>
-		<input type="text" v-model="input.name" id="name" name="name" />
-		
-		<label for="name">Email (never displayed):</label>
-		<input type="email" v-model="input.email" id="email" name="email" />
-		
-		<label for="name">URL:</label>
-		<input type="url" v-model="input.url" id="URL" name="URL" />
-		
-		<label for="message" class="required">Message:</label>
-		<textarea name="message" v-model="input.message" id="message"></textarea>
-		
-		<button type="submit">Submit &darr;</button>
-	</fieldset>
-</form>
+      <label for="name">Email (never displayed):</label>
+      <input type="email" v-model="input.email" id="email" name="email" />
 
-<p style="margin-top: 4rem; text-align: center; font-size: 1em; text-transform: uppercase; letter-spacing: 0.15em;" v-if="getEntriesState === 'loading'">Loading guestbook...</p>
+      <label for="name">URL:</label>
+      <input type="url" v-model="input.url" id="URL" name="URL" />
 
-<div style="margin-top: 4rem;" v-if="getEntriesState === 'success'">
-  <h2>{{header}}</h2>
+      <label for="message" class="required">Message:</label>
+      <textarea name="message" v-model="input.message" id="message"></textarea>
 
-  <ul class="guestbook">
+      <button type="submit">Submit &darr;</button>
+    </fieldset>
+  </form>
 
-  <li class="guestbook-entry" v-for="entry in guestbook">
-    <div class="metadata">
-		<span class="name">{{entry.name}}</span>
-      <span class="timestamp">{{entry.date | relative}} <span class="absolute">{{entry.date | toIso}}</span></span>
-	</div>
-	<span class="url"><a v-bind:href="entry.url">{{entry.url}}</a></span>
-    <div class="message">
-      <p>{{entry.message}}</p>
-    </div>
-  </li>
+  <div style="margin-top: 4rem;">
+    <h2>{{header}}</h2>
 
-  </ul>
-</div>
+    <ul class="guestbook" v-if="getEntriesState === 'success'">
+      <li class="guestbook-entry" v-for="entry in guestbook">
+        <div class="metadata">
+          <span class="name">{{entry.name}}</span>
+          <span class="timestamp"
+            >{{entry.date | relative}}
+            <span class="absolute" v-if="relative(entry.date) != toIso(entry.date)">{{entry.date | toIso}}</span></span
+          >
+        </div>
+        <span class="url"><a v-bind:href="entry.url">{{entry.url}}</a></span>
+        <div class="message">
+          <p>{{entry.message}}</p>
+        </div>
+      </li>
+    </ul>
+  </div>
 </div>
 
 <style>
+  form {
+    max-width: 32em;
+    margin: 0 auto;
+  }
+  fieldset {
+    border: none;
+    padding: 0;
+  }
+  input,
+  textarea {
+    font-family: inherit;
+    display: block;
+    font-size: 1.2em;
+    width: 100%;
+    background: none;
+    border: 1px solid hsla(0, 0%, 50%, 0.7);
+    padding: 0.5em;
+    border-radius: 2px;
+    color: var(--font-color);
+  }
 
-form {
-	max-width: 32em;
-	margin: 0 auto;
-}
-fieldset {
-	border: none;
-	padding: 0;
-}
-input, textarea {
-	font-family: inherit;
-	display: block;
-	font-size: 1.2em;
-	width: 100%;
-	background: none;
-	border: 1px solid hsla(0, 0%, 50%, 0.7);
-	padding: 0.5em;
-	border-radius: 2px;
-	color: var(--font-color)
-}
+  textarea {
+    font-size: 0.9em;
+    min-height: 5em;
+  }
 
-textarea {
-	font-size: 0.9em;
-	min-height: 5em;
-}
+  label {
+    display: block;
+    opacity: 0.8;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 0.8em;
+    letter-spacing: 0.02em;
+    margin-top: 1.7em;
+  }
 
-label {
-	display: block;
-	opacity: 0.8;
-	text-transform: uppercase;
-	font-weight: bold;
-	font-size: 0.8em;
-	letter-spacing: 0.02em;
-	margin-top: 1.7em;
-}
+  label.required:after {
+    content: "\2605";
+    color: var(--secondary-color);
+  }
 
-label.required:after {
-	content: "\2605";
-	color: var(--secondary-color);
-}
+  button {
+    display: block;
+    width: 100%;
+    margin-top: 1.7em;
+    background: var(--secondary-color);
+    color: var(--white-override);
+    padding: 1em;
+    border: none;
+    font-size: 1em;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: box-shadow 0.4s;
+    cursor: pointer;
+  }
 
-button {
-	display: block;
-	width: 100%;
-	margin-top: 1.7em;
-	background: var(--secondary-color);
-	color: var(--white-override);
-	padding: 1em;
-	border: none;
-	font-size: 1em;
-	font-weight: bold;
-	border-radius: 5px;
-	transition: box-shadow 0.4s;
-	cursor: pointer;
-}
+  button:hover {
+    box-shadow: var(--shadow);
+  }
 
-button:hover {
-	box-shadow: var(--shadow);
-}
+  .guestbook {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
 
-.guestbook {
-	list-style-type: none;
-	margin: 0;
-	padding: 0;
-}
+  .guestbook-entry {
+    border: 1px solid hsla(0, 0%, 50%, 0.4);
+    border-radius: 2px;
+    margin-bottom: 2rem;
+    padding: 1rem 2rem;
+    overflow: hidden; /* for absolute timestamp transition */
+  }
 
-.guestbook-entry {
-	border: 1px solid hsla(0, 0%, 50%, 0.4);
-	border-radius: 2px;
-	margin-bottom: 2rem;
-	padding: 1rem 2rem;
-	overflow: hidden; /* for absolute timestamp transition */
-}
+  .guestbook-entry p {
+    margin: 0;
+  }
 
-.guestbook-entry p {
-	margin: 0;
-}
+  .metadata {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 
-.metadata {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-}
+  .author {
+    display: flex;
+    flex-direction: column;
+  }
 
-.author {
-	display: flex;
-	flex-direction: column;
-}
+  .name {
+    color: var(--primary-color);
+    font-weight: bold;
+    font-size: 1.3em;
+  }
 
-.name {
-	color: var(--primary-color);
-	font-weight: bold;
-	font-size: 1.3em;
-}
+  .url {
+    font-size: 0.8em;
+  }
 
-.url {
-	font-size: 0.8em;
-}
+  .timestamp {
+    opacity: 0.8;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 0.8em;
+    letter-spacing: 0.02em;
+    transition: transform 0.4s;
+  }
 
-.timestamp {
-	opacity: 0.8;
-	text-transform: uppercase;
-	font-weight: bold;
-	font-size: 0.8em;
-	letter-spacing: 0.02em;
-	transition: transform 0.4s;
-}
+  .absolute {
+    display: inline-block;
+    padding-left: 1em;
+    transition: opacity 0.4s;
+    opacity: 0;
+  }
 
-.absolute {
-	display: inline-block;
-	padding-left: 1em;
-	transition: opacity 0.4s;
-	opacity: 0;
-}
+  .timestamp:hover .absolute {
+    opacity: 1;
+    transform: translateX(0);
+  }
 
-.timestamp:hover .absolute {
-	opacity: 1;
-	transform: translateX(0);
-}
-
-.form-submission-message {
-  background-color: var(--secondary-color);
-  color: var(--white-override);
-  padding: 1em;
-}
+  .form-submission-message {
+    background-color: var(--secondary-color);
+    color: var(--white-override);
+    padding: 1em;
+  }
 </style>
 
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
