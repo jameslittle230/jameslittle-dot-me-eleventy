@@ -8,8 +8,7 @@ layout: base.njk
 <div class="pre-article">
     <h1 class="big-title">{{title}}</h1>
     <div class="metadata">
-        <i>Written on
-            {{date | dateformat}}</i>
+        <p><i>Written on {{date | dateformat}}<br>{{content | wordcount}} words</i></p>
     </div>
 </div>
 
