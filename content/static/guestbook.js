@@ -2,7 +2,7 @@ const BLANK_INPUT = {
   name: "",
   email: "",
   url: "",
-  message: ""
+  message: "",
 };
 
 var app = new Vue({
@@ -13,22 +13,30 @@ var app = new Vue({
     guestbook: [],
     getEntriesState: "loading", // "loading" || "error" || "success"
     formSubmissionState: "", // "" || "loading" || "error" || "success"
-    formSubmissionErrorMessage: ""
+    formSubmissionErrorMessage: "",
   },
   computed: {
-    header: function() {
-      return `${this.guestbook.length} message${this.guestbook.length == 1 ? '' : 's'}`;
-    }
+    header: function () {
+      if (this.getEntriesState === "loading") {
+        return "Fetching entries...";
+      } else if (this.getEntriesState === "error") {
+        return "Error fetching entries. Please tweet at me.";
+      } else if (this.getEntriesState === "success") {
+        return `${this.guestbook.length} message${
+          this.guestbook.length == 1 ? "" : "s"
+        }`;
+      }
+    },
   },
   methods: {
-    submitForm: function() {
+    submitForm: function () {
       let validation = this.formIsValid();
       if (validation.error) {
         this.showFormErrorState(validation);
         return;
       }
 
-      this.formSubmissionState = "loading"
+      this.formSubmissionState = "loading";
       this.input["date"] = Date.now();
 
       axios
@@ -36,54 +44,30 @@ var app = new Vue({
           "https://vipqpoael1.execute-api.us-west-1.amazonaws.com/prod",
           this.input
         )
-        .then(response => {
+        .then((response) => {
           this.formSubmissionState = "success";
           this.guestbook.unshift(this.input);
           this.input = JSON.parse(JSON.stringify(BLANK_INPUT));
         })
-        .catch(err => {
-          this.formSubmissionState = "error"
+        .catch((err) => {
+          this.formSubmissionState = "error";
           this.formSubmissionErrorMessage = err.response.data.errorMessage;
-        })
+        });
     },
 
-    formIsValid: function() {
+    formIsValid: function () {
       return true;
     },
 
-    showFormErrorState: function() {
+    showFormErrorState: function () {
       return;
-    }
-  },
-  mounted() {
-    axios
-      .get("https://vipqpoael1.execute-api.us-west-1.amazonaws.com/prod")
-      .then(response => {
-        this.getEntriesState = "success";
-        this.guestbook = response.data;
-      })
-      .catch(err => {
-        this.getEntriesState = "error";
-      });
-  },
-  updated: function(params) {
-    const timestamps = document.querySelectorAll(".timestamp");
-    timestamps.forEach(ts => {
-      const absolute = ts.querySelector(".absolute");
-      if (absolute) {
-        ts.style.transform = `translateX(${absolute.offsetWidth}px)`;
-      }
-      ts.addEventListener("mouseenter", () => {
-        ts.style.transform = `translateX(0)`;
-      });
-      ts.addEventListener("mouseleave", () => {
-        ts.style.transform = `translateX(${absolute.offsetWidth}px)`;
-      });
-    });
-  },
+    },
 
-  filters: {
-    relative: function(date) {
+    toIso: function (date) {
+      return new Date(date).toISOString().split("T")[0];
+    },
+
+    relative: function (date) {
       date = new Date(date);
       var delta = Math.round((+new Date() - date) / 1000);
 
@@ -109,18 +93,55 @@ var app = new Vue({
       } else if (delta < day * 2) {
         fuzzy = "yesterday";
       } else if (delta < day * 7) {
-        fuzzy = "this week"
+        fuzzy = "this week";
       } else if (delta < day * 14) {
-        fuzzy = "last week"
+        fuzzy = "last week";
       } else if (delta < day * 31) {
-        fuzzy = "within a month"
+        fuzzy = "within a month";
       }
 
-      return fuzzy || toIso(date);
+      return fuzzy || this.toIso(date);
+    },
+  },
+  mounted() {
+    axios
+      .get("https://vipqpoael1.execute-api.us-west-1.amazonaws.com/prod")
+      .then((response) => {
+        this.getEntriesState = "success";
+        this.guestbook = response.data;
+      })
+      .catch((err) => {
+        this.getEntriesState = "error";
+      });
+  },
+  updated: function (params) {
+    const timestamps = document.querySelectorAll(".timestamp");
+    timestamps.forEach((ts) => {
+      const absolute = ts.querySelector(".absolute");
+      if (absolute) {
+        ts.style.transform = `translateX(${absolute.offsetWidth}px)`;
+        ts.addEventListener("mouseenter", () => {
+          ts.style.transform = `translateX(0)`;
+        });
+        ts.addEventListener("mouseleave", () => {
+          ts.style.transform = `translateX(${absolute.offsetWidth}px)`;
+        });
+      }
+    });
+  },
+
+  filters: {
+    toIso: function (date) {
+      return this.app.toIso(date);
     },
 
-    toIso: function(date) {
-      return new Date(date).toISOString().split("T")[0];
-    }
-  }
+    relative: function (date) {
+      return this.app.relative(date);
+    },
+  },
 });
+
+Vue.config.errorHandler = (err, vm, info) => {
+  vm.getEntriesState = "error";
+  console.log(err);
+};
