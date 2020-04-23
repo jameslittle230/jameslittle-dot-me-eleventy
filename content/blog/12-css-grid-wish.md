@@ -12,7 +12,21 @@ I cared a lot about the page layout for this version—the layout of the last re
 
 I knew I wanted a central column for text, and I wanted that central column to be nicely sized so your eyes don't get tired tracking across super-long lines of text. I also wanted some elements to be able to break out of that central column into a wider, but still centered column. You can likely see the intended result on the [portfolio page](/portfolio), but here's a diagram:
 
-{% img "62.73%", "https://files.jameslittle.me/images/layout" %}
+<img src="https://files.jameslittle.me/images/layout-2.png alt="All elements fit into a central column, except for one which is wider.">
+
+With an indended HTML structure of:
+
+```html
+<div class="grid">
+  <header>...</header>
+  <main>
+    <p>...</p>
+    <p>...</p>
+    <div class="breakout">...</div>
+    <p>...</p>
+  </main>
+</div>
+```
 
 Turns out this is impossible, as far as I can tell. Only direct child elements are grid sub-items, and if I have (as displayed here) a `<div>` inside a `<main>` inside a `display: grid` element, the `<main>` will be the grid item (and will be able to conform itself to a given grid area), but the contents inside don't have access to that grid.
 
