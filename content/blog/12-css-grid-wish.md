@@ -12,7 +12,7 @@ I cared a lot about the page layout for this version—the layout of the last re
 
 I knew I wanted a central column for text, and I wanted that central column to be nicely sized so your eyes don't get tired tracking across super-long lines of text. I also wanted some elements to be able to break out of that central column into a wider, but still centered column. You can likely see the intended result on the [portfolio page](/portfolio), but here's a diagram:
 
-<img src="https://files.jameslittle.me/images/layout-2.png alt="All elements fit into a central column, except for one which is wider.">
+<img src="https://files.jameslittle.me/images/layout-2.png" alt="All elements fit into a central column, except for one which is wider." />
 
 With an indended HTML structure of:
 
