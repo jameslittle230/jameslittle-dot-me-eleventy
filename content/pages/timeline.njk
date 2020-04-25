@@ -1,0 +1,48 @@
+---
+layout: page.njk
+slug: "timeline"
+data: [
+    {date: 1996-11-23, content: "Born in Boston, MA"},
+    {date: 2006-10-01, content: "Published my first website, a page outlining my fourth grade class's recycling&nbsp;program"},
+    {date: 2015-06-01, content: "Graduated from <a href=\"https://milton.edu\">Milton Academy</a>"},
+    {date: 2017-07-01, content: "Met Maddie while spending the summer in San Francisco interning at Okta"},
+    {date: 2018-01-01, content: "Spent a semester living in Budapest, Hungary"},
+    {date: 2019-05-01, content: "Graduated from <a href=\"https://bowdoin.edu\">Bowdoin College</a>"},
+    {date: 2019-07-01, content: "Moved to San Francisco"},
+    {date: 2019-08-05, content: "Started work at <a href=\"https://stripe.com\">Stripe</a>"},
+    {date: 2020-03-01, content: "Launched <a href=\"https://stork-search.net\">Stork</a>"},
+]
+---
+
+<h1>Timeline of Events</h1>
+
+<p>Inspired by <a href="https://chriscoyier.net/timeline/">Chris Coyier's</a>. Like his, this is more for me than for you.</p>
+
+<ul>
+{% for item in data %}
+  <li>
+    <span class="tag timeline-tag">{{ item.date | dateformat('MMM yyyy') }}</span>
+    <span>{{item.content | safe}}</span>
+  </li>
+{% endfor %}
+</ul>
+
+<style>
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  margin-bottom: 0.5em;
+  display: flex;
+  align-items: baseline;
+}
+
+.timeline-tag {
+  flex-shrink: 0; 
+  margin-right: 1em;
+  width: 6em;
+  text-align: center;
+}
+</style>

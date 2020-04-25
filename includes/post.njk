@@ -18,18 +18,18 @@ layout: base.njk
 
 <div class="post-article">
     <div class="related-links">
-            <div class="prev-article-link">
-                {% if prevPost.url %}
-                        <strong>Previous Post</strong>
-                        <a href="{{prevPost.url}}">{{prevPost.data.title}}</a>
-                {% endif %}
-                    </div>
-                    <div class="next-article-link">
-                {% if nextPost.url %}
-                        <strong>Next Post</strong>
-                        <a href="{{nextPost.url}}">{{nextPost.data.title}}</a>
-                {% endif %}
-            </div>
+        <div class="prev-article-link">
+            {% if prevPost.url %}
+                <strong>Previous Post</strong>
+                <a href="{{prevPost.url}}">{{prevPost.data.title}}</a>
+            {% endif %}
+        </div>
+        <div class="next-article-link">
+            {% if nextPost.url %}
+                <strong>Next Post</strong>
+                <a href="{{nextPost.url}}">{{nextPost.data.title}}</a>
+            {% endif %}
+        </div>
     </div>
 
     <div class="whoami-box">

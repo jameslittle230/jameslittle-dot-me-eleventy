@@ -242,3 +242,16 @@ figcaption {
   text-align: center;
   letter-spacing: 0.02em;
 }
+
+.tag {
+  background: gray;
+  border-radius: 5px;
+  padding: 0.1em 0.4em;
+  font-size: 0.8em;
+  line-height: 1.;
+}
+
+.tag-red {
+  background: rgb(61.01% 12.34% 16.23%);
+  color: white;
+}
