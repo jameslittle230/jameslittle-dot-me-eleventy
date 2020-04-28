@@ -11,6 +11,19 @@ article > * {
   margin-bottom: 1.5em;
 }
 
+article > pre {
+  box-shadow: 3px 3.5px 0 var(--bg-color),
+    0.7em 0.7em 0 var(--secondary-color);
+}
+
+/**
+ * Shadow looks weird in dark mode so let's change it to a border.
+ */
+[data-theme="dark"] article > pre {
+  box-shadow: none;
+  border: 1px solid var(--secondary-color)
+}
+
 .post-article {
   margin-top: 2em;
 }
