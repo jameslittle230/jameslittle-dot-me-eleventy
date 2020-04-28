@@ -32,14 +32,6 @@ article > pre {
   margin-bottom: 1em;
 }
 
-.post-article .whoami-box {
-  color: var(--black-override);
-  background: var(--primary-color);
-  padding: 1em;
-  box-shadow: 0.1em 0.1em 0 var(--bg-color),
-    0.7em 0.7em 0 var(--secondary-color);
-}
-
 .post-article p {
   margin: 0;
 }
