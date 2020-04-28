@@ -21,7 +21,7 @@ data: [
 <ul>
 {% for item in data %}
   <li>
-    <span class="badge timeline-badge">{{ item.date | dateformat('MMM yyyy') }}</span>
+    <span class="badge badge-green timeline-badge">{{ item.date | dateformat('MMM yyyy') }}</span>
     <span>{{item.content | safe}}</span>
   </li>
 {% endfor %}
