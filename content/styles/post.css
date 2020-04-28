@@ -23,7 +23,8 @@ article > * {
   color: var(--black-override);
   background: var(--primary-color);
   padding: 1em;
-  box-shadow: 0.1em 0.1em 0 var(--bg-color), 0.7em 0.7em 0 var(--secondary-color);
+  box-shadow: 0.1em 0.1em 0 var(--bg-color),
+    0.7em 0.7em 0 var(--secondary-color);
 }
 
 .post-article p {
@@ -60,6 +61,13 @@ article > * {
   width: 40%;
 }
 
+.enlarged {
+  position: fixed;
+  width: 100%;
+  left: 0;
+  top: 50%;
+  margin-top: -50%;
+}
 
 
 
@@ -76,15 +84,16 @@ sup.footnote-ref {
 }
 
 [data-theme="dark"] .footnote-button {
-  background: rgba(233, 230, 230, 0.7)
+  background: rgba(233, 230, 230, 0.7);
 }
 
-[data-theme="dark"] .footnote-button:after, [data-theme="dark"] .footnote-button:hover:after {
+[data-theme="dark"] .footnote-button:after,
+[data-theme="dark"] .footnote-button:hover:after {
   color: var(--black-override);
 }
 
 [data-theme="dark"] .footnote-button:hover {
-  background: rgba(233, 230, 230, 1)
+  background: rgba(233, 230, 230, 1);
 }
 
 [data-theme="dark"] .bf-footnote {
@@ -103,4 +112,10 @@ sup.footnote-ref {
 
 img {
   background-color: var(--bg-color);
+  z-index: 10;
+  cursor: zoom-in; /* For enlarging */
+}
+
+img.enlarged {
+  cursor: zoom-out;
 }
