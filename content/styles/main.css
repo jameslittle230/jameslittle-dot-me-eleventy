@@ -247,7 +247,7 @@ figcaption {
   letter-spacing: 0.02em;
 }
 
-.tag {
+.badge {
   background: gray;
   border-radius: 5px;
   padding: 0.1em 0.4em;
@@ -255,7 +255,7 @@ figcaption {
   line-height: 1.;
 }
 
-.tag-red {
+.badge-red {
   background: rgb(61.01% 12.34% 16.23%);
   color: white;
 }

@@ -21,7 +21,7 @@ data: [
 <ul>
 {% for item in data %}
   <li>
-    <span class="tag timeline-tag">{{ item.date | dateformat('MMM yyyy') }}</span>
+    <span class="badge timeline-badge">{{ item.date | dateformat('MMM yyyy') }}</span>
     <span>{{item.content | safe}}</span>
   </li>
 {% endfor %}
@@ -39,7 +39,7 @@ li {
   align-items: baseline;
 }
 
-.timeline-tag {
+.timeline-badge {
   flex-shrink: 0; 
   margin-right: 1em;
   width: 6em;
