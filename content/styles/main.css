@@ -20,12 +20,11 @@
 [data-theme="dark"] {
   --font-color: #d7dfdd;
   --muted-color: #7d8885;
-  --bg-color: #1e201e;
+  --bg-color: #2a2f2a;
   --link-color: #26d5c9;
-  --visited-color: #ad7ed5;
-  --heading-color: #c4ddc8;
+  --visited-color: #cfa4f4;
+  --heading-color: #d5f2da;
 }
-
 
 *,
 *:before,
@@ -67,12 +66,18 @@ h6 {
 /* These need the article > hx selector to override the article > * selector in
    post.css
 */
-h1, article > h1,
-h2, article > h2,
-h3, article > h3,
-h4, article > h4,
-h5, article > h5,
-h6, article > h6 {
+h1,
+article > h1,
+h2,
+article > h2,
+h3,
+article > h3,
+h4,
+article > h4,
+h5,
+article > h5,
+h6,
+article > h6 {
   margin-bottom: 0.3em;
   margin-top: 2.25em;
 }
@@ -117,7 +122,7 @@ blockquote {
   font-style: italic;
 }
 
-blockquote:before{
+blockquote:before {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -235,7 +240,7 @@ pre {
   background-color: #2d2d2d;
   color: #ccc;
   padding: 1em;
-	margin: .5em 0;
+  margin: 0.5em 0;
 }
 
 figcaption {
@@ -252,7 +257,7 @@ figcaption {
   border-radius: 5px;
   padding: 0.1em 0.4em;
   font-size: 0.8em;
-  line-height: 1.;
+  line-height: 1;
 }
 
 .badge-red {
