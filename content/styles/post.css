@@ -141,4 +141,5 @@ img {
 
 img.enlarged {
   cursor: zoom-out;
+  background-color: transparent;
 }
