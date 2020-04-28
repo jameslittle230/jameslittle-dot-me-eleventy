@@ -41,7 +41,7 @@ article > * {
 .related-links {
   display: flex;
   background-color: var(--bg-color);
-  padding: 1.5em 3em;
+  padding: 1.5em 0;
 }
 
 .related-links a {
@@ -51,14 +51,32 @@ article > * {
 .related-links .prev-article-link {
   text-align: right;
   margin-left: auto;
-  margin-right: 0.8em;
-  width: 40%;
+  margin-right: 1em;
+  width: 35%;
 }
 
 .related-links .next-article-link {
   margin-right: auto;
-  margin-left: 0.8em;
-  width: 40%;
+  margin-left: 1em;
+  width: 35%;
+}
+
+@media (max-width: 600px) {
+  .related-links {
+    flex-direction: column;
+    border-top: 2px dashed var(--muted-color);
+    border-bottom: 2px dashed var(--muted-color);
+  }
+
+  .related-links.related-links > * {
+    width: 100%;
+    margin: 0;
+  }
+
+  .related-links .prev-article-link {
+    text-align: left;
+    margin-bottom: 1.5em
+  }
 }
 
 .enlarged {
