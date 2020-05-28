@@ -133,6 +133,14 @@ var app = new Vue({
     },
   },
   mounted() {
+    document.querySelectorAll(".hidden-until-js-load").forEach((e) => {
+      e.classList.remove("hidden-until-js-load");
+    });
+
+    document.querySelectorAll(".hidden-when-js-load").forEach((e) => {
+      e.classList.add("hidden");
+    });
+
     axios
       .get("https://vipqpoael1.execute-api.us-west-1.amazonaws.com/prod")
       .then((response) => {

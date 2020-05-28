@@ -25,17 +25,23 @@ templateEngineOverride: liquid
 </p>
 
 <div id="app">
-  <p class="form-submission-message" v-if="formSubmissionState === 'error'">
+  <p class="form-submission-message hidden-until-js-load" v-if="formSubmissionState === 'error'">
     {{formSubmissionErrorMessage}}
   </p>
 
-  <p class="form-submission-message" v-if="formSubmissionState === 'loading'">
+  <p class="form-submission-message hidden-until-js-load" v-if="formSubmissionState === 'loading'">
     Submitting...
   </p>
 
-  <p class="form-submission-message" v-if="formSubmissionState === 'success'">
+  <p class="form-submission-message hidden-until-js-load" v-if="formSubmissionState === 'success'">
     Success!
   </p>
+  
+  <noscript>
+  <p class="form-submission-message">
+    You need Javascript to get this form to work.
+  </p>
+  </noscript>
 
   <form v-on:submit.prevent="submitForm">
     <fieldset>
@@ -56,13 +62,14 @@ templateEngineOverride: liquid
   </form>
 
   <div style="margin-top: 4rem;">
+    <h2 class="hidden-when-js-load">{{guestbook.size}} entries</h2>
     {% raw %}
-    <h2>{{header}}</h2>
+    <h2 class="hidden-until-js-load">{{header}}</h2>
     {% endraw %}
 
     <ul class="guestbook">
       <li
-        class="guestbook-entry dynamic-guestbook-entry"
+        class="guestbook-entry dynamic-guestbook-entry hidden-until-js-load"
         v-for="entry in dynamicGuestbook"
       >
         {% raw %}
@@ -230,6 +237,12 @@ templateEngineOverride: liquid
     background-color: var(--secondary-color);
     color: var(--white-override);
     padding: 1em;
+  }
+
+  .hidden-until-js-load,
+  /* this class added by guestbook.js */
+  .hidden {
+    display: none;
   }
 </style>
 
