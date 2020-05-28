@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "npx @11ty/eleventy --config=eleventy.js",
-    "serve": "npx @11ty/eleventy --config=eleventy.js --serve"
+    "build": "ELEVENTY_ENV=production  npx @11ty/eleventy --config=eleventy.js",
+    "serve": "ELEVENTY_ENV=development npx @11ty/eleventy --config=eleventy.js --serve"
   },
   "keywords": [],
   "author": "",
@@ -14,11 +14,12 @@
     "@11ty/eleventy": "^0.10.0",
     "@11ty/eleventy-plugin-rss": "^1.0.7",
     "@11ty/eleventy-plugin-syntaxhighlight": "^3.0.1",
-    "html-minifier": "^4.0.0",
-    "markdown-it-footnote": "^3.0.2",
     "autoprefixer": "^9.7.4",
+    "axios": "^0.19.2",
     "clean-css": "^4.2.2",
-    "date-fns": "^2.9.0",
-    "date-fns-tz": "^1.0.9"
+    "date-fns": "^2.14.0",
+    "date-fns-tz": "^1.0.9",
+    "html-minifier": "^4.0.0",
+    "markdown-it-footnote": "^3.0.2"
   }
 }
