@@ -2,7 +2,7 @@
 layout: page.njk
 title: Guestbook
 permalink: "guestbook/index.html"
-templateEngineOverride: false
+templateEngineOverride: liquid
 ---
 
 <h1>Guestbook</h1>
@@ -18,7 +18,11 @@ templateEngineOverride: false
   write something down!
 </p>
 
-<p>I also wrote about <a href="/blog/2020/about-the-guestbook/">how I made this</a>, if you're into that sort of thing.</p>
+<p>
+  I also wrote about
+  <a href="/blog/2020/about-the-guestbook/">how I made this</a>, if you're into
+  that sort of thing.
+</p>
 
 <div id="app">
   <p class="form-submission-message" v-if="formSubmissionState === 'error'">
@@ -52,22 +56,51 @@ templateEngineOverride: false
   </form>
 
   <div style="margin-top: 4rem;">
+    {% raw %}
     <h2>{{header}}</h2>
+    {% endraw %}
 
-    <ul class="guestbook" v-if="getEntriesState === 'success'">
-      <li class="guestbook-entry" v-for="entry in guestbook">
+    <ul class="guestbook">
+      <li
+        class="guestbook-entry dynamic-guestbook-entry"
+        v-for="entry in dynamicGuestbook"
+      >
+        {% raw %}
         <div class="metadata">
           <span class="name">{{entry.name}}</span>
-          <span class="timestamp"
-            >{{entry.date | relative}}
-            <span class="absolute" v-if="relative(entry.date) != toIso(entry.date)">{{entry.date | toIso}}</span></span
-          >
+          <span class="timestamp">
+            {{entry.date | relative}}
+            <span class="absolute">{{entry.date | toIso}}</span>
+          </span>
         </div>
         <span class="url"><a v-bind:href="entry.url">{{entry.url}}</a></span>
         <div class="message">
           <p>{{entry.message}}</p>
         </div>
+        {% endraw %}
       </li>
+
+      {% for entry in guestbook %}
+      <li class="guestbook-entry">
+        <div class="metadata">
+          <span class="name">{{entry.name}}</span>
+          <span class="timestamp">
+            {{entry.date | relativeDate}}
+            <span class="absolute">{{entry.date | dateformat}}</span>
+          </span>
+        </div>
+        <span class="url">
+          {% comment %} 
+            The replace filter is because danj added quotes to a URL once and 
+            it messed up everything.
+          {% endcomment %}
+          <a href="{{entry.url | replace: '"', ""}}">{{entry.url}}</a>
+        </span>
+        <div class="message">
+          <p>{{entry.message}}</p>
+        </div>
+      </li>
+      {% endfor %}
     </ul>
   </div>
 </div>
@@ -200,6 +233,14 @@ templateEngineOverride: false
   }
 </style>
 
-<script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+<script>
+  var staticLength = {{guestbook.size}};
+  var latestEntryDate = {{guestbook[0].date}}
+</script>
+
+<!-- dev mode: -->
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script> -->
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="/guestbook.js"></script>

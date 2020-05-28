@@ -5,12 +5,38 @@ const BLANK_INPUT = {
   message: "",
 };
 
+function count(quantity, singular, plural) {
+  if (quantity === 1) {
+    return `${quantity} ${singular}`;
+  } else {
+    return `${quantity} ${plural}`;
+  }
+}
+
+function hideIsoDate() {
+  const timestamps = document.querySelectorAll(".timestamp");
+  timestamps.forEach((ts) => {
+    const absolute = ts.querySelector(".absolute");
+    if (absolute) {
+      ts.style.transform = `translateX(${absolute.offsetWidth}px)`;
+      ts.addEventListener("mouseenter", () => {
+        ts.style.transform = `translateX(0)`;
+      });
+      ts.addEventListener("mouseleave", () => {
+        ts.style.transform = `translateX(${absolute.offsetWidth}px)`;
+      });
+    }
+  });
+}
+
+hideIsoDate();
+
 var app = new Vue({
   el: "#app",
   data: {
     input: JSON.parse(JSON.stringify(BLANK_INPUT)),
 
-    guestbook: [],
+    dynamicGuestbook: [],
     getEntriesState: "loading", // "loading" || "error" || "success"
     formSubmissionState: "", // "" || "loading" || "error" || "success"
     formSubmissionErrorMessage: "",
@@ -18,13 +44,16 @@ var app = new Vue({
   computed: {
     header: function () {
       if (this.getEntriesState === "loading") {
-        return "Fetching entries...";
+        return "Fetching newest entries...";
       } else if (this.getEntriesState === "error") {
         return "Error fetching entries. Please tweet at me.";
       } else if (this.getEntriesState === "success") {
-        return `${this.guestbook.length} message${
-          this.guestbook.length == 1 ? "" : "s"
-        }`;
+        return count(
+          this.dynamicGuestbook.length +
+            (typeof staticLength === "number" ? staticLength : 0),
+          "entry",
+          "entries"
+        );
       }
     },
   },
@@ -46,7 +75,7 @@ var app = new Vue({
         )
         .then((response) => {
           this.formSubmissionState = "success";
-          this.guestbook.unshift(this.input);
+          this.dynamicGuestbook.unshift(this.input);
           this.input = JSON.parse(JSON.stringify(BLANK_INPUT));
         })
         .catch((err) => {
@@ -108,26 +137,16 @@ var app = new Vue({
       .get("https://vipqpoael1.execute-api.us-west-1.amazonaws.com/prod")
       .then((response) => {
         this.getEntriesState = "success";
-        this.guestbook = response.data;
+        this.dynamicGuestbook = response.data.filter(
+          (e) => e.date > Date.parse(latestEntryDate)
+        );
       })
       .catch((err) => {
         this.getEntriesState = "error";
       });
   },
   updated: function (params) {
-    const timestamps = document.querySelectorAll(".timestamp");
-    timestamps.forEach((ts) => {
-      const absolute = ts.querySelector(".absolute");
-      if (absolute) {
-        ts.style.transform = `translateX(${absolute.offsetWidth}px)`;
-        ts.addEventListener("mouseenter", () => {
-          ts.style.transform = `translateX(0)`;
-        });
-        ts.addEventListener("mouseleave", () => {
-          ts.style.transform = `translateX(${absolute.offsetWidth}px)`;
-        });
-      }
-    });
+    hideIsoDate();
   },
 
   filters: {

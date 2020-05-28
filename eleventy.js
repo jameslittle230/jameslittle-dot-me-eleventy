@@ -2,6 +2,7 @@ const htmlmin = require("html-minifier");
 const pluginRss = require("@11ty/eleventy-plugin-rss");
 const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
 const { zonedTimeToUtc, utcToZonedTime, format } = require("date-fns-tz");
+const { formatDistanceToNow } = require("date-fns");
 const mdit = require("markdown-it");
 const mditfootnote = require("markdown-it-footnote");
 
@@ -12,7 +13,7 @@ function minifyHtml(content, outputPath) {
     let minified = htmlmin.minify(content, {
       useShortDoctype: true,
       removeComments: true,
-      collapseWhitespace: true
+      collapseWhitespace: true,
     });
     return minified;
   }
@@ -35,7 +36,11 @@ function dateformat(value, fmtstring = "yyyy-MM-dd") {
   return format(zonedDate, fmtstring);
 }
 
-module.exports = function(eleventyConfig) {
+function relativeDate(value) {
+  return formatDistanceToNow(new Date(value), { addSuffix: true });
+}
+
+module.exports = function (eleventyConfig) {
   eleventyConfig.addTransform("htmlmin", minifyHtml);
 
   eleventyConfig.addPlugin(pluginRss);
@@ -43,6 +48,7 @@ module.exports = function(eleventyConfig) {
 
   eleventyConfig.addFilter("extractPostSlug", extractPostSlug);
   eleventyConfig.addFilter("dateformat", dateformat);
+  eleventyConfig.addFilter("relativeDate", relativeDate);
 
   eleventyConfig.addPassthroughCopy("content/styles/");
   eleventyConfig.addPassthroughCopy({ "content/static/": "/" });
@@ -54,8 +60,8 @@ module.exports = function(eleventyConfig) {
     '<section class="footnotes"><ol class="footnotes-list">';
   eleventyConfig.setLibrary("md", markdownLib);
 
-  eleventyConfig.addCollection("uniquePostYears", function(collection) {
-    Array.prototype.uniqued = function() {
+  eleventyConfig.addCollection("uniquePostYears", function (collection) {
+    Array.prototype.uniqued = function () {
       var output = [];
       for (const val of this) {
         if (output.indexOf(val) === -1) {
@@ -67,16 +73,16 @@ module.exports = function(eleventyConfig) {
 
     return collection
       .getFilteredByTag("post")
-      .map(p => p.date)
-      .map(d => dateformat(d, "yyyy"))
+      .map((p) => p.date)
+      .map((d) => dateformat(d, "yyyy"))
       .uniqued()
       .sort();
   });
 
-  eleventyConfig.addCollection("postsWithYears", function(collection) {
+  eleventyConfig.addCollection("postsWithYears", function (collection) {
     var coll = collection.getFilteredByTag("post");
 
-    coll.map(p => {
+    coll.map((p) => {
       p.year = format(p.date, "yyyy");
       return p;
     });
@@ -96,7 +102,7 @@ module.exports = function(eleventyConfig) {
     dir: {
       input: "./content",
       includes: "../includes",
-      output: "./_site"
-    }
+      output: "./_site",
+    },
   };
 };
