@@ -69,10 +69,10 @@ var app = new Vue({
       this.input["date"] = Date.now();
 
       axios
-        .post(
-          "https://vipqpoael1.execute-api.us-west-1.amazonaws.com/prod",
-          this.input
-        )
+        .post("https://vipqpoael1.execute-api.us-west-1.amazonaws.com/prod", {
+          ...this.input,
+          qa: environment === "development",
+        })
         .then((response) => {
           this.formSubmissionState = "success";
           this.dynamicGuestbook.unshift(this.input);

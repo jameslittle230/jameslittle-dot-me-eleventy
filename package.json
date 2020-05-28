@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "npx @11ty/eleventy --config=eleventy.js",
-    "serve": "npx @11ty/eleventy --config=eleventy.js --serve"
+    "build": "ELEVENTY_ENV=production  npx @11ty/eleventy --config=eleventy.js",
+    "serve": "ELEVENTY_ENV=development npx @11ty/eleventy --config=eleventy.js --serve"
   },
   "keywords": [],
   "author": "",

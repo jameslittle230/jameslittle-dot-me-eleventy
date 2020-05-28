@@ -25,6 +25,12 @@ templateEngineOverride: liquid
 </p>
 
 <div id="app">
+  {% if environment == "development" %}
+  <p class="form-submission-message">
+    Development mode enabled. Guestbook posts will not be saved to the production bucket.
+  </p>
+  {% endif %}
+
   <p class="form-submission-message hidden-until-js-load" v-if="formSubmissionState === 'error'">
     {{formSubmissionErrorMessage}}
   </p>
@@ -69,7 +75,7 @@ templateEngineOverride: liquid
 
     <ul class="guestbook">
       <li
-        class="guestbook-entry dynamic-guestbook-entry hidden-until-js-load"
+        class="guestbook-entry dynamic-guestbook-entry"
         v-for="entry in dynamicGuestbook"
       >
         {% raw %}
@@ -249,7 +255,8 @@ templateEngineOverride: liquid
 <!-- The following are populated at build time, by the liquid templater: -->
 <script>
   var staticLength = {{guestbook.size}};
-  var latestEntryDate = {{guestbook[0].date}}
+  var latestEntryDate = {{guestbook[0].date}};
+  var environment = "{{environment}}";
 </script>
 
 <!-- dev mode: -->

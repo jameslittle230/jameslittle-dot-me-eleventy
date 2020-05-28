@@ -11,5 +11,6 @@ async function fetchGuestbookEntries() {
 module.exports = async function () {
   return {
     guestbook: await fetchGuestbookEntries(),
+    environment: process.env.ELEVENTY_ENV,
   };
 };
