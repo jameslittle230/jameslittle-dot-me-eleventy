@@ -21,6 +21,7 @@ This explicitly _doesn't_ track things I read online—you might be interested i
 - A Philosophy of Software Design - John Ousterhout
 - Strangers in Budapest - Jessica Keener
 - The Timeless Way of Building - Christopher Alexander
+- Severance - Ling Ma
 
 ## 2019
 
