@@ -23,6 +23,7 @@ This explicitly _doesn't_ track things I read online—you might be interested i
 - The Timeless Way of Building - Christopher Alexander
 - Severance - Ling Ma
 - Something Incredibly Wonderful Happens: Frank Oppenheimer and his Astonishing Exploratorium - K.C. Cole
+- An Elegant Puzzle: Systems of Engineering Management - Will Larson
 
 ## 2019
 
