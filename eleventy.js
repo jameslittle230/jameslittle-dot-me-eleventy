@@ -2,7 +2,7 @@ const htmlmin = require("html-minifier");
 const pluginRss = require("@11ty/eleventy-plugin-rss");
 const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
 const { zonedTimeToUtc, utcToZonedTime, format } = require("date-fns-tz");
-const { formatDistanceToNow } = require("date-fns");
+const { formatDistanceToNow, differenceInDays } = require("date-fns");
 const mdit = require("markdown-it");
 const mditfootnote = require("markdown-it-footnote");
 
@@ -40,6 +40,10 @@ function relativeDate(value) {
   return formatDistanceToNow(new Date(value), { addSuffix: true });
 }
 
+function dateOlderThan1y(value) {
+  return differenceInDays(new Date(), new Date(value)) > 365;
+}
+
 module.exports = function (eleventyConfig) {
   eleventyConfig.addTransform("htmlmin", minifyHtml);
 
@@ -49,6 +53,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addFilter("extractPostSlug", extractPostSlug);
   eleventyConfig.addFilter("dateformat", dateformat);
   eleventyConfig.addFilter("relativeDate", relativeDate);
+  eleventyConfig.addFilter("dateOlderThan1y", dateOlderThan1y);
 
   eleventyConfig.addPassthroughCopy("content/styles/");
   eleventyConfig.addPassthroughCopy({ "content/static/": "/" });

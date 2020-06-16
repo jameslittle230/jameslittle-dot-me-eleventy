@@ -12,8 +12,7 @@ article > * {
 }
 
 article > pre {
-  box-shadow: 3px 3.5px 0 var(--bg-color),
-    0.7em 0.7em 0 var(--secondary-color);
+  box-shadow: 3px 3.5px 0 var(--bg-color), 0.7em 0.7em 0 var(--secondary-color);
 }
 
 /**
@@ -21,7 +20,7 @@ article > pre {
  */
 [data-theme="dark"] article > pre {
   box-shadow: none;
-  border: 1px solid var(--secondary-color)
+  border: 1px solid var(--secondary-color);
 }
 
 .post-article {
@@ -80,7 +79,7 @@ article > pre {
 
   .related-links .prev-article-link {
     text-align: left;
-    margin-bottom: 1.5em
+    margin-bottom: 1.5em;
   }
 }
 
@@ -91,12 +90,6 @@ article > pre {
   top: 50%;
   margin-top: -50%;
 }
-
-
-
-
-
-
 
 /**
  * FOOTNOTES
@@ -124,11 +117,6 @@ sup.footnote-ref {
   box-shadow: var(--shadow);
 }
 
-
-
-
-
-
 /**
  * IMAGES
  */
@@ -142,4 +130,20 @@ img {
 img.enlarged {
   cursor: zoom-out;
   background-color: transparent;
+}
+
+.old-alert {
+  background: hsla(0, 0%, 50%, 0.5);
+  font-size: 0.8em;
+  padding: 0.75em 1.5em;
+  color: currentColor;
+}
+
+@media screen and (min-width: 36rem) {
+  .old-alert {
+    width: 50%;
+  float: right;
+  margin-left: 1em;
+  margin-bottom: 1em;
+  }
 }

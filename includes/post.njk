@@ -1,6 +1,6 @@
 --- 
 permalink: "blog/{{page.date | dateformat: 'yyyy'}}/{{ page.fileSlug | extractPostSlug }}/index.html" 
-layout: base.njk
+layout: base.njk 
 ---
 
 <link rel="stylesheet" href="/styles/post.css"/>
@@ -8,8 +8,19 @@ layout: base.njk
 <div class="pre-article">
     <h1 class="big-title">{{title}}</h1>
     <div class="metadata">
-        <p><i>Written on {{date | dateformat}}<br>{{content | wordcount}} words</i></p>
+        <p>
+            <i>Written on
+                {{date | dateformat}}<br>{{content | wordcount}}
+                words</i>
+        </p>
     </div>
+
+    {% if page.date | dateOlderThan1y %}
+        <div class="old-alert color-box">
+            <h3>This is old as heck!</h3>
+            <p>We are all learning as we grow, and I wrote this over a year ago. My opinions have likely changed, the advice I give here might not be relevant anymore, and anything technical might be wildly outdated.</p>
+        </div>
+    {% endif %}
 </div>
 
 <article>
