@@ -1,0 +1,37 @@
+---
+layout: base.njk
+permalink: /404.html
+---
+
+<link rel="stylesheet" href="/404.css" />
+
+<h1>404 — Page not found.</h1>
+
+<canvas id="boids"></canvas>
+
+<script id="vertex-shader" type="x-shader/x-vertex">
+  attribute vec2 aVertexPosition;
+  attribute vec4 aVertexColor;
+
+  varying lowp vec4 vColor;
+
+  void main() {
+    gl_PointSize = 10.0;
+    gl_Position = vec4(aVertexPosition.xy, 0.0, 1.0);
+    vColor = aVertexColor;
+  }
+</script>
+
+<script id="fragment-shader" type="x-shader/x-fragment">
+  #ifdef GL_ES
+    precision highp float;
+  #endif
+
+  varying lowp vec4 vColor;
+
+  void main() {
+    gl_FragColor = vColor;
+  }
+</script>
+
+<script src="/boids.js"></script>
