@@ -6,11 +6,11 @@ permalink: /404.html
 <link rel="stylesheet" href="/404.css" />
 
 <h1>404 — Page not found.</h1>
-
+<!-- 
 <label for="activeCheckbox"
   ><input type="checkbox" id="activeCheckbox" checked="checked" />
   Active?</label
->
+> -->
 
 <canvas id="boids"></canvas>
 
@@ -19,10 +19,12 @@ permalink: /404.html
   attribute vec4 aVertexColor;
 
   varying lowp vec4 vColor;
+  varying float pointSize;
 
   void main() {
     gl_PointSize = 10.0;
     gl_Position = vec4(aVertexPosition.xy, 0.0, 1.0);
+    pointSize = gl_PointSize;
     vColor = aVertexColor;
   }
 </script>
@@ -33,8 +35,13 @@ permalink: /404.html
   #endif
 
   varying lowp vec4 vColor;
+  varying float pointSize;
 
   void main() {
+    float distance = length(2.0 * gl_PointCoord - 1.0);
+    if (distance > 1.0) {
+        discard;
+    }
     gl_FragColor = vColor;
   }
 </script>

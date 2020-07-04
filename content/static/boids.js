@@ -1,3 +1,20 @@
+/**
+ * boids.js
+ *
+ * A WebGL implementation of Boids, the artificial life flocking algorithm
+ * developed by Craig Reynolds.
+ *
+ * See: https://en.wikipedia.org/wiki/Boids
+ *
+ * Todo:
+ * - Add interactivity with the mouse
+ * - Add settings that the user can change: number of boids? Importance of each
+ *   flocking rule?
+ * - Add tests and abstractions for things like vector averaging
+ * - Add obstacles that the boids try to avoid
+ * - Make it responsive to light mode + dark mode
+ */
+
 let gl = null;
 let glCanvas = null;
 let shaderProgram = null;
@@ -21,7 +38,7 @@ let aVertexPosition;
 
 // Program Options
 let boids = [];
-let boidsCount = 200;
+let boidsCount = 500;
 let boidsVelocity = 400;
 const colors = [
   "#ffa297",
@@ -31,6 +48,7 @@ const colors = [
   "#42cbff",
   "#c3b1ff",
 ];
+let debug = false;
 
 function randomElement(array) {
   return array[Math.floor(Math.random() * array.length)];
@@ -216,7 +234,6 @@ function animateScene() {
     const velocity = ((currentTime - previousTime) / 1000.0) * boidsVelocity;
     previousTime = currentTime;
     boids.forEach((boid) => {
-      // boid.color = "#888888";
       moveBoid(boid, velocity);
 
       let separationData = [];
@@ -235,22 +252,12 @@ function animateScene() {
       let alignmentVector = calculateAlignmentVector(boid, alignmentData);
       let cohesionVector = calculateCohesionVector(boid, cohesionData);
 
-      if (boid.special && separationData.length > 0) {
-        // console.log("SEPARATION", separationData, separationVector);
-        // console.log("ALIGNMENT", alignmentData, alignmentVector);
-        // console.log("COHESION", cohesionData, cohesionVector);
-      }
-
       let steerVector = calculateSteerVector(
         boid,
         separationVector,
         alignmentVector,
         cohesionVector
       );
-
-      if (boid.special) {
-        // console.log("STEER", steerVector);
-      }
 
       boid = steerBoid(boid, steerVector);
     });
@@ -282,10 +289,19 @@ function moveBoid(boid, velocity) {
 }
 
 function boidSeesBoid(boid, other) {
-  viewport = (Math.PI / 3) * 2;
+  // Todo: A boid can't currently see a boid on the opposite side of the viewport.
+  // Sight, like motion, should wrap around edges.
+  if (
+    Math.abs(Math.floor(boid.xPos / 150) - Math.floor(other.xPos / 150)) > 1 ||
+    Math.abs(Math.floor(boid.yPos / 150) - Math.floor(other.yPos / 150)) > 1
+  ) {
+    if (debug && boid.special) other.color = "#888888";
+    return false;
+  }
+
+  if (debug && boid.special) other.color = "#FFFF00";
 
   if (boid.xPos == other.xPos && boid.yPos == other.yPos) {
-    // other.color = "#888888";
     return false;
   }
 
@@ -294,19 +310,11 @@ function boidSeesBoid(boid, other) {
   );
 
   if (dist > 150) {
-    if (boid.special) other.color = "#888888";
     return false;
   }
 
+  viewport = (Math.PI / 3) * 2;
   const output = true;
-
-  if (boid.special && output) {
-    other.color = "#FAFA0A";
-  }
-
-  if (boid.special && !output) {
-    other.color = "#888888";
-  }
 
   return output;
 }
