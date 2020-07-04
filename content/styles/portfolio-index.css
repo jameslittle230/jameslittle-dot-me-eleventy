@@ -11,7 +11,6 @@
   list-style-type: none;
 }
 
-
 @media (min-width: calc(45rem * 1.2 + 1em) /* [1] */) {
   .portfolio-index {
     --element-width: 80vw;
@@ -33,7 +32,6 @@
  * 
  *      This is kind of hacky stuff. Sorry.
  */
-
 
 @media (min-width: calc(90rem * 1.2 + 1em)) {
   .portfolio-index {
