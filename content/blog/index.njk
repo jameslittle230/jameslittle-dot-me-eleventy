@@ -8,7 +8,9 @@ title: "My Blog"
 <link rel="stylesheet" href="/styles/post-index.css"/>
 
 {%- for year in collections.uniquePostYears | reverse -%}
-  <h2 class="year-listing">{{year}}</h2>
+  {% if year != collections.uniquePostYears | reverse | first %}
+    <hr class="year-listing">
+  {% endif %}
   <ul>
     {%- for post in collections.postsWithYears | reverse -%}
       {% if year == post.year %}

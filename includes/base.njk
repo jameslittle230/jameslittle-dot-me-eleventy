@@ -1,12 +1,14 @@
 <!doctype html>
 <!-- Dark mode script has to go first -->
 <script>
-var jlGlobals = {};
-function recomputeComputedValue() {
-  const storedSetting = localStorage.getItem('theme')
-  const osThemeIsDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  var jlGlobals = {};
+  function recomputeComputedValue() {
+    const storedSetting = localStorage.getItem('theme')
+    const osThemeIsDark = window
+      .matchMedia('(prefers-color-scheme: dark)')
+      .matches;
 
-  /*
+    /*
   Light by default
   Dark if stored setting is null and OS is in dark mode
   Whatever stored setting is if it exists
@@ -21,17 +23,24 @@ function recomputeComputedValue() {
 
   */
 
-  jlGlobals.theme = storedSetting ? storedSetting : (osThemeIsDark ? "dark" : "light");
-  if (["light", "dark"].indexOf(jlGlobals.theme) === -1) { 
-    console.error("Could not determine theme");
-    /* Log */
-    jlGlobals.theme = "light"
+    jlGlobals.theme = storedSetting
+      ? storedSetting
+      : (
+        osThemeIsDark
+        ? "dark"
+        : "light");
+    if (["light", "dark"].indexOf(jlGlobals.theme) === -1) {
+      console.error("Could not determine theme");
+      /* Log */
+      jlGlobals.theme = "light"
+    }
+
+    document
+      .documentElement
+      .setAttribute('data-theme', jlGlobals.theme);
   }
 
-  document.documentElement.setAttribute('data-theme', jlGlobals.theme);
-}
-
-recomputeComputedValue()
+  recomputeComputedValue()
 </script>
 
 <html lang="en" data-theme="light">
@@ -39,18 +48,318 @@ recomputeComputedValue()
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-      <link rel="stylesheet" href="https://rsms.me/inter/inter.css"/>
-      <link rel="stylesheet" href="https://files.jameslittle.me/webfonts/jetbrains-mono/jetbrains-mono.css"/>
-      <link rel="stylesheet" href="/styles/main.css"/>
-      <link rel="stylesheet" href="/styles/prism.css"/>
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css"/>
+    <link rel="stylesheet" href="https://files.jameslittle.me/webfonts/jetbrains-mono/jetbrains-mono.css"/>
+    <link rel="stylesheet" href="/styles/main.css"/>
+    <link rel="stylesheet" href="/styles/prism.css"/>
 
-    <title>{{ title }} • jameslittle.me</title>
+    <title>{{ title }}
+      • jameslittle.me</title>
+
+    <style>
+      :root {
+        --primary-color: #3bef8f;
+        --secondary-color: #c5369a;
+        --font-color: #182b28;
+        --muted-color: #535e5c;
+        --bg-color: #fff;
+        --heading-color: #163833;
+        --link-color: #007e76;
+        --visited-color: #9f10ac;
+        --white-override: #ffffff;
+        --black-override: #182b28;
+
+        --page-width: 45rem;
+        --shadow: 0 0.9px 2.1px rgba(0, 0, 0, 0.031), 0 2.1px 5.1px rgba(0, 0, 0, 0.039), 0 3.9px 9.7px rgba(0, 0, 0, 0.044), 0 6.9px 17.3px rgba(0, 0, 0, 0.048), 0 13px 32.7px rgba(0, 0, 0, 0.053), 0 31px 80px rgba(0, 0, 0, 0.07);
+      }
+
+      [data-theme="dark"] {
+        --font-color: #d7dfdd;
+        --muted-color: #7d8885;
+        --bg-color: #1d1d20;
+        --link-color: #26d5c9;
+        --visited-color: #cfa4f4;
+        --heading-color: #d5f2da;
+
+        font-weight: 300;
+      }
+
+      *,
+      *:after,
+      *:before {
+        position: relative;
+        box-sizing: border-box;
+      }
+
+      img {
+        max-width: 100%;
+        margin: 0;
+      }
+
+      body,
+      html {
+        background-color: var(--bg-color);
+      }
+
+      body {
+        font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+        max-width: var(--page-width);
+        width: 96%;
+        margin: 0 auto;
+        color: var(--font-color);
+        line-height: 1.6;
+      }
+
+      strong {
+        font-weight: 700;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        color: var(--heading-color);
+      }
+
+      /* These need the article > hx selector to override the article > * selector in
+   post.css
+*/
+      article > h1,
+      article > h2,
+      article > h3,
+      article > h4,
+      article > h5,
+      article > h6,
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        margin-bottom: 0.3em;
+        margin-top: 2.25em;
+      }
+
+      h1:first-child,
+      h2:first-child,
+      h3:first-child,
+      h4:first-child,
+      h5:first-child,
+      h6:first-child {
+        margin-top: 0.3em;
+      }
+
+      code {
+        font-family: "jetbrains mono";
+      }
+
+      *:not(pre) > code {
+        background: var(--primary-color);
+        color: var(--black-override);
+        font-size: 0.9em;
+        padding: 0.1em 0.4em;
+      }
+
+      .tabl {
+        font-feature-settings: "tnum";
+      }
+
+      a:link {
+        color: var(--link-color);
+      }
+
+      a:visited {
+        color: var(--visited-color);
+      }
+
+      blockquote {
+        font-size: 0.85em;
+        line-height: 1.65;
+        padding: 0 0 0 2em;
+        font-style: italic;
+      }
+
+      blockquote:before {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        width: 1em;
+        content: "";
+        background: left repeat-y repeating-linear-gradient(-30deg, var(--primary-color), var(--primary-color) 0.5em, var(--bg-color) 0.5em, var(--bg-color) 1.3em);
+        background-attachment: fixed;
+      }
+
+      .footbar {
+        text-align: center;
+        padding: 4em 0 2em;
+        font-size: 0.7em;
+        text-transform: uppercase;
+        letter-spacing: 0.035em;
+        line-height: 1.5;
+        clear: both;
+      }
+
+      .footbar p {
+        margin: 0.7em 0;
+      }
+
+      .footbar .links a {
+        margin: 0 0.5em;
+      }
+
+      .color-box {
+        background: var(--primary-color);
+        color: var(--black-override);
+        font-weight: 400;
+
+        /* The 3px and 3.5px values seem pretty magic-number-y,
+  but they look a whole lot better than what came before.
+  There's no reason these values should be derived from
+  the size of the typography.
+  */
+        box-shadow: 3px 3.5px 0 var(--bg-color), 0.7em 0.7em 0 var(--secondary-color);
+
+        padding: 1em;
+        margin-bottom: 2em;
+        margin-top: 0.5em;
+        width: calc(100% - 1em);
+      }
+
+      .topbar {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .topbar a {
+        margin: 0 1.5em 0 0;
+        color: var(--black-override);
+        text-decoration: none;
+      }
+
+      .topbar a:last-child {
+        margin-right: 0;
+      }
+
+      .topbar a:hover {
+        text-decoration: underline;
+      }
+
+      .back-home {
+        font-weight: bold;
+      }
+
+      button.link {
+        background: none;
+        border: none;
+        font-family: inherit;
+        font-size: inherit;
+        text-transform: inherit;
+        letter-spacing: inherit;
+        color: var(--link-color);
+        text-decoration: underline;
+      }
+
+      button.link:hover {
+        cursor: pointer;
+      }
+
+      .big-title {
+        font-size: 3em;
+        letter-spacing: -0.03em;
+        margin: 0.8em 0 0.2em;
+        line-height: 1.1;
+      }
+
+      .picture-placeholder {
+        background-color: gray;
+      }
+
+      .over-placeholder {
+        position: absolute;
+        top: 0;
+      }
+
+      pre {
+        max-height: 50vh;
+        overflow-y: scroll;
+        background-color: #2d2d2d;
+        color: #ccc;
+        padding: 1em;
+        margin: 0.5em 0;
+      }
+
+      figcaption {
+        margin-top: 0.5em;
+        font-size: 0.8em;
+        text-transform: uppercase;
+        opacity: 0.8;
+        text-align: center;
+        letter-spacing: 0.02em;
+      }
+
+      .badge {
+        background: #d5d5d5;
+        border-radius: 5px;
+        padding: 0.1em 0.4em;
+        margin: 0 0.8em;
+        font-size: 0.8em;
+        line-height: 1.25;
+        /* Offset 0.8em font size */
+      }
+
+      [data-theme="dark"] .badge {
+        background: #575757;
+      }
+
+      /* Class names have to appear twice to override the above rule's specificity */
+
+      .badge-red.badge-red {
+        background: rgb(61.01% 12.34% 16.23%);
+        color: white;
+      }
+
+      .badge-green.badge-green {
+        background: hsl(148, 65%, 32%);
+        color: white;
+      }
+
+      .boxed-list-element {
+        transition: box-shadow 0.15s ease-out, background-color 0.15s ease-out;
+        border: 1px solid hsla(0, 0%, 50%, 0.3);
+        border-radius: 6px;
+        padding: 0.7em;
+        margin: 0 -0.3em 1em;
+      }
+
+      .boxed-list-element:hover {
+        box-shadow: var(--shadow);
+        background-color: hsla(0, 0%, 50%, 0.05);
+      }
+
+      #scrim {
+        opacity: 0;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: black;
+        z-index: 9;
+        /* One less than img z-index in post.css */
+        pointer-events: none;
+      }
+    </style>
   </head>
   <body>
     <div id="scrim"></div>
     {% include "topbar.njk" %}
     <main>
-    {{ content | safe }}
+      {{ content | safe }}
     </main>
     {% include "footbar.njk" %}
     {% include "matomo.njk" %}

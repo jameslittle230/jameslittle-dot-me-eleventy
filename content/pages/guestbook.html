@@ -75,7 +75,7 @@ templateEngineOverride: liquid
 
     <ul class="guestbook">
       <li
-        class="guestbook-entry dynamic-guestbook-entry"
+        class="guestbook-entry dynamic-guestbook-entry boxed-list-element"
         v-for="entry in dynamicGuestbook"
       >
         {% raw %}
@@ -94,7 +94,7 @@ templateEngineOverride: liquid
       </li>
 
       {% for entry in guestbook %}
-      <li class="guestbook-entry">
+      <li class="guestbook-entry boxed-list-element">
         <div class="metadata">
           <span class="name">{{entry.name}}</span>
           <span class="timestamp">
@@ -156,7 +156,7 @@ templateEngineOverride: liquid
   }
 
   label.required:after {
-    content: "\2605";
+    content: " \2605";
     color: var(--secondary-color);
   }
 
@@ -186,10 +186,8 @@ templateEngineOverride: liquid
   }
 
   .guestbook-entry {
-    border: 1px solid hsla(0, 0%, 50%, 0.4);
-    border-radius: 2px;
-    margin-bottom: 2rem;
-    padding: 1rem 2rem;
+    padding: 1.4em;
+    margin: 0 -0.6em 2em;
     overflow: hidden; /* for absolute timestamp transition */
   }
 

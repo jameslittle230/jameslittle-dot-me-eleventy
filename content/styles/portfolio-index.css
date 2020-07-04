@@ -2,15 +2,13 @@
 
 .portfolio-index {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  grid-column-gap: 3em;
-  grid-row-gap: 3em;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-column-gap: 1.5em;
+  grid-row-gap: 1.5em;
 
-  margin-top: 3vw;
   padding: 0;
   list-style-type: none;
 }
-
 
 @media (min-width: calc(45rem * 1.2 + 1em) /* [1] */) {
   .portfolio-index {
@@ -33,7 +31,6 @@
  * 
  *      This is kind of hacky stuff. Sorry.
  */
-
 
 @media (min-width: calc(90rem * 1.2 + 1em)) {
   .portfolio-index {

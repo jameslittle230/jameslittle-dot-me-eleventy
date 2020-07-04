@@ -1,7 +1,11 @@
 .portfolio-listing {
-  /* padding: 1em; */
-  transition: box-shadow 0.15s ease-out;
+  display: flex;
   font-size: 0.9em;
+}
+
+.portfolio-listing:hover {
+  box-shadow: var(--shadow);
+  background-color: hsla(0, 0%, 50%, 0.05);
 }
 
 .portfolio-listing a {
@@ -11,14 +15,16 @@
 
 .portfolio-listing img {
   width: 100%;
+  border-radius: 3px;
 }
 
-.portfolio-listing:hover {
-  box-shadow: var(--shadow);
+.portfolio-listing .image {
+  flex-basis: 25%;
+  flex-shrink: 0;
 }
 
 .portfolio-listing .text {
-  padding: 0 1em;
+  padding-left: 1.5em
 }
 
 .portfolio-listing h2 {
@@ -33,6 +39,14 @@
   opacity: 0.7;
 }
 
+.portfolio-listing *:first-child {
+  margin-top: 0;
+}
+
+.portfolio-listing *:last-child {
+  margin-bottom: 0;
+}
+
 .github-link path {
   fill: var(--muted-color);
 }
@@ -43,5 +57,5 @@
 
 .ext-arrow {
   color: var(--muted-color);
-  font-size: 0.8em
+  font-size: 0.8em;
 }
