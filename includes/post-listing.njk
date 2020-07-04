@@ -2,9 +2,7 @@
     <a href="{{ post.url }}" class="post-listing-flex">
         <span class="tabl date badge">{{ post.date | dateformat }}</span>
         <div>
-            <p class="title">
-                <b>{{ post.data.title }}</b>
-            </p>
+            <p class="title">{{ post.data.title }}</p>
             {% if post.data.blurb %}
                 <p class="blurb">{{ post.data.blurb }}</p>
             {% else %}

@@ -15,6 +15,7 @@
 
 .portfolio-listing img {
   width: 100%;
+  border-radius: 3px;
 }
 
 .portfolio-listing .image {
@@ -23,7 +24,7 @@
 }
 
 .portfolio-listing .text {
-  padding: 0 1em;
+  padding-left: 1.5em
 }
 
 .portfolio-listing h2 {
@@ -36,6 +37,14 @@
   text-transform: uppercase;
   letter-spacing: 0.02em;
   opacity: 0.7;
+}
+
+.portfolio-listing *:first-child {
+  margin-top: 0;
+}
+
+.portfolio-listing *:last-child {
+  margin-bottom: 0;
 }
 
 .github-link path {

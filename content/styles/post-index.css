@@ -1,35 +1,8 @@
 @import "/styles/post-listing.css";
 
-h2.year-listing {
-  font-size: 2.2em;
-  margin-top: 2em;
-  margin-bottom: 0.5em;
-  text-align: center;
-  font-style: italic;
-  
-  position: relative;
-}
-
-.year-listing:first-of-type {
-  margin-top: 0;
-}
-
-.year-listing::after, .year-listing::before {
-    content: "";
-    display: block;
-    border-top: 1px dashed var(--muted-color);
-    position: absolute;
-    width: calc(50% - 2em);
-    height: 100%;
-}
-
-.year-listing::after {
-  right: 0;
-  transform: translateY(-50%);
-}
-
-.year-listing::before {
-  transform: translateY(50%);
+.year-listing {
+  border: none;
+  margin-top: 6rem
 }
 
 ul {
