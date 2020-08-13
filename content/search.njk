@@ -1,0 +1,22 @@
+---json
+{
+  "permalink": "stork-posts.toml",
+  "eleventyExcludeFromCollections": true
+}
+---
+
+[input]
+url_prefix = "https://jameslittle.me"
+
+{%- for post in collections.post %}
+{% set absolutePostUrl %}{{ post.url | url | absoluteUrl(metadata.url) }}{% endset %}
+[[input.files]] 
+path = "{{post.inputPath}}"
+url = "{{absolutePostUrl}}"
+title = "{{post.data.title | safe}}"
+filetype = "PlainText"
+
+{%- endfor %}
+
+[output]
+filename = "_site/stork-posts.st"
