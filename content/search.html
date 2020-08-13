@@ -3,8 +3,6 @@ layout: base.njk
 permalink: /search.html
 ---
 
-<link rel="stylesheet" href="https://files.stork-search.net/basic.css" />
-
 <h1>Search</h1>
 
 <div class="stork-wrapper">
@@ -13,8 +11,6 @@ permalink: /search.html
 </div>
 <script src="https://files.stork-search.net/stork.js"></script>
 <script>
-  stork.register(
-    'posts',
-    'https://jameslittle.me/stork-posts.st'
-  )
-</script>
+  stork.register('posts', '/stork-posts.st');
+  </script>
+  <link rel="stylesheet" href="https://files.stork-search.net/basic.css" />
