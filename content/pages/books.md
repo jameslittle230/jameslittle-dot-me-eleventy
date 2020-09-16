@@ -26,6 +26,7 @@ This explicitly _doesn't_ track things I read online—you might be interested i
 - An Elegant Puzzle: Systems of Engineering Management - Will Larson
 - The Making of Prince of Persia: Journals 1985 – 1993 - Jordan Mechner
 - Antiracism: An Introduction - Alex Zamalin
+- Homegoing - Yaa Gyasi
 
 ## 2019
 
