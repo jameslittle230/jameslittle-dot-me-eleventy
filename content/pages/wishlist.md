@@ -16,3 +16,4 @@ This feels kind of weird to write out, but I wanted to have something up so that
 - [This L.L.Bean Duffel Bag in Navy](https://www.llbean.com/llb/shop/121981)
 - A candle snuffer
 - [This book](https://mitpress.mit.edu/books/software-design-flexibility) that doesn't come out until 2021
+- New running shorts, ideally with a zip pocket that can fit an iPhone.
