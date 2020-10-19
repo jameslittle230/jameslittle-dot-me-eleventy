@@ -27,6 +27,7 @@ This explicitly _doesn't_ track things I read online—you might be interested i
 - The Making of Prince of Persia: Journals 1985 – 1993 - Jordan Mechner
 - Antiracism: An Introduction - Alex Zamalin
 - Homegoing - Yaa Gyasi
+- Thoughts Without a Thinker - Mark Epstein
 
 ## 2019
 
