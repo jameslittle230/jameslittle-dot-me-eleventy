@@ -15,6 +15,17 @@ article > pre {
   box-shadow: 3px 3.5px 0 var(--bg-color), 0.7em 0.7em 0 var(--secondary-color);
 }
 
+.metadata {
+  font-weight: bold;
+  text-transform: uppercase;
+  color: var(--muted-color);
+  font-size: 0.8em;
+}
+
+.metadata > *:last-child {
+  margin-bottom: 0;
+}
+
 /**
  * Shadow looks weird in dark mode so let's change it to a border.
  */
@@ -23,28 +34,13 @@ article > pre {
   border: 1px solid var(--secondary-color);
 }
 
-.post-article {
-  margin-top: 2em;
-}
-
-.post-article > *:first-child {
-  margin-bottom: 1em;
-}
-
-.post-article p {
-  margin: 0;
-}
-
-.post-article .whoami-text {
+.whoami-text {
   text-transform: uppercase;
   letter-spacing: 0.04em;
   font-size: 0.8em;
-  margin-bottom: 0.3em;
 }
 
 .related-links {
-  display: flex;
-  background-color: var(--bg-color);
   padding: 1.5em 0;
 }
 
@@ -53,42 +49,12 @@ article > pre {
 }
 
 .related-links .prev-article-link {
-  text-align: right;
-  margin-left: auto;
-  margin-right: 1em;
-  width: 35%;
+  width: 50%;
 }
 
 .related-links .next-article-link {
-  margin-right: auto;
-  margin-left: 1em;
-  width: 35%;
-}
-
-@media (max-width: 600px) {
-  .related-links {
-    flex-direction: column;
-    border-top: 2px dashed var(--muted-color);
-    border-bottom: 2px dashed var(--muted-color);
-  }
-
-  .related-links.related-links > * {
-    width: 100%;
-    margin: 0;
-  }
-
-  .related-links .prev-article-link {
-    text-align: left;
-    margin-bottom: 1.5em;
-  }
-}
-
-.enlarged {
-  position: fixed;
-  width: 100%;
-  left: 0;
-  top: 50%;
-  margin-top: -50%;
+  text-align: right;
+  width: 50%;
 }
 
 /**
@@ -96,7 +62,7 @@ article > pre {
  */
 
 sup.footnote-ref {
-  vertical-align: initial;
+  vertical-align: bottom;
 }
 
 [data-theme="dark"] .footnote-button {
@@ -127,23 +93,22 @@ img {
   cursor: zoom-in; /* For enlarging */
 }
 
+.enlarged {
+  position: fixed;
+  left: 0;
+  top: 0;
+  object-fit: cover;
+  padding: 5px;
+}
+
 img.enlarged {
   cursor: zoom-out;
   background-color: transparent;
 }
 
-.old-alert {
-  background: hsla(0, 0%, 50%, 0.5);
+.note {
+  background: var(--badge-color);
   font-size: 0.8em;
   padding: 0.75em 1.5em;
   color: currentColor;
-}
-
-@media screen and (min-width: 36rem) {
-  .old-alert {
-    width: 50%;
-  float: right;
-  margin-left: 1em;
-  margin-bottom: 1em;
-  }
 }

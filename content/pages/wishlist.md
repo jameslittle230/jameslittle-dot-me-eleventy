@@ -17,3 +17,4 @@ This feels kind of weird to write out, but I wanted to have something up so that
 - A candle snuffer
 - [This book](https://mitpress.mit.edu/books/software-design-flexibility) that doesn't come out until 2021
 - New running shorts, ideally with a zip pocket that can fit an iPhone.
+- A bluetooth speaker so I can play some tunes while I'm making dinner

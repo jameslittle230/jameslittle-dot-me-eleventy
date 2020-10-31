@@ -6,13 +6,17 @@ tags: post
 blurb: "An overarching description of my financial setup, preceded by some of the concepts you need to know about in order to understand what you should do with your money. Meant to help someone go from basic saving to investing."
 ---
 
-> Note: I wrote this for my brother. Money decisions are intensely personal, and if you aren't my brother and you don't agree with what I've written here, note that your financial situation is likely different from that of my brother.
+<div class="note">
+    <p>I wrote this for my brother. Money decisions are intensely personal, and if you aren't my brother and you don't agree with what I've written here, note that your financial situation is likely different and you should do different things accordingly.</p>
+</div>
 
 When you're not in school anymore, at some point you will get a job and start making money. Good for you! You're employed!
 
 Once you're employed, your first goal should be making sure you're spending, on average, less than you make. The unit of time doesn't really matter, but since so much of the world works on a monthly cadence (bills, rent, Netflix subscriptions, etc.), my thought process centers around spending less each month than I make in an average month. When you spend less than you make, then congratulations! You can start saving!
 
-> Note: It takes some people a lot of time just to get to the employed + saving part, and that's ignoring very common issues like debt. I don't mean to imply that getting to this point is necessarily easy, just that much of the advice I'm going to give explains what you should do once you get there. If you have debt, you'll want to employ a different strategy 
+<div class="note">
+    <p>Note: It takes some people a lot of time just to get to the employed + saving part, and that's ignoring very common issues like debt. I don't mean to imply that getting to this point is necessarily easy, just that much of the advice I'm going to give explains what you should do once you get there. If you have debt, you'll want to employ a different strategy.</p>
+</div>
 
 Generally you start out with a single bank account, usually a **Checking Account** or a **Savings Account** at some bank. Once you're making a profit every month, you'll see the numbers in those accounts go up at a regular cadence, and you'll find that you're storing a sizable chunk of cash in that account. Unfortunately,  a checking or savings account is generally a bad place to store sizable chunks of cash. To understand why, we have to explore the spectrum of **liquidity** and **yield**.
 
@@ -37,7 +41,9 @@ Generally, when you make money, you have to give the government some of it. That
 - a **Roth IRA**, in which you pay taxes on income but don't pay taxes on investment profits, and
 - a **401k**, in which you (typically, but not always) pay taxes on investment profits but not on the portion of your income that goes into it.
 
-> Note: You're only allowed to have one of each, and they both come with federal contribution limits. As of 2020, you're only allowed to put $6,000/year in a Roth IRA, for example, and you're not allowed to contribute to a Roth IRA at all if you make more than $135,000 annually. The rules are more complex than that, and a 401k has other rules.
+<div class="note">
+    <p>You're only allowed to have one of each, and they both come with federal contribution limits. As of 2020, you're only allowed to put $6,000/year in a Roth IRA, for example, and you're not allowed to contribute to a Roth IRA at all if you make more than $135,000 annually. The rules are more complex than that, and a 401k has other rules.</p>
+</div>
 
 I called both of them "buckets" because they're not types of investments themselves; rather, they hold the various investments you can have. Having a 401k doesn't mean you've invested money in any particular thing. You could buy two thousand shares of Snapchat (really Snap Inc.) and have that be your entire 401k if you were crazy. Generally, though, you don't want to be the one picking which companies you invest in. Instead, you want to pay smart finance people money to pick the stocks, because they're going to be better than you at picking them. 
 

@@ -9,53 +9,6 @@
         {# <button class="link">Make the site bigger</button> #}
     </p>
 
-    <script>
-        function repaintButton() {
-            switch (jlGlobals.theme) {
-                case "light":
-                    document
-                        .getElementById("dark-text")
-                        .style
-                        .display = 'none'
-                    document
-                        .getElementById("light-text")
-                        .style
-                        .display = 'inline'
-                    break;
-                case "dark":
-                    document
-                        .getElementById("light-text")
-                        .style
-                        .display = 'none'
-                    document
-                        .getElementById("dark-text")
-                        .style
-                        .display = 'inline'
-                    break;
-            }
-        }
-
-        function switchTheme() {
-            switch (jlGlobals.theme) {
-                case "light":
-                    localStorage.setItem('theme', 'dark');
-                    break;
-                case "dark":
-                    localStorage.setItem('theme', 'light');
-                    break;
-            }
-
-            recomputeComputedValue()
-            repaintButton()
-        }
-
-        document
-            .getElementById("dark-mode-switch")
-            .addEventListener("click", switchTheme)
-
-        repaintButton()
-    </script>
-
     <div class="links">
         <a href="https://twitter.com/jameslittle230">Twitter</a>
         <a href="https://instagram.com/jameslittle230">Instagram</a>

@@ -36,9 +36,17 @@ let uGlobalColor;
 let uRotationVector;
 let aVertexPosition;
 
+function randomBetween(min, max, floor = true) {
+  let val = Math.random() * (max - min) + min;
+  if (floor) {
+    return Math.floor(val);
+  }
+  return val;
+}
+
 // Program Options
 let boids = [];
-let boidsCount = 500;
+let boidsCount = randomBetween(100, 200);
 let boidsVelocity = 400;
 const colors = [
   "#ffa297",
@@ -52,14 +60,6 @@ let debug = false;
 
 function randomElement(array) {
   return array[Math.floor(Math.random() * array.length)];
-}
-
-function randomBetween(min, max, floor = true) {
-  let val = Math.random() * (max - min) + min;
-  if (floor) {
-    return Math.floor(val);
-  }
-  return val;
 }
 
 function hexToRgb(hex) {
@@ -94,6 +94,12 @@ function startup() {
       special: false,
     });
   }
+
+  glCanvas.addEventListener("click", () => {
+    for (let i = 0; i < boidsCount; i++) {
+      boids[i].theta = randomBetween(0, 2 * Math.PI, false);
+    }
+  })
 
   boids[0].special = true;
 
@@ -234,7 +240,7 @@ function animateScene() {
     const velocity = ((currentTime - previousTime) / 1000.0) * boidsVelocity;
     previousTime = currentTime;
     boids.forEach((boid) => {
-      moveBoid(boid, velocity);
+      moveBoid(boid, velocity * randomBetween(0.9, 1.1, false));
 
       let separationData = [];
       let alignmentData = [];
@@ -304,19 +310,36 @@ function boidSeesBoid(boid, other) {
   if (boid.xPos == other.xPos && boid.yPos == other.yPos) {
     return false;
   }
-
-  const dist = Math.sqrt(
+  
+  const normalDistance = Math.sqrt(
     Math.pow(boid.xPos - other.xPos, 2) + Math.pow(boid.yPos - other.yPos, 2)
   );
+  
+  const northWrapDistance = Math.sqrt(
+    Math.pow(boid.xPos - other.xPos, 2) + Math.pow(boid.yPos - (other.yPos + glCanvas.height), 2)
+  );
+  
+  const southWrapDistance = Math.sqrt(
+    Math.pow(boid.xPos - other.xPos, 2) + Math.pow(boid.yPos - (other.yPos - glCanvas.height), 2)
+  );
+  
+  const eastWrapDistance = Math.sqrt(
+    Math.pow(boid.xPos - other.xPos + glCanvas.width, 2) + Math.pow(boid.yPos - (other.yPos), 2)
+  );
+  
+  const westWrapDistance = Math.sqrt(
+    Math.pow(boid.xPos - other.xPos - glCanvas.width, 2) + Math.pow(boid.yPos - (other.yPos), 2)
+  );
 
-  if (dist > 150) {
-    return false;
-  }
+  const dist = Math.min(
+    normalDistance,
+    northWrapDistance,
+    southWrapDistance,
+    eastWrapDistance,
+    westWrapDistance
+  )
 
-  viewport = (Math.PI / 3) * 2;
-  const output = true;
-
-  return output;
+  return dist < 150;
 }
 
 function getSeparationData(boid, other) {

@@ -3,8 +3,15 @@ layout: base.njk
 title: Home 
 ---
 
-<link rel="stylesheet" href="/styles/post-listing.css"/>
-<link rel="stylesheet" href="/styles/portfolio-listing.css"/>
+{% set css %}
+{% include "content/styles/post-listing.css" %}
+{% include "content/styles/portfolio-listing.css" %}
+{% include "content/styles/index.css" %}
+{% endset %}
+
+<style>
+    {{css | cssmin | safe}}
+</style>
 
 {% img style = "float: right; width: 40%; margin: 0 0 2em 2em",
 ratio = "150%",
@@ -13,13 +20,14 @@ urlbase = "https://files.jameslittle.me/images/headshot" %}
 
 <h1 style="margin-top: 0">Hi, I'm James Little!</h1>
 
-<p>I'm an iOS and web developer and designer from Boston, currently living in San Francisco, Calif.</p>
+<p>I'm a software engineer and design enthusiast from Boston, currently living in San Francisco, Calif.</p>
 
-<p>I'm currently working on
-    <a href="https://stripe.com/terminal">Terminal</a>, at
-    <a href="https://stripe.com">Stripe</a>, a company that builds financial infrastructure for the internet.</p>
+<p>I'm currently working at
+    <a href="https://stripe.com">Stripe</a>, building in-person payment experiences on the
+    <a href="https://stripe.com/terminal">Terminal</a>
+    team.</p>
 
-<p>I started there after graduating from
+<p>I started at Stripe after graduating from
     <a href="https://bowdoin.edu">Bowdoin College</a>
     in Brunswick, Maine, where I majored in Computer Science, worked as the Digital Director for the
     <a href="https://bowdoinorient.com">student newspaper</a>, and
@@ -30,21 +38,21 @@ urlbase = "https://files.jameslittle.me/images/headshot" %}
 </p>
 
 <div class="section-heading" style="clear: both">
-    <h2>Recent Blog Posts</h2>
-    <a href="/blog">See the rest →</a>
+    <h2>Blog Posts</h2>
+    <a href="/blog">See more →</a>
 </div>
 
 <ul>
     {% for post in collections.post | reverse %}
-        {% if loop.index <= 3 %}
+        {% if loop.index <= 5 %}
             {% include "post-listing.njk" %}
         {% endif %}
     {% endfor %}
 </ul>
 
 <div class="section-heading" style="clear: both">
-    <h2>My Work</h2>
-    <a href="/portfolio">See the rest →</a>
+    <h2>Side Projects</h2>
+    <a href="/portfolio">See more →</a>
 </div>
 
 <ul class="portfolio-list">
@@ -57,34 +65,4 @@ urlbase = "https://files.jameslittle.me/images/headshot" %}
 
 <h2>Contact</h2>
 
-<p>I'd love to get in touch. I <strong>strongly</strong> prefer email: send me one at jameslittle230 (it's at gmail dot com). I'm also on various places on the internet, which are listed in the page's footer. &darr;</p>
-
-<style>
-    .section-heading {
-        margin-top: 3em;
-        display: flex;
-        justify-content: space-between;
-        align-items: baseline;
-    }
-
-    .see-the-rest {
-        }
-
-    h2 a:active,
-    h2 a:link,
-    h2 a:visited {
-        color: currentcolor;
-        text-decoration: none;
-    }
-
-    ul {
-        list-style-type: none;
-        padding: 0;
-    }
-
-    @media (max-width: 500px) {
-        .headshot {
-            display: none;
-        }
-    }
-</style>
+<p>I'd love to get in touch. Send me an email at jameslittle230 (it's at gmail dot com) or tweet something at me @jameslittle230. I'm also on other various places on the internet, which are listed in the page's footer. &darr;</p>

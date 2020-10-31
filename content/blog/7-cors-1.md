@@ -52,13 +52,17 @@ We can dig into the request/response pairs in greater depth by looking at them i
 
 **Payload:** The payload for an HTTP _response_ will almost always be the contents of the requested file. HTTP requests can sometimes have a payload, though most of the time this payload is empty — usually, an HTTP request only consists of headers describing the file the browser is asking for.
 
-> _For more information about what HTTP requests and responses look like (and what they can do), [Julia Evans](https://jvns.ca) has a zine coming out that does a fantastic job explaining it. When she publishes it, I'll update this post with the link here._
->
-> Update: Julia has been tweeting about HTTP like crazy! Here are some tweets:
-> 
-> [Using HTTP APIs](https://twitter.com/b0rk/status/1160933788949655552), [HTTP headers](https://twitter.com/b0rk/status/1164181027469832196), [HTTP Response headers](https://twitter.com/b0rk/status/1161262574031265793), [Security headers](https://twitter.com/b0rk/status/1160185182323970050), [custom headers](https://twitter.com/b0rk/status/1161283690925834241), Request methods [part one](https://twitter.com/b0rk/status/1161679906415218690) and [part two](https://twitter.com/b0rk/status/1161680137865367553), [HTTP request methods](https://twitter.com/b0rk/status/1161679906415218690), [the Same Origin policy](https://twitter.com/b0rk/status/1155493682885341184) and [why it matters](https://twitter.com/b0rk/status/1163460967067541504).
-> 
-> Update 2: [Here is the zine!](https://wizardzines.com/zines/http/)
+<div class="note">
+
+For more information about what HTTP requests and responses look like (and what they can do), [Julia Evans](https://jvns.ca) has a zine coming out that does a fantastic job explaining it. When she publishes it, I'll update this post with the link here.
+
+Update: Julia has been tweeting about HTTP like crazy! Here are some tweets:
+ 
+[Using HTTP APIs](https://twitter.com/b0rk/status/1160933788949655552), [HTTP headers](https://twitter.com/b0rk/status/1164181027469832196), [HTTP Response headers](https://twitter.com/b0rk/status/1161262574031265793), [Security headers](https://twitter.com/b0rk/status/1160185182323970050), [custom headers](https://twitter.com/b0rk/status/1161283690925834241), Request methods [part one](https://twitter.com/b0rk/status/1161679906415218690) and [part two](https://twitter.com/b0rk/status/1161680137865367553), [HTTP request methods](https://twitter.com/b0rk/status/1161679906415218690), [the Same Origin policy](https://twitter.com/b0rk/status/1155493682885341184) and [why it matters](https://twitter.com/b0rk/status/1163460967067541504).
+
+Update 2: [Here is the zine!](https://wizardzines.com/zines/http/)
+
+</div>
 
 ## How HTTP headers relate to CORS errors
 
@@ -66,9 +70,13 @@ As I described earlier, CORS errors occur when the server hasn't specified that 
 
 Remember: HTTP headers are key-value pairs in the beginning of an HTTP message. The one that describes this permission granting has a key of **`Access-Control-Allow-Origin`**, and has a value of the _origin_ allowed to use that file (in this example, **`bowdoinorient.com`**). If that key-value pair is present on an HTTP response from an external server (like a font CDN), any time a page on `bowdoinorient.com` wants to load that font, the browser will allow that to happen.
 
-> **Note:** In the case of `GET` requests, the file is always downloaded, but if the browser finds itself in a situation that would break the CORS policy, it will refuse to load the file's contents: the script won't run, the stylesheet won't get used, etc.
->
-> `POST` requests are different: the browser typically sends a canary request (called an `OPTIONS` request) to check what it's allowed to do, and if it finds it is allowed to make the POST request, it does so.
+<div class="note">
+
+In the case of `GET` requests, the file is always downloaded, but if the browser finds itself in a situation that would break the CORS policy, it will refuse to load the file's contents: the script won't run, the stylesheet won't get used, etc.
+
+`POST` requests are different: the browser typically sends a canary request (called an `OPTIONS` request) to check what it's allowed to do, and if it finds it is allowed to make the POST request, it does so.
+
+</div>
 
 Therefore, if you're getting console warnings about CORS headers not being properly included, it means you have to change the configuration on your server: your server needs to be including HTTP headers in the response so that the browser knows it's allowed to use the file it downloaded.
 
@@ -94,7 +102,11 @@ When struggling with CORS errors, the concepts I always have to remind myself ar
 
 Those three concepts are the biggies. And ultimately I always feel like the fix was something simple that just requires a large research journey. Security is just like that, I guess.
 
-> [Update: I wrote about a CORS error that I encountered, and fixed.](/blog/2019/cors-debug/)
+<div class="note">
+
+[Update: I wrote about a CORS error that I encountered and fixed.](/blog/2019/cors-debug/)
+
+</div>
 
 <!-- Footnotes -->
 
