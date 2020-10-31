@@ -20,9 +20,7 @@
     "date-fns": "^2.14.0",
     "date-fns-tz": "^1.0.9",
     "html-minifier": "^4.0.0",
-    "markdown-it-footnote": "^3.0.2"
-  },
-  "dependencies": {
+    "markdown-it-footnote": "^3.0.2",
     "terser": "^5.3.8"
   }
 }
