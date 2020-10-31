@@ -5,6 +5,8 @@ const { zonedTimeToUtc, utcToZonedTime, format } = require("date-fns-tz");
 const { formatDistanceToNow, differenceInDays } = require("date-fns");
 const mdit = require("markdown-it");
 const mditfootnote = require("markdown-it-footnote");
+const CleanCSS = require("clean-css");
+const { minify } = require("terser");
 
 const imagePartial = require("./includes/image-partial.js");
 
@@ -54,6 +56,24 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addFilter("dateformat", dateformat);
   eleventyConfig.addFilter("relativeDate", relativeDate);
   eleventyConfig.addFilter("dateOlderThan1y", dateOlderThan1y);
+
+  eleventyConfig.addFilter("cssmin", function (code) {
+    return new CleanCSS({}).minify(code).styles;
+  });
+
+  eleventyConfig.addNunjucksAsyncFilter("jsmin", async function (
+    code,
+    callback
+  ) {
+    try {
+      const minified = await minify(code);
+      callback(null, minified.code);
+    } catch (err) {
+      console.error("Terser error: ", err);
+      // Fail gracefully.
+      callback(null, code);
+    }
+  });
 
   eleventyConfig.addPassthroughCopy("content/styles/");
   eleventyConfig.addPassthroughCopy({ "content/static/": "/" });

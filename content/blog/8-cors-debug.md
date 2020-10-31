@@ -6,9 +6,15 @@ tags: post
 blurb: "Piggybacking on the previous post, a stream-of-thought post describing my own process for fixing a CORS error. Ends up as a Cloudfront configuration debugging session."
 ---
 
-I've been thinking ([and writing](/blog/2019/cors-1)) about CORS recently because there's a CORS error on the Bowdoin Orient's site. The stylesheets for loading the Orient's fonts are coming up with a CORS error in the Firefox console, while the Chrome console shows CORS errors for both the stylesheet and the font files.
+I've been thinking ([and writing](/blog/2019/cors-1)) about CORS recently because there's (as of this writing) a CORS error on the [Bowdoin Orient's site](https://bowdoinorient.com). The stylesheets for loading the Orient's fonts are coming up with a CORS error in the Firefox console, while the Chrome console shows CORS errors for both the stylesheet and the font files.
 
 I thought the solution would be fairly easy, but a quick diagnostic showed that it's a little more complicated than originally expected. As I write this, I'm not sure what needs to be changed to fix the issue, but I'm going to try to outline my thought process while I debug it.
+
+<div class="note"><p>
+    
+Post-debug update: this ended up being more of an AWS configuration issue than a CORS issue, but I'm still leaving it up to show how I got here. CORS bugs require that you know about your specific HTTP server, about browser security policies, and about different ways HTTP requests can be made; throughout this process, I had to tap into all of those.
+
+</p></div>
 
 <!--more-->
 
@@ -19,6 +25,7 @@ I thought the solution would be fairly easy, but a quick diagnostic showed that 
   - Also interestingly, *every* font coming from the CDN is showing CORS errors in the console, but every font except that one combo looks... totally fine.
   - I wish I could deprioritize the bug given that it's not breaking all the fonts, but the Chronicle 700 font is used as the article headline on the [single.php page](https://developer.wordpress.org/themes/template-files-section/post-template-files/#single-php) which is arguably the most viewed part of the website.
 - The browsers are complaining that there isn't an `Access-Control-Allow-Origin` header on the response, so let's figure out why not.
+- _Some investigation later_
 - The response headers in the network tag don't have an `Access-Control-Allow-Origin` header
 - When I copy the Curl request, I don't see the headers either:
 
@@ -74,6 +81,8 @@ I thought the solution would be fairly easy, but a quick diagnostic showed that 
 - I sequentially added each header in a new CURL request. It wasn't any of the headers, it was the `--compressed` flag.
 - I looked up what the `--compressed` flag does for CURL:
   > **`--compressed`** (HTTP) Request a compressed response using one of the algorithms curl supports, and save the uncompressed document. If this option is used and the server sends an unsupported encoding, curl will report an error.
+  >
+  > — `man curl | grep compressed`
 - I thought my S3 configuration was wrong, but maybe it's my Cloudfront configuration; maybe Cloudfront, in compressing the files, is removing the CORS headers that S3 is providing.
 - I found a [documentation page about Cloudfront and CORS](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/header-caching.html#header-caching-web-cors). I whitelisted four headers in my Cloudfront Default Cache Behavior Settings:
   - `Access-Control-Request-Headers`
@@ -84,10 +93,14 @@ I thought the solution would be fairly easy, but a quick diagnostic showed that 
 - But the CORS error is gone from Firefox now.[^2]
 - And from Chrome.
 - After clearing the browser cache, the page looks fine on my girlfriend's computer. I think I fixed this.
-- I wonder if I need to clear the Cloudfront cache or add a cachebusting query onto the `<link>` tag.
+- I wonder if I need to clear the Cloudfront cache or add a cachebusting query onto the `<link>` tag? Eh, seems like a lot of work, maybe not worth it if everything looks ok.
 - The end.
 
-> Update from the next day: It looks like my `orient-fonts.css` file is being requested twice: once from the `<link>` tag and once as an XHR request so that [EQCSS](https://elementqueries.com/) can analyze the stylesheets and render the element queries properly. It's those link tag requests that have the CORS headers, but the XHR requests do not.
+<div class="note"><p>
+    
+Update from the next day: It looks like my `orient-fonts.css` file is being requested twice: once from the `<link>` tag and once as an XHR request so that [EQCSS](https://elementqueries.com/) can analyze the stylesheets and render the element queries properly. It's those link tag requests that have the CORS headers, but the XHR requests do not.
+
+</p></div>
 
 If I had any takeaways, they would have to be that debugging these kinds of issues (especially on systems you don't know well) can be tricky, and it helps to have knowledge of the invariants of the system. In this case, I had done my background research on CORS errors so I knew what the ultimate solution would look like: there were response headers that weren't showing up when I expected them to. I also knew that because *some* CURL queries responded with the correct CORS headers, there was a problem with some configuration between S3 and the browser: one of the layers working in there was stripping away the response headers I wanted. I was then able to examine each layer to narrow down where the problem lies, then read the documentation specific to that layer (thank goodness that documentation exists) to configure the CDN correctly.
 

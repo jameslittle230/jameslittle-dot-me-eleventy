@@ -33,6 +33,7 @@ function flipFigure(ev) {
   }
 
   let scrim = document.getElementById("scrim");
+  
   let animationOptions = {
     duration: 400,
     easing: "ease-out",

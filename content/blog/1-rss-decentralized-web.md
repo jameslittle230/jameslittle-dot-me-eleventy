@@ -3,6 +3,7 @@ title:  "Bringing back RSS won't decentralize web publishing."
 date:   2018-04-24
 layout: post
 tags: post
+oldAlert: true
 blurb: "The first post I ever wrote, about RSS's place on the internet in the era of online news and content distribution."
 ---
 
