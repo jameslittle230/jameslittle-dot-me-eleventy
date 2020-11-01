@@ -258,9 +258,11 @@ templateEngineOverride: liquid
   var environment = "{{environment}}";
 </script>
 
-<!-- dev mode: -->
-<!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
-
+{% if environment == "development" %}
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+{% else %}
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+{% endif %}
+
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="/guestbook.js"></script>
