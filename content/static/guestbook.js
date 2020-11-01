@@ -146,7 +146,7 @@ var app = new Vue({
       .then((response) => {
         this.getEntriesState = "success";
         this.dynamicGuestbook = response.data.filter(
-          (e) => e.date > Date.parse(latestEntryDate)
+          (e) => e.date > latestEntryDate
         );
       })
       .catch((err) => {
