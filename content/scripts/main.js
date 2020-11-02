@@ -62,10 +62,27 @@ function switchTheme() {
   repaintButton();
 }
 
+function toggleTopbarNavVisibility() {
+  const e = document.getElementById("linked-list")
+  if(e.style.display === "flex") {
+    e.style.display = null; // reset to default; "none" in stylesheet
+    document.getElementById("topbar-caret").innerHTML = "&darr;"
+  } else {
+    e.style.display = "flex";
+    document.getElementById("topbar-caret").innerHTML = "&uarr;"
+
+  }
+  console.log(e.style.display)
+}
+
 window.addEventListener("DOMContentLoaded", () => {
   document
     .getElementById("dark-mode-switch")
     .addEventListener("click", switchTheme);
 
-  repaintButton();
+  document
+    .getElementById("topbar-caret")
+    .addEventListener("click", toggleTopbarNavVisibility);
+  
+    repaintButton();
 });
