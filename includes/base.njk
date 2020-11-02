@@ -1,23 +1,23 @@
 <!doctype html>
 
-{% set js %}
-  {% include "content/scripts/darkmode.js" %}
-{% endset %}
-<script>
-  {{ js | jsmin | safe }}
-</script>
-
-{% set css %}
-  {% include "content/styles/main.css" %}
-{% endset %}
-<style>
-  {{ css | cssmin | safe }}
-</style>
-
 <html lang="en" data-theme="light">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {% set js %}
+      {% include "content/scripts/main.js" %}
+    {% endset %}
+    <script>
+      {{ js | jsmin | safe }}
+    </script>
+
+    {% set css %}
+      {% include "content/styles/main.css" %}
+    {% endset %}
+    <style>
+      {{css | cssmin | safe}}
+    </style>
 
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css"/>
     <link rel="stylesheet" href="https://files.jameslittle.me/webfonts/jetbrains-mono/jetbrains-mono.css"/>
