@@ -28,6 +28,7 @@ This explicitly _doesn't_ track things I read online—you might be interested i
 - Antiracism: An Introduction - Alex Zamalin
 - Homegoing - Yaa Gyasi
 - Thoughts Without a Thinker - Mark Epstein
+- How to Win Friends & Influence People - Dale Carnegie
 
 ## 2019
 
