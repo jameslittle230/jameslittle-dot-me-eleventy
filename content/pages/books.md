@@ -29,6 +29,7 @@ This explicitly _doesn't_ track things I read online—you might be interested i
 - Homegoing - Yaa Gyasi
 - Thoughts Without a Thinker - Mark Epstein
 - How to Win Friends & Influence People - Dale Carnegie
+- How to be an Antiracist - Ibram X. Kendi
 
 ## 2019
 
