@@ -11,7 +11,7 @@ layout: base.njk
             Written on
             {{date | dateformat}}
             •
-            {{content | wordcount}}
+            {{content | striptags | wordcount}}
             words
         </p>
     </div>

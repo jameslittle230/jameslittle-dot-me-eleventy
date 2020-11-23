@@ -71,7 +71,7 @@ var app = new Vue({
       axios
         .post("https://vipqpoael1.execute-api.us-west-1.amazonaws.com/prod", {
           ...this.input,
-          qa: environment === "development",
+          qa: development,
         })
         .then((response) => {
           this.formSubmissionState = "success";

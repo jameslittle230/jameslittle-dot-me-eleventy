@@ -42,6 +42,10 @@ img {
   margin: 0;
 }
 
+html {
+  overflow-x: hidden;
+}
+
 body,
 html {
   background-color: var(--bg-color);
@@ -338,8 +342,8 @@ figcaption {
   right: 0;
   bottom: 0;
   background-color: black;
+  /* z-index is one less than img z-index in post.css */
   z-index: 9;
-  /* One less than img z-index in post.css */
   pointer-events: none;
 }
 

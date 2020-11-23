@@ -25,7 +25,7 @@ templateEngineOverride: liquid
 </p>
 
 <div id="app">
-  {% if environment == "development" %}
+  {% if environment.development %}
   <p class="form-submission-message">
     Development mode enabled. Guestbook posts will not be saved to the production bucket.
   </p>
@@ -255,10 +255,10 @@ templateEngineOverride: liquid
 <script>
   var staticLength = {{guestbook.size}};
   var latestEntryDate = {{guestbook[0].date}};
-  var environment = "{{environment}}";
+  var development = "{{environment.development}}";
 </script>
 
-{% if environment == "development" %}
+{% if environment.development %}
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 {% else %}
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
