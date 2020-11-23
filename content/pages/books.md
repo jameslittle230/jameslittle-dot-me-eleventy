@@ -1,5 +1,6 @@
 ---
 layout: page.njk
+title: Reading Log
 slug: "books"
 ---
 
