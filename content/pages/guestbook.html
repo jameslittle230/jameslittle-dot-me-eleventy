@@ -95,9 +95,9 @@ templateEngineOverride: liquid
 
       {% for entry in guestbook %}
       <li class="guestbook-entry boxed-list-element">
-        <div class="metadata">
+        <div class="guestbook-metadata">
           <span class="name">{{entry.name}}</span>
-          <span class="timestamp">
+          <span class="timestamp metadata">
             {{entry.date | relativeDate}}
             <span class="absolute">{{entry.date | dateformat}}</span>
           </span>
@@ -195,7 +195,7 @@ templateEngineOverride: liquid
     margin: 0;
   }
 
-  .metadata {
+  .guestbook-metadata {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -217,11 +217,6 @@ templateEngineOverride: liquid
   }
 
   .timestamp {
-    opacity: 0.8;
-    text-transform: uppercase;
-    font-weight: bold;
-    font-size: 0.8em;
-    letter-spacing: 0.02em;
     transition: transform 0.4s;
   }
 

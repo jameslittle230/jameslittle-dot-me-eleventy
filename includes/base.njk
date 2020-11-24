@@ -1,3 +1,7 @@
+---
+cssFiles: ["content/styles/main.css"]
+---
+
 <!doctype html>
 <html lang="en" data-theme="light">
   <head>
@@ -11,16 +15,18 @@
       {{ js | jsmin | safe }}
     </script>
 
-    {% set css %}
-      {% include "content/styles/main.css" %}
-    {% endset %}
-    <style>
-      {{css | cssmin | safe}}
-    </style>
+    {% for file in cssFiles %}
+      {% set css %}
+        {% include file %}
+      {% endset %}
+      <!-- {{ file }} -->
+      <style>
+        {{css | cssmin | safe}}
+      </style>
+      {% endfor %}
 
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css"/>
     <link rel="stylesheet" href="https://files.jameslittle.me/webfonts/jetbrains-mono/jetbrains-mono.css"/>
-    <link rel="stylesheet" href="/styles/prism.css"/>
 
     <title>{{ "DEV • " if environment.development }} {{ title }} • jameslittle.me</title>
   </head>

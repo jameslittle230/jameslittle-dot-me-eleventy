@@ -271,6 +271,13 @@ button.link:hover {
   }
 }
 
+.metadata {
+  font-weight: bold;
+  text-transform: uppercase;
+  color: var(--muted-color);
+  font-size: 0.8em;
+}
+
 .picture-placeholder {
   background-color: gray;
 }

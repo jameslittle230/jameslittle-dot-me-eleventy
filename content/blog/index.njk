@@ -1,11 +1,15 @@
 --- 
 layout: base.njk 
 title: "My Blog" 
+cssFiles: ["content/styles/post-index.css", "content/styles/post-listing.css"]
 ---
 
-<h1 class="big-title">Blog</h1>
+<div class="metadata">
+  {{collections.postsWithYears | length}} posts since
+  {{ (collections.postsWithYears | first).date | dateformat }}
+</div>
 
-<link rel="stylesheet" href="/styles/post-index.css"/>
+<h1 class="big-title">Blog</h1>
 
 {%- for year in collections.uniquePostYears | reverse -%}
   {% if year != collections.uniquePostYears | reverse | first %}

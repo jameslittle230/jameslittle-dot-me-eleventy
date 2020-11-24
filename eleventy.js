@@ -52,6 +52,8 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPlugin(pluginRss);
   eleventyConfig.addPlugin(syntaxHighlight);
 
+  eleventyConfig.setDataDeepMerge(true);
+
   eleventyConfig.addFilter("extractPostSlug", extractPostSlug);
   eleventyConfig.addFilter("dateformat", dateformat);
   eleventyConfig.addFilter("relativeDate", relativeDate);

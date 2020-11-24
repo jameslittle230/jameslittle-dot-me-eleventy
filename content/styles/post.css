@@ -15,13 +15,6 @@ article > pre {
   box-shadow: 3px 3.5px 0 var(--bg-color), 0.7em 0.7em 0 var(--secondary-color);
 }
 
-.metadata {
-  font-weight: bold;
-  text-transform: uppercase;
-  color: var(--muted-color);
-  font-size: 0.8em;
-}
-
 .metadata > *:last-child {
   margin-bottom: 0;
 }
