@@ -1,5 +1,3 @@
-@import "/styles/portfolio-listing.css";
-
 .portfolio-index {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));

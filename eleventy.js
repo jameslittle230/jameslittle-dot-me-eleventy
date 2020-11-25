@@ -1,129 +1,41 @@
-const htmlmin = require("html-minifier");
 const pluginRss = require("@11ty/eleventy-plugin-rss");
 const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
-const { zonedTimeToUtc, utcToZonedTime, format } = require("date-fns-tz");
-const { formatDistanceToNow, differenceInDays } = require("date-fns");
-const mdit = require("markdown-it");
-const mditfootnote = require("markdown-it-footnote");
-const CleanCSS = require("clean-css");
-const { minify } = require("terser");
 
-const imagePartial = require("./includes/image-partial.js");
+const extractPostSlug = require("./11ty/extractPostSlug.js");
+const {
+  dateFormat,
+  relativeDate,
+  dateOlderThan1y,
+} = require("./11ty/dateFilters.js");
+const { htmlmin, cssmin, jsmin } = require("./11ty/minifiers.js");
+const { uniquePostYears, postsWithYears } = require("./11ty/postYears.js");
+const markdownLibrary = require("./11ty/markdownLibrary.js")
 
-function minifyHtml(content, outputPath) {
-  if (outputPath.endsWith(".html")) {
-    let minified = htmlmin.minify(content, {
-      useShortDoctype: true,
-      removeComments: true,
-      collapseWhitespace: true,
-    });
-    return minified;
-  }
-
-  return content;
-}
-
-function extractPostSlug(value) {
-  // test that value is of the format 6-asdf.md
-  let slug = value.match(/\d+-([a-zA-Z0-9-]+)/);
-  if (slug.length === 2) {
-    return slug[1];
-  } else {
-    throw `Can't extract post slug from ${value}`;
-  }
-}
-
-function dateformat(value, fmtstring = "yyyy-MM-dd") {
-  let zonedDate = utcToZonedTime(value, "UTC");
-  return format(zonedDate, fmtstring);
-}
-
-function relativeDate(value) {
-  return formatDistanceToNow(new Date(value), { addSuffix: true });
-}
-
-function dateOlderThan1y(value) {
-  return differenceInDays(new Date(), new Date(value)) > 365;
-}
+const imagePartial = require("./11ty/imagePartial.js");
 
 module.exports = function (eleventyConfig) {
-  eleventyConfig.addTransform("htmlmin", minifyHtml);
-
   eleventyConfig.addPlugin(pluginRss);
   eleventyConfig.addPlugin(syntaxHighlight);
 
   eleventyConfig.setDataDeepMerge(true);
 
   eleventyConfig.addFilter("extractPostSlug", extractPostSlug);
-  eleventyConfig.addFilter("dateformat", dateformat);
+  eleventyConfig.addFilter("dateformat", dateFormat);
   eleventyConfig.addFilter("relativeDate", relativeDate);
   eleventyConfig.addFilter("dateOlderThan1y", dateOlderThan1y);
 
-  eleventyConfig.addFilter("cssmin", function (code) {
-    return new CleanCSS({}).minify(code).styles;
-  });
-
-  eleventyConfig.addNunjucksAsyncFilter("jsmin", async function (
-    code,
-    callback
-  ) {
-    try {
-      const minified = await minify(code);
-      callback(null, minified.code);
-    } catch (err) {
-      console.error("Terser error: ", err);
-      // Fail gracefully.
-      callback(null, code);
-    }
-  });
-
-  eleventyConfig.addPassthroughCopy("content/styles/");
-  eleventyConfig.addPassthroughCopy({ "content/static/": "/" });
+  eleventyConfig.addTransform("htmlmin", htmlmin);
+  eleventyConfig.addFilter("cssmin", cssmin);
+  eleventyConfig.addNunjucksAsyncFilter("jsmin", jsmin);
 
   eleventyConfig.addShortcode("img", imagePartial.img);
 
-  let markdownLib = mdit({ html: true }).use(mditfootnote);
-  markdownLib.renderer.rules.footnote_block_open = () =>
-    '<section class="footnotes"><ol class="footnotes-list">';
-  eleventyConfig.setLibrary("md", markdownLib);
+  eleventyConfig.addPassthroughCopy({ "content/static/": "/" });
 
-  eleventyConfig.addCollection("uniquePostYears", function (collection) {
-    Array.prototype.uniqued = function () {
-      var output = [];
-      for (const val of this) {
-        if (output.indexOf(val) === -1) {
-          output.push(val);
-        }
-      }
-      return output;
-    };
+  eleventyConfig.setLibrary("md", markdownLibrary);
 
-    return collection
-      .getFilteredByTag("post")
-      .map((p) => p.date)
-      .map((d) => dateformat(d, "yyyy"))
-      .uniqued()
-      .sort();
-  });
-
-  eleventyConfig.addCollection("postsWithYears", function (collection) {
-    var coll = collection.getFilteredByTag("post");
-
-    coll.map((p) => {
-      p.year = format(p.date, "yyyy");
-      return p;
-    });
-
-    for (let i = 0; i < coll.length; i++) {
-      const prevPost = coll[i - 1];
-      const nextPost = coll[i + 1];
-
-      coll[i].data["prevPost"] = prevPost;
-      coll[i].data["nextPost"] = nextPost;
-    }
-
-    return coll;
-  });
+  eleventyConfig.addCollection("uniquePostYears", uniquePostYears);
+  eleventyConfig.addCollection("postsWithYears", postsWithYears);
 
   return {
     dir: {
