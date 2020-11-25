@@ -23,10 +23,15 @@ cssFiles: ["content/styles/main.css"]
       <style>
         {{css | cssmin | safe}}
       </style>
-      {% endfor %}
+    {% endfor %}
 
-    <link rel="stylesheet" href="https://rsms.me/inter/inter.css"/>
-    <link rel="stylesheet" href="https://files.jameslittle.me/webfonts/jetbrains-mono/jetbrains-mono.css"/>
+    {# https://web.dev/defer-non-critical-css/ #}
+    <link rel="preload" href="https://rsms.me/inter/inter.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="https://files.jameslittle.me/webfonts/jetbrains-mono/jetbrains-mono.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+      <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+      <link rel="stylesheet" href="https://files.jameslittle.me/webfonts/jetbrains-mono/jetbrains-mono.css"/>
+    </noscript>
 
     <title>{{ "DEV • " if environment.development }} {{ title }} • jameslittle.me</title>
   </head>
