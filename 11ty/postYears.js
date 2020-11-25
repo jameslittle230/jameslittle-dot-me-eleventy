@@ -1,5 +1,11 @@
 const { format } = require("date-fns-tz");
 
+/**
+ * Given a collection where each object has a .date field, returns a sorted
+ * array of unique years present in the collection: ["2017", "2018", "2019"]
+ * 
+ * @param {Eleventy Collection} collection 
+ */
 function uniquePostYears(collection) {
   Array.prototype.uniqued = function () {
     var output = [];
@@ -19,6 +25,12 @@ function uniquePostYears(collection) {
     .sort();
 }
 
+/**
+ * Adds .year properties to all objects in a collection, where .year is the
+ * post's date formatted as just the year.
+ * 
+ * @param {Eleventy Collection} collection 
+ */
 function postsWithYears(collection) {
   var coll = collection.getFilteredByTag("post");
 
