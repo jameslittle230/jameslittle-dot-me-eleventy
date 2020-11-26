@@ -31,6 +31,7 @@ This explicitly _doesn't_ track things I read online—you might be interested i
 - Thoughts Without a Thinker - Mark Epstein
 - How to Win Friends & Influence People - Dale Carnegie
 - How to be an Antiracist - Ibram X. Kendi
+- The Girl with the Dragon Tattoo - Stieg Larsson
 
 ## 2019
 
