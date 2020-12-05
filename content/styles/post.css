@@ -110,11 +110,20 @@ img.enlarged {
 
 .pull-wide {
   width: clamp(100%, calc(100vw - 10rem), 120vh);
+
+  /**
+   * clean-css mangles the following rule by transforming `0px` to `0`, which
+   * in _any other situation_ is equivalent, but in clamp results in a syntax
+   * error in all browsers as of 2020-12-05.
+   */
+
+  /* clean-css ignore:start */
   margin-left: clamp(
     ( 120vh - 45rem ) / -2,
     ( 100vw - 55rem ) / -2,
     0px
   );
+  /* clean-css ignore:end */
 }
 
 .pull-wide-banner img {

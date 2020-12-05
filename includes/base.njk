@@ -42,6 +42,12 @@ cssFiles: ["content/styles/main.css"]
       {{ content | safe }}
     </main>
     {% include "footbar.njk" %}
-    {% include "matomo.njk" %}
+
+    {% set matomo %}
+      {% include "content/scripts/matomo.js" %}
+    {% endset %}
+    <script>
+      {{ matomo | jsmin | safe }}
+    </script>
   </body>
 </html>
