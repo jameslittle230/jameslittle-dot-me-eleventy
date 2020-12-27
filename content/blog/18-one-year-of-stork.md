@@ -1,12 +1,12 @@
 ---
-title:  "My Year of Building and Releasing an Open-Source WASM Search Tool"
-date:   2020-12-22
+title:  "Stork Turns One: Building a search tool for static sites with Rust and WebAssembly"
+date:   2020-12-27
 layout: post
 tags: post
 blurb: "Stork, my web search side project, is launching publicly after one year of development. This post describes the goals I took on while building it and how I got from idea to release."
 ---
 
-This week, I launched version 1.0.0 of [Stork](https://stork-search.net/), the web search library I’ve been building for just under a year. Stork is a tool for building dynamic, responsive, and native full-text search interfaces—usually only possible with a SaaS product or a web server—that can be added to static, serverless web pages. It’s free, open-source, and build-system-agnostic. It’s one of the tools I wish I had when I was starting to build websites.
+Just before the holidays, I launched version 1.0.0 of [Stork](https://stork-search.net/), the web search library I’ve been building for just over a year. Stork is a tool for building dynamic, responsive, and native full-text search interfaces—usually only possible with a SaaS product or a web server—that can be added to static, serverless web pages. It’s free, open-source, and build-system-agnostic. It’s one of the tools I wish I had when I was starting to build websites.
 
 <div class="note">
     <p>If you want to try a demo or read the documentation, visit Stork’s website: <a href="https://stork-search.net">https://stork-search.net</a>.</p>
