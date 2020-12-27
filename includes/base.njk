@@ -43,10 +43,11 @@ cssFiles: ["content/styles/main.css"]
     <title>{{ "DEV • " if environment.development }} {{ title }} • jameslittle.me</title>
 
     <meta name="twitter:card" content="summary" />
-    <meta property="og:title" content="{{title}}" />
+    <meta property="og:title" content="{{title}} • jameslittle.me" />
+    <meta property="og:description" content="{{blurb if blurb}} • jameslittle.me" />
     <meta
       property="og:image"
-      content="https://files.jameslittle.me/apple-touch-icon.png"
+      content="https://jameslittle.me/apple-touch-icon.png"
     />
   </head>
   <body>
