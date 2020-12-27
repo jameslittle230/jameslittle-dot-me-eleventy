@@ -41,6 +41,13 @@ cssFiles: ["content/styles/main.css"]
     </noscript>
 
     <title>{{ "DEV • " if environment.development }} {{ title }} • jameslittle.me</title>
+
+    <meta name="twitter:card" content="summary" />
+    <meta property="og:title" content="{{title}}" />
+    <meta
+      property="og:image"
+      content="https://files.jameslittle.me/apple-touch-icon.png"
+    />
   </head>
   <body>
     <div id="scrim"></div>
