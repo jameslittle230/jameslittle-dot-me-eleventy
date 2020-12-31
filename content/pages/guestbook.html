@@ -79,9 +79,9 @@ templateEngineOverride: liquid
         v-for="entry in dynamicGuestbook"
       >
         {% raw %}
-        <div class="metadata">
+        <div class="guestbook-metadata">
           <span class="name">{{entry.name}}</span>
-          <span class="timestamp">
+          <span class="timestamp metadata">
             {{entry.date | relative}}
             <span class="absolute">{{entry.date | toIso}}</span>
           </span>

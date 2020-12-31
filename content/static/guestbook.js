@@ -71,7 +71,7 @@ var app = new Vue({
       axios
         .post("https://vipqpoael1.execute-api.us-west-1.amazonaws.com/prod", {
           ...this.input,
-          qa: development,
+          qa: (development !== "false"), /* [1] */
         })
         .then((response) => {
           this.formSubmissionState = "success";
@@ -82,6 +82,12 @@ var app = new Vue({
           this.formSubmissionState = "error";
           this.formSubmissionErrorMessage = err.response.data.errorMessage;
         });
+
+        /**
+         * [1]: // Using !== here because it's safer than === - 
+         *      it'll always default to QA except in the one scenario where
+         *      I don't want it to (in case `development` is null/not a string)
+         */
     },
 
     formIsValid: function () {
