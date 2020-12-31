@@ -17,10 +17,10 @@
     0 6.9px 17.3px rgba(0, 0, 0, 0.048), 0 13px 32.7px rgba(0, 0, 0, 0.053),
     0 31px 80px rgba(0, 0, 0, 0.07);
 
-    --font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+  --font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
     "Segoe UI Symbol";
-    --mono-font-family: "jetbrains mono", monospace
+  --mono-font-family: "jetbrains mono", monospace;
 }
 
 [data-theme="dark"] {
@@ -192,24 +192,34 @@ the size of the typography.
   width: calc(100% - 1em);
 }
 
-.topbar {
+.topbar nav {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
+  transition: transform 0.4s ease;
+  z-index: 10;
+  transform-origin: bottom left;
+  background: var(--primary-color);
+  color: var(--black-override);
+  font-weight: 400;
+  box-shadow: 3px 3.5px 0 var(--bg-color);
+  padding: 1em;
+  width: calc(100% - 1em);
+  position: absolute;
 }
 
-.topbar a {
+.topbar nav a {
   margin: 0 1.5em 0 0;
   color: var(--black-override);
   text-decoration: none;
 }
 
-.topbar a:last-child {
+.topbar nav a:last-child {
   margin-right: 0;
 }
 
-.topbar a:hover {
+.topbar nav a:hover {
   text-decoration: underline;
 }
 
@@ -219,6 +229,51 @@ the size of the typography.
 
 .topbar #linked-list {
   display: block;
+}
+
+.zoop {
+  transform: rotateZ(-8deg);
+}
+
+.stork-wrapper {
+  background: var(--secondary-color);
+  color: var(--black-override);
+  font-weight: 400;
+  padding: 0.7em 1em;
+  margin-bottom: 2em;
+  margin-top: 0.5em;
+  width: calc(100% - 1em);
+  position: relative;
+  top: 7px;
+  right: -7px;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+}
+
+.stork-wrapper input {
+  background: none;
+  border: none;
+  border-bottom: 1px solid black;
+  font-size: 1.4em;
+  padding: 0.1rem;
+  outline: none;
+  color: white;
+  font-family: var(--mono-font-family);
+}
+
+.stork-wrapper button {
+  background: none;
+  border: none;
+  background: hsla(0, 0%, 100%, 0.1);
+  flex-shrink: 0;
+  width: 1em;
+  height: 1em;
+  font-size: 1.2em;
+  padding: 0;
+  line-height: 1;
+  cursor: pointer;
+  margin: 0 0.2em;
 }
 
 @media (max-width: 600px) {
@@ -365,20 +420,106 @@ hr {
   font-weight: 200;
   opacity: 0;
   transition: opacity 0.1s ease;
-  margin: 0 0.5em
+  margin: 0 0.5em;
 }
 
-h1:hover .header-anchor, 
-h2:hover .header-anchor, 
-h3:hover .header-anchor, 
-h4:hover .header-anchor, 
-h5:hover .header-anchor, 
+h1:hover .header-anchor,
+h2:hover .header-anchor,
+h3:hover .header-anchor,
+h4:hover .header-anchor,
+h5:hover .header-anchor,
 h6:hover .header-anchor {
   opacity: 1;
 }
 
 .header-anchor {
-  /* transition: opacity 0.1s ease; */
   transition: opacity 0.3s ease;
   text-decoration: none;
+}
+
+.stork-attribution a:link,
+.stork-wrapper-basic .stork-attribution a:link {
+  color: hsl(192, 82%, 44%);
+}
+
+.stork-output-visible,
+.stork-wrapper-basic .stork-output-visible {
+  width: 100%;
+  background: #333;
+  border: 10px solid hsla(0, 0%, 0%);
+  position: absolute;
+  z-index: 20;
+  color: white;
+}
+
+.stork-message,
+.stork-wrapper-basic .stork-message {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  color: hsla(0, 0%, 100%, 0.8);
+  font-weight: bold;
+  font-family: var(--mono-font-family);
+}
+
+.stork-attribution,
+.stork-wrapper-basic .stork-attribution {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  font-size: 0.8em;
+  color: hsla(0, 0%, 0%, 0.8);
+}
+
+.stork-results,
+.stork-wrapper-basic .stork-results {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  list-style-type: none;
+  max-height: 25rem;
+  overflow-y: scroll;
+  border-top: 1px solid hsla(0, 0%, 80%, 1);
+  border-bottom: 1px solid hsla(0, 0%, 80%, 1);
+}
+
+.stork-result,
+.stork-wrapper-basic .stork-result {
+  font-size: 0.8em;
+}
+
+.stork-result.selected,
+.stork-wrapper-basic .stork-result.stork-result.selected {
+  background: #111;
+}
+
+.stork-result a:link,
+.stork-result a:visited {
+  padding: 1rem;
+  display: block;
+  color: currentcolor;
+  text-decoration: none;
+}
+
+.stork-result p {
+  margin: 0;
+}
+
+.stork-result .stork-title {
+  font-weight: bold;
+  font-size: 1.1em;
+  margin-bottom: 0.8em;
+}
+
+.stork-result .stork-excerpt {
+  margin-bottom: 0.8em;
+  line-height: 1;
+}
+
+.stork-highlight,
+.stork-wrapper-basic .stork-highlight {
+  background-color: #2b4e0e;
+}
+
+.stork-close-button,
+.stork-wrapper-basic .stork-close-button {
+  display: none;
 }

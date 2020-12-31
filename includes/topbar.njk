@@ -1,12 +1,41 @@
-<section class="topbar color-box">
-  <div>
-    <a href="/" class="back-home">jameslittle.me</a>
-  </div>
-  <div id="topbar-caret">&darr;</div>
-  <div id="linked-list">
-    <a href="/blog">blog</a>
-    <a href="/portfolio">portfolio</a>
-    <a href="/books">reading log</a>
-    <a href="/guestbook">guestbook</a>
+<section class="topbar">
+  <nav id="search-toggle-target">
+    <div>
+      <a href="/" class="back-home">jameslittle.me</a>
+    </div>
+    <div id="topbar-caret">&darr;</div>
+    <div id="linked-list">
+      <a href="/blog">blog</a>
+      <a href="/portfolio">portfolio</a>
+      <a href="/books">reading log</a>
+      <a href="/guestbook">guestbook</a>
+      <a id="search-toggle" href="#">search</a>
+    </div>
+  </nav>
+  <div class="stork-wrapper">
+    <input type="text" id="stork-input" placeholder="type to search..." data-stork="jil"/>
+    <button id="search-toggle-close">&times;</button>
   </div>
 </section>
+
+<div class="search-results" data-stork="jil-output"></div>
+
+<script>
+document.querySelector("#search-toggle").addEventListener("click", (e) => {
+  e.preventDefault()
+  document.querySelector("#search-toggle-target").classList.toggle("zoop")
+  if(document.querySelector("#search-toggle-target").classList.contains("zoop")) {
+    document.querySelector("#stork-input").focus();
+  }
+});
+
+document.querySelector("#search-toggle-close").addEventListener("click", (e) => {
+  e.preventDefault()
+  document.querySelector("#search-toggle-target").classList.remove("zoop")
+});
+</script>
+
+<script src="https://files.stork-search.net/stork.js"></script>
+<script>
+  stork.register('jil', '/stork-posts.st', {showProgress: false})
+</script>

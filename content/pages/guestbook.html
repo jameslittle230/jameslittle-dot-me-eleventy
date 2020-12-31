@@ -63,7 +63,9 @@ templateEngineOverride: liquid
       <label for="message" class="required">Message:</label>
       <textarea name="message" v-model="input.message" id="message"></textarea>
 
-      <button type="submit" class="submit-button">Submit &darr;</button>
+      {% raw %}
+      <button type="submit" :class="['submit-button', formSubmissionState]">Submit &darr;</button>
+      {% endraw %}
     </fieldset>
   </form>
 

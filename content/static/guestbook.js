@@ -6,11 +6,7 @@ const BLANK_INPUT = {
 };
 
 function count(quantity, singular, plural) {
-  if (quantity === 1) {
-    return `${quantity} ${singular}`;
-  } else {
-    return `${quantity} ${plural}`;
-  }
+  return `${quantity} ${quantity === 1 ? singular : plural}`;
 }
 
 function hideIsoDate() {
