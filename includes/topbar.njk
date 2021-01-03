@@ -19,23 +19,3 @@
 </section>
 
 <div class="search-results" data-stork="jil-output"></div>
-
-<script>
-document.querySelector("#search-toggle").addEventListener("click", (e) => {
-  e.preventDefault()
-  document.querySelector("#search-toggle-target").classList.toggle("zoop")
-  if(document.querySelector("#search-toggle-target").classList.contains("zoop")) {
-    document.querySelector("#stork-input").focus();
-  }
-});
-
-document.querySelector("#search-toggle-close").addEventListener("click", (e) => {
-  e.preventDefault()
-  document.querySelector("#search-toggle-target").classList.remove("zoop")
-});
-</script>
-
-<script src="https://files.stork-search.net/stork.js"></script>
-<script>
-  stork.register('jil', '/stork-posts.st', {showProgress: false})
-</script>

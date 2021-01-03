@@ -184,15 +184,24 @@ but they look a whole lot better than what came before.
 There's no reason these values should be derived from
 the size of the typography.
 */
-  box-shadow: 3px 3.5px 0 var(--bg-color), 0.7em 0.7em 0 var(--secondary-color);
+  box-shadow: 3px 3px 0 var(--bg-color), 7px 7px 0 var(--secondary-color);
 
   padding: 1em;
   margin-bottom: 2em;
   margin-top: 0.5em;
-  width: calc(100% - 1em);
+  width: calc(100% - 7px);
+}
+
+.topbar {
+  display: grid;
+  grid-template-columns: [x-start] 1fr [x-end];
+  grid-template-rows: [y-start] 1fr [y-end];
+  width: calc(100% - 7px);
+  margin: 1em 0 1.5em;
 }
 
 .topbar nav {
+  grid-area: y-start / x-start / y-end / x-end;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -205,8 +214,10 @@ the size of the typography.
   font-weight: 400;
   box-shadow: 3px 3.5px 0 var(--bg-color);
   padding: 1em;
-  width: calc(100% - 1em);
-  position: absolute;
+}
+
+.topbar nav:last-child {
+  margin-left: 1em;
 }
 
 .topbar nav a {
@@ -235,17 +246,27 @@ the size of the typography.
   transform: rotateZ(-8deg);
 }
 
+@media (max-width: 700px) {
+  .zoop {
+    transform: translateY(-1em) rotateZ(-8deg);
+  }
+}
+
+@media (max-width: 550px) {
+  .zoop {
+    transform: rotateZ(120deg);
+  }
+}
+
 .stork-wrapper {
+  grid-area: y-start / x-start / y-end / x-end;
+  position: relative;
+  top: 7px;
+  right: -7px;
   background: var(--secondary-color);
   color: var(--black-override);
   font-weight: 400;
   padding: 0.7em 1em;
-  margin-bottom: 2em;
-  margin-top: 0.5em;
-  width: calc(100% - 1em);
-  position: relative;
-  top: 7px;
-  right: -7px;
   display: flex;
   flex-direction: row-reverse;
   align-items: center;
@@ -260,6 +281,10 @@ the size of the typography.
   outline: none;
   color: white;
   font-family: var(--mono-font-family);
+}
+
+.stork-wrapper input::placeholder {
+  color: hsla(0, 0%, 100%, 0.6);
 }
 
 .stork-wrapper button {
@@ -437,13 +462,7 @@ h6:hover .header-anchor {
   text-decoration: none;
 }
 
-.stork-attribution a:link,
-.stork-wrapper-basic .stork-attribution a:link {
-  color: hsl(192, 82%, 44%);
-}
-
-.stork-output-visible,
-.stork-wrapper-basic .stork-output-visible {
+.stork-output-visible {
   width: 100%;
   background: #333;
   border: 10px solid hsla(0, 0%, 0%);
@@ -452,21 +471,25 @@ h6:hover .header-anchor {
   color: white;
 }
 
-.stork-message,
-.stork-wrapper-basic .stork-message {
+.stork-message {
   width: 100%;
   padding: 0.5rem 1rem;
-  color: hsla(0, 0%, 100%, 0.8);
+  color: var(--white-override);
   font-weight: bold;
   font-family: var(--mono-font-family);
 }
 
-.stork-attribution,
-.stork-wrapper-basic .stork-attribution {
+.stork-attribution {
   width: 100%;
   padding: 0.5rem 1rem;
   font-size: 0.8em;
-  color: hsla(0, 0%, 0%, 0.8);
+  color: var(--white-override);
+}
+
+.stork-attribution a:link,
+.stork-attribution a:visited {
+  color: hsl(192, 82%, 44%);
+  font-weight: bold;
 }
 
 .stork-results,
@@ -477,17 +500,16 @@ h6:hover .header-anchor {
   list-style-type: none;
   max-height: 25rem;
   overflow-y: scroll;
-  border-top: 1px solid hsla(0, 0%, 80%, 1);
-  border-bottom: 1px solid hsla(0, 0%, 80%, 1);
+  border-top: 1px solid hsla(0, 0%, 30%, 1);
+  border-bottom: 1px solid hsla(0, 0%, 30%, 1);
 }
 
-.stork-result,
-.stork-wrapper-basic .stork-result {
+.stork-result {
   font-size: 0.8em;
+  border-bottom: 1px solid hsla(0, 0%, 100%, 0.1);
 }
 
-.stork-result.selected,
-.stork-wrapper-basic .stork-result.stork-result.selected {
+.stork-result.selected {
   background: #111;
 }
 
@@ -514,12 +536,11 @@ h6:hover .header-anchor {
   line-height: 1;
 }
 
-.stork-highlight,
-.stork-wrapper-basic .stork-highlight {
-  background-color: #2b4e0e;
+.stork-highlight {
+  background-color: var(--secondary-color);
+  color: var(--black-override);
 }
 
-.stork-close-button,
-.stork-wrapper-basic .stork-close-button {
+.stork-close-button {
   display: none;
 }

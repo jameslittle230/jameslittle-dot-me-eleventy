@@ -63,16 +63,15 @@ function switchTheme() {
 }
 
 function toggleTopbarNavVisibility() {
-  const e = document.getElementById("linked-list")
-  if(e.style.display === "flex") {
+  const e = document.getElementById("linked-list");
+  if (e.style.display === "flex") {
     e.style.display = null; // reset to default; "none" in stylesheet
-    document.getElementById("topbar-caret").innerHTML = "&darr;"
+    document.getElementById("topbar-caret").innerHTML = "&darr;";
   } else {
     e.style.display = "flex";
-    document.getElementById("topbar-caret").innerHTML = "&uarr;"
-
+    document.getElementById("topbar-caret").innerHTML = "&uarr;";
   }
-  console.log(e.style.display)
+  console.log(e.style.display);
 }
 
 window.addEventListener("DOMContentLoaded", () => {
@@ -83,6 +82,26 @@ window.addEventListener("DOMContentLoaded", () => {
   document
     .getElementById("topbar-caret")
     .addEventListener("click", toggleTopbarNavVisibility);
-  
-    repaintButton();
+
+  repaintButton();
+
+  document.querySelector("#search-toggle").addEventListener("click", (e) => {
+    e.preventDefault();
+    document.querySelector("#search-toggle-target").classList.toggle("zoop");
+    if (
+      document.querySelector("#search-toggle-target").classList.contains("zoop")
+    ) {
+      document.querySelector("#stork-input").focus();
+    }
+  });
+
+  document
+    .querySelector("#search-toggle-close")
+    .addEventListener("click", (e) => {
+      e.preventDefault();
+      const input = document.querySelector("#stork-input");
+      input.value = "";
+      input.dispatchEvent(new KeyboardEvent("keypress", { key: "a" }));
+      document.querySelector("#search-toggle-target").classList.remove("zoop");
+    });
 });

@@ -20,7 +20,8 @@
 .post-listing .title {
   font-size: 1.2em;
   font-weight: 700;
-  margin-bottom: 0;
+  margin-bottom: 0.3em;
+  line-height: 1.25;
 }
 
 .post-listing .blurb {

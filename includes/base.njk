@@ -61,6 +61,11 @@ cssFiles: ["content/styles/main.css"]
     {% set matomo %}
       {% include "content/scripts/matomo.js" %}
     {% endset %}
+    <script src="https://files.stork-search.net/stork.js"></script>
+    <script>
+      stork.register('jil', '/stork-posts.st', {showProgress: false})
+    </script>
+    
     <script>
       {{ matomo | jsmin | safe }}
     </script>
