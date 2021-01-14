@@ -16,7 +16,7 @@
     "@11ty/eleventy-plugin-syntaxhighlight": "^3.0.1",
     "airtable": "^0.10.1",
     "autoprefixer": "^9.7.4",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "clean-css": "^4.2.3",
     "date-fns": "^2.14.0",
     "date-fns-tz": "^1.0.9",
