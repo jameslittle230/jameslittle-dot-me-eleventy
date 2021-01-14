@@ -6,16 +6,18 @@ slug: "books"
 
 <h1>Reading Log</h1>
 
-<p>In January of 2014, inspired by <a href="http://www.jamierubin.net">Jamie Todd Rubin</a>, I started compiling a list of all the books I've read. 2014 marked the end of my junior year in high school, so a lot of these are books I read for school. I count listening to an audiobook as having read it, but my reading setup consists of Audible, my Kindle, and actual dead-tree books.</p>
+<p>In January of 2014, I started compiling a list of all the books I've read. 2014 marked the end of my junior year in high school, so the beginning of this list represents a lot of literature courses I took in hich school and college. I count listening to an audiobook as having read it, but my reading setup consists of Audible, my Kindle, and actual dead-tree books.</p>
 
 <p>This explicitly <em>doesn't</em> track things I read online—you might be interested in my <a href="https://pinboard.in/u:littleguy23">pinboard.in profile</a> for that.</p>
 
-{% for year, list in books %}
+<p>This list contains {{count}} books, and is automatically generated from an Airtable base.</p>
 
-<h2>{{year}}</h2>
+{% for yearListing in yearListings %}
+
+<h2>{{yearListing.year}}</h2>
 
 <ul>
-{% for book in list %}
+{% for book in yearListing.books %}
 <li>{{ book.title }} - {{ book.author }}</li>
 {% endfor %}
 </ul>

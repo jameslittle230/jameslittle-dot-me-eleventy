@@ -6,11 +6,21 @@ Airtable.configure({
   apiKey: process.env.AIRTABLE_API_KEY,
 });
 
+Array.prototype.uniqued = function () {
+  var output = [];
+  for (const val of this) {
+    if (output.indexOf(val) === -1) {
+      output.push(val);
+    }
+  }
+  return output;
+};
+
 const booksBaseKey = "appktTl97d89xOZQa";
 var base = Airtable.base(booksBaseKey);
 
-const getBooks = new Promise((resolve, reject) => {
-  var books = {};
+const getAirtableEntries = new Promise((resolve, reject) => {
+  var books = [];
 
   base("Reading List")
     .select()
@@ -19,38 +29,52 @@ const getBooks = new Promise((resolve, reject) => {
         // called for each page of records (100 records/page)
 
         for (const record of records) {
-          const date = utcToZonedTime(new Date(record.get("Completion Date")));
-          const year = format(date, "yyyy", {timeZone: "Etc/GMT"});
+          const completed = utcToZonedTime(
+            new Date(record.get("Completion Date"))
+          );
+          const year = format(completed, "yyyy", { timeZone: "Etc/GMT" });
           const datum = {
             title: record.get("Title"),
             author: record.get("Author"),
-            completed: new Date(record.get("Completion Date")),
+            completed,
+            year,
           };
-
-          if (books[year]) {
-            books[year].push(datum);
-          } else {
-            books[year] = [datum];
-          }
+          books.push(datum);
         }
 
         fetchNextPage();
       },
       (err) => {
         if (err) reject(err);
-        else {
-          for (const year in books) {
-            books[year].sort((a, b) => a.completed - b.completed);
-          }
-
-          resolve(books)
-        };
+        else resolve(books);
       }
     );
 });
 
-module.exports = async function () {
+const processAirtableEntries = (data) => {
+  const years = data
+    .map((d) => d.year)
+    .uniqued()
+    .sort((a, b) => b - a); // reverse sort years
+
+  const yearListings = years.map((year) => ({
+    year,
+    books: data
+      .filter((d) => d.year === year)
+      .sort((a, b) => a.completed - b.completed),
+  }));
+
   return {
-    books: await getBooks
-  }
+    count: data.length,
+    yearListings,
+  };
+};
+
+async function fetchBookData() {
+  const airtableEntries = await getAirtableEntries;
+  return processAirtableEntries(airtableEntries);
+}
+
+module.exports = async function () {
+  return await fetchBookData();
 };
