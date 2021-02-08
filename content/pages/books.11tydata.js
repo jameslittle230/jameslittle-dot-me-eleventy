@@ -1,5 +1,6 @@
+require("dotenv").config();
 const Airtable = require("airtable");
-const { zonedTimeToUtc, utcToZonedTime, format } = require("date-fns-tz");
+const { utcToZonedTime, format } = require("date-fns-tz");
 
 Airtable.configure({
   endpointUrl: "https://api.airtable.com",

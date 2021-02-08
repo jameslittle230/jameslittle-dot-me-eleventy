@@ -20,6 +20,7 @@
     "clean-css": "^4.2.3",
     "date-fns": "^2.14.0",
     "date-fns-tz": "^1.0.9",
+    "dotenv": "^8.2.0",
     "html-minifier": "^4.0.0",
     "markdown-it": "^12.0.0",
     "markdown-it-anchor": "^6.0.1",
