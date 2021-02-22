@@ -1,4 +1,5 @@
 var jlGlobals = {};
+
 function recomputeComputedValue() {
   const storedSetting = localStorage.getItem("theme");
   const osThemeIsDark = window.matchMedia("(prefers-color-scheme: dark)")
@@ -48,7 +49,7 @@ function repaintButton() {
   }
 }
 
-function switchTheme() {
+function toggleTheme() {
   switch (jlGlobals.theme) {
     case "light":
       localStorage.setItem("theme", "dark");
@@ -71,13 +72,39 @@ function toggleTopbarNavVisibility() {
     e.style.display = "flex";
     document.getElementById("topbar-caret").innerHTML = "&uarr;";
   }
-  console.log(e.style.display);
+}
+
+function toggleSearchVisibility(override = null) {
+  const visibleClassName = "zoop";
+  document
+    .querySelector("#search-toggle-target")
+    .classList.toggle(visibleClassName);
+
+  if (override === false) {
+    document
+      .querySelector("#search-toggle-target")
+      .classList.remove(visibleClassName);
+  } else if (override === true) {
+    document
+      .querySelector("#search-toggle-target")
+      .classList.add(visibleClassName);
+  }
+
+  if (
+    document
+      .querySelector("#search-toggle-target")
+      .classList.contains(visibleClassName)
+  ) {
+    document.querySelector("#stork-input").focus();
+  } else {
+    document.querySelector("#stork-input").value = "";
+  }
 }
 
 window.addEventListener("DOMContentLoaded", () => {
   document
     .getElementById("dark-mode-switch")
-    .addEventListener("click", switchTheme);
+    .addEventListener("click", toggleTheme);
 
   document
     .getElementById("topbar-caret")
@@ -87,21 +114,13 @@ window.addEventListener("DOMContentLoaded", () => {
 
   document.querySelector("#search-toggle").addEventListener("click", (e) => {
     e.preventDefault();
-    document.querySelector("#search-toggle-target").classList.toggle("zoop");
-    if (
-      document.querySelector("#search-toggle-target").classList.contains("zoop")
-    ) {
-      document.querySelector("#stork-input").focus();
-    }
+    toggleSearchVisibility();
   });
 
   document
-    .querySelector("#search-toggle-close")
+    .querySelector("#manual-search-toggle-close")
     .addEventListener("click", (e) => {
       e.preventDefault();
-      const input = document.querySelector("#stork-input");
-      input.value = "";
-      input.dispatchEvent(new KeyboardEvent("keypress", { key: "a" }));
-      document.querySelector("#search-toggle-target").classList.remove("zoop");
+      toggleSearchVisibility(false);
     });
 });

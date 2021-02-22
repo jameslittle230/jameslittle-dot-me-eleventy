@@ -1,0 +1,240 @@
+.topbar {
+  display: grid;
+  grid-template-columns: [x-start] 1fr [x-end];
+  grid-template-rows: [y-start] 1fr [y-end];
+  width: calc(100% - 7px);
+  margin: 1em 0 1.5em;
+}
+
+.topbar nav {
+  grid-area: y-start / x-start / y-end / x-end;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  transition: transform 0.4s ease;
+  z-index: 10;
+  transform-origin: bottom left;
+  background: var(--primary-color);
+  color: var(--black-override);
+  font-weight: 400;
+  box-shadow: 3px 3.5px 0 var(--bg-color);
+  padding: 1em;
+}
+
+.topbar nav:last-child {
+  margin-left: 1em;
+}
+
+.topbar nav a {
+  margin: 0 1.5em 0 0;
+  color: var(--black-override);
+  text-decoration: none;
+}
+
+.topbar nav a:last-child {
+  margin-right: 0;
+}
+
+.topbar nav a:hover {
+  text-decoration: underline;
+}
+
+.topbar #nameplate {
+  margin-right: 3em;
+}
+
+.topbar #topbar-caret {
+  display: none;
+}
+
+.topbar #linked-list {
+  display: block;
+}
+
+.zoop {
+  transform: rotateZ(-8deg);
+}
+
+@media (max-width: 700px) {
+  .zoop {
+    transform: translateY(-1em) rotateZ(-8deg);
+  }
+}
+
+@media (max-width: 550px) {
+  .zoop {
+    transform: rotateZ(120deg);
+  }
+}
+
+.stork-wrapper {
+  grid-area: y-start / x-start / y-end / x-end;
+  position: relative;
+  top: 7px;
+  right: -7px;
+  background: var(--secondary-color);
+  color: var(--black-override);
+  font-weight: 400;
+  padding: 0.7em 1em;
+  align-items: center;
+  display: grid;
+  grid-template-columns: 1fr 2em minmax(10px, 16em);
+  justify-items: center;
+  align-items: center;
+}
+
+.stork-wrapper input {
+  background: none;
+  border: none;
+  border-bottom: 1px solid black;
+  font-size: 1.4em;
+  padding: 0.1rem;
+  outline: none;
+  color: white;
+  font-family: var(--mono-font-family);
+  grid-column: 3 / 4;
+}
+
+.stork-wrapper input::placeholder {
+  color: hsla(0, 0%, 100%, 0.6);
+}
+
+.stork-wrapper button {
+  border: none;
+  background: hsla(0, 0%, 100%, 0.1);
+  width: 1em;
+  height: 1em;
+  font-size: 1.2em;
+  padding: 0;
+  line-height: 1;
+  cursor: pointer;
+  margin: 0 0.2em;
+}
+
+.stork-wrapper .stork-progress {
+  display: none;
+}
+
+@media (max-width: 600px) {
+  .topbar #topbar-caret {
+    display: block;
+    flex-grow: 1;
+    flex-shrink: 0;
+    flex-basis: calc(100% - 10em);
+    text-align: right;
+    cursor: pointer;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+  }
+
+  .topbar #linked-list {
+    display: none;
+    flex-direction: column;
+  }
+}
+
+.footbar {
+  text-align: center;
+  padding: 4em 0 2em;
+  font-size: 0.7em;
+  text-transform: uppercase;
+  letter-spacing: 0.035em;
+  line-height: 1.5;
+  clear: both;
+}
+
+.footbar p {
+  margin: 0.7em 0;
+}
+
+.footbar .links a {
+  margin: 0 0.5em;
+}
+
+.stork-output-visible {
+  width: 100%;
+  background: #333;
+  border: 10px solid hsla(0, 0%, 0%);
+  position: absolute;
+  z-index: 20;
+  color: white;
+}
+
+.stork-message {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  color: var(--white-override);
+  font-weight: bold;
+  font-family: var(--mono-font-family);
+  background: #555;
+}
+
+.stork-attribution {
+  background: #555;
+  width: 100%;
+  padding: 0.5rem 1rem;
+  font-size: 0.8em;
+  color: var(--white-override);
+}
+
+.stork-attribution a:link,
+.stork-attribution a:visited {
+  color: var(--primary-color);
+  font-weight: bold;
+}
+
+.stork-results,
+.stork-wrapper-basic .stork-results {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  list-style-type: none;
+  max-height: 25rem;
+  overflow-y: scroll;
+  border-top: 1px solid hsla(0, 0%, 30%, 1);
+  border-bottom: 1px solid hsla(0, 0%, 30%, 1);
+}
+
+.stork-result {
+  font-size: 0.8em;
+  border-bottom: 1px solid hsla(0, 0%, 100%, 0.1);
+  font-family: var(--mono-font-family);
+}
+
+.stork-result.selected {
+  background: #222;
+}
+
+.stork-result a:link,
+.stork-result a:visited {
+  padding: 1rem;
+  display: block;
+  color: currentcolor;
+  text-decoration: none;
+}
+
+.stork-result p {
+  margin: 0;
+}
+
+.stork-result .stork-title {
+  font-size: 1.2em;
+  margin-bottom: 0.8em;
+}
+
+.stork-result .stork-excerpt {
+  margin-bottom: 0.8em;
+  line-height: 1;
+}
+
+.stork-highlight {
+  background-color: #782960;
+  padding: 0.1em;
+}
+
+.stork-close-button, .stork-close-button-position {
+  grid-row:  1 / 2;
+  grid-column: 2 / 3;
+}

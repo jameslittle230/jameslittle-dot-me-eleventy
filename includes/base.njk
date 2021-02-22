@@ -1,5 +1,5 @@
 ---
-cssFiles: ["content/styles/main.css"]
+cssFiles: ["content/styles/main.css", "content/styles/topbar-footbar.css"]
 ---
 
 <!doctype html>
@@ -15,18 +15,13 @@ cssFiles: ["content/styles/main.css"]
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" sizes="any">
     <link rel="manifest" href="/site.webmanifest">
 
-    {% set js %}
-      {% include "content/scripts/main.js" %}
-    {% endset %}
+    {% set js %}{% include "content/scripts/main.js" %}{% endset %}
     <script>
       {{ js | jsmin | safe }}
     </script>
 
     {% for file in cssFiles %}
-      {% set css %}
-        {% include file %}
-      {% endset %}
-      <!-- {{ file }} -->
+      {% set css %}{% include file %}{% endset %}
       <style>
         {{css | cssmin | safe}}
       </style>
@@ -63,7 +58,14 @@ cssFiles: ["content/styles/main.css"]
     {% endset %}
     <script src="https://files.stork-search.net/stork.js"></script>
     <script>
-      stork.register('jil', '/stork-posts.st', {showProgress: false})
+      stork.register(
+        'jil', 'https://files.stork-search.net/federalist.st', 
+        {
+          showProgress: false, 
+          onInputCleared: () => toggleSearchVisibility(false), 
+          onResultsHidden: () => toggleSearchVisibility(false)
+        }
+      )
     </script>
     
     <script>
