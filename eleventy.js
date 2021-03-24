@@ -7,6 +7,7 @@ const {
   relativeDate,
   dateOlderThan1y,
 } = require("./11ty/dateFilters.js");
+const { leftpad } = require("./11ty/leftpad.js");
 const { htmlmin, cssmin, jsmin } = require("./11ty/minifiers.js");
 const { uniquePostYears, postsWithYears } = require("./11ty/postYears.js");
 const markdownLibrary = require("./11ty/markdownLibrary.js");
@@ -29,6 +30,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addFilter("dateformat", dateFormat);
   eleventyConfig.addFilter("relativeDate", relativeDate);
   eleventyConfig.addFilter("dateOlderThan1y", dateOlderThan1y);
+  eleventyConfig.addFilter("leftpad", leftpad);
 
   // HTML/CSS/JS TRANSFORMERS
   eleventyConfig.addTransform("htmlmin", htmlmin);

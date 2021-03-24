@@ -7,11 +7,11 @@ function dateFormat(value, fmtstring = "yyyy-MM-dd") {
 }
 
 function relativeDate(value) {
-    return formatDistanceToNow(new Date(value), { addSuffix: true });
-  }
-  
-  function dateOlderThan1y(value) {
-    return differenceInDays(new Date(), new Date(value)) > 365;
-  }
+  return formatDistanceToNow(new Date(value), { addSuffix: true });
+}
 
-module.exports = {dateFormat, relativeDate, dateOlderThan1y};
+function dateOlderThan1y(value) {
+  return differenceInDays(new Date(), new Date(value)) > 365;
+}
+
+module.exports = { dateFormat, relativeDate, dateOlderThan1y };

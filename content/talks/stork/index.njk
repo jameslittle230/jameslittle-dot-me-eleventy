@@ -1,0 +1,25 @@
+---
+layout: base.njk
+permalink: /talks/stork/
+cssFiles: ["content/styles/post.css"]
+---
+
+<h1>Stork Talk</h1>
+
+<style>
+.slide {
+    border: 1px solid black;
+    margin: 1em 0;
+}
+</style>
+
+<div class="note">
+    <p>The slides view is still a work in progress. Notes and better layout to come.</p>
+</div>
+
+{% for i in range(1, 22) -%}
+<div class="row">
+<img class="slide" src="https://files.jameslittle.me/talks/stork-slides/Stork Slides.{{ i | leftpad(3) }}.jpeg" width="640" height="360"/>
+</div>
+{% endfor %}
+
