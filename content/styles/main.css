@@ -77,6 +77,18 @@ h6 {
   font-family: var(--header-font-family);
 }
 
+h4, h5, h6 {
+  font-size: 1rem;
+}
+
+h5 {
+  font-style: italic;
+}
+
+h6 {
+  opacity: 0.75;
+}
+
 /* These need the article > hx selector to override the article > * selector in
 post.css
 */
@@ -93,7 +105,7 @@ h4,
 h5,
 h6 {
   margin-bottom: 0.3em;
-  margin-top: 2.25em;
+  margin-top: 1.75em;
 }
 
 h1:first-child,
@@ -205,24 +217,29 @@ button.link:hover {
   cursor: pointer;
 }
 
-.big-title {
+h1.big-title {
   font-size: 3em;
   letter-spacing: -0.03em;
-  margin: 0 0 0.2em;
+  margin: 1rem 0;
   line-height: 1.1;
 }
 
 @media (max-width: 600px) {
-  .big-title {
+  h1.big-title {
     font-size: 2.4em;
   }
 }
 
-.metadata {
+p.metadata {
   font-weight: bold;
   text-transform: uppercase;
   color: var(--muted-color);
   font-size: 0.8em;
+  margin-bottom: 0;
+}
+
+p.metadata + h1.big-title {
+  margin-top: 0;
 }
 
 .picture-placeholder {

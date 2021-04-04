@@ -4,10 +4,10 @@ title: "My Blog"
 cssFiles: ["content/styles/post-index.css", "content/styles/post-listing.css"]
 ---
 
-<div class="metadata">
+<p class="metadata">
   {{collections.postsWithYears | length}} posts since
   {{ (collections.postsWithYears | first).date | dateformat }}
-</div>
+</p>
 
 <h1 class="big-title">Blog</h1>
 

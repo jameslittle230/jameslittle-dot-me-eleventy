@@ -13,6 +13,7 @@ const { uniquePostYears, postsWithYears } = require("./11ty/postYears.js");
 const markdownLibrary = require("./11ty/markdownLibrary.js");
 
 const imagePartial = require("./11ty/imagePartial.js");
+const shortcodes = require("./11ty/shortcodes.js");
 
 module.exports = function (eleventyConfig) {
   // PLUGINS
@@ -39,6 +40,8 @@ module.exports = function (eleventyConfig) {
 
   // SHORTCODES
   eleventyConfig.addShortcode("img", imagePartial.img);
+  eleventyConfig.addShortcode("bigTitle", shortcodes.bigTitle);
+  eleventyConfig.addAsyncShortcode("autoImg", imagePartial.autoImg);
 
   // COLLECTIONS
   eleventyConfig.addCollection("uniquePostYears", uniquePostYears);

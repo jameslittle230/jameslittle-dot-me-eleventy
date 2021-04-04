@@ -5,17 +5,11 @@ cssFiles: ["content/styles/post.css", "content/styles/prism.css"]
 ---
 
 <div class="pre-article">
-    <div class="metadata">
-        <p>
-            Written on
-            {{date | dateformat}}
-            •
-            {{content | striptags | wordcount}}
-            words
-        </p>
-    </div>
+    {% set metadata %} 
+    Written on {{date | dateformat}} • {{content | striptags | wordcount}} words
+    {% endset %}
 
-    <h1 class="big-title">{{title}}</h1>
+    {% bigTitle title, metadata %}
 
     {% if oldAlert %}
         <div class="note">
@@ -25,23 +19,23 @@ cssFiles: ["content/styles/post.css", "content/styles/prism.css"]
 </div>
 
 <article>
-    {{content | safe }}
+{{content | safe }}
 </article>
 
 <hr>
 
 <div class="related-links">
-    {% if prevPost.url %}
-        <strong>Previous Post</strong><br>
-        <a href="{{prevPost.url}}">{{prevPost.data.title}}</a>
-    {% endif %}
+{% if prevPost.url %}
+    <strong>Previous Post</strong><br>
+    <a href="{{prevPost.url}}">{{prevPost.data.title}}</a>
+{% endif %}
 </div>
 
 <div class="whoami-box color-box">
-    <div class="whoami-text">
-        <strong>Who am I?</strong>
-    </div>
-    <div>I'm James Little, a software engineer and design enthusiast in San Francisco. I'm currently working on Stripe Terminal.</div>
+<div class="whoami-text">
+    <strong>Who am I?</strong>
+</div>
+<div>I'm James Little, a software engineer and design enthusiast in San Francisco. I'm currently working on Stripe Terminal.</div>
 </div>
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/philgruneich/barefoot/dist/css/barefoot.min.css"/>

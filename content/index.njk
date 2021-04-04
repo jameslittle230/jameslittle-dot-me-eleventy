@@ -13,10 +13,11 @@ title: Home
     {{css | cssmin | safe}}
 </style>
 
-{% img style = "float: right; width: 40%; margin: 0 0 2em 2em",
-ratio = "150%",
-classList = "headshot",
-urlbase = "https://files.jameslittle.me/images/headshot" %}
+{% autoImg 
+style="float: right; width: 40%; height: auto; margin: 0 0 2em 2em", 
+classList="headshot", 
+url="https://files.jameslittle.me/images/headshot.jpg", 
+alt="A headshot of James Little" %}
 
 <h1 style="margin-top: 0">Hi, I'm James Little!</h1>
 

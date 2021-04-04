@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "./build.sh",
+    "build-11ty": "ELEVENTY_ENV=production npx @11ty/eleventy --config=eleventy.js",
     "serve": "ELEVENTY_ENV=development npx @11ty/eleventy --config=eleventy.js --serve"
   },
   "keywords": [],
@@ -26,6 +27,8 @@
     "markdown-it-anchor": "^7.0.2",
     "markdown-it-footnote": "^3.0.2",
     "terser": "^5.6.0-beta",
-    "uslug": "^1.0.4"
+    "uslug": "^1.0.4",
+    "image-size": "^0.9.7",
+    "sharp": "^0.28.0"
   }
 }
