@@ -14,7 +14,7 @@ url_prefix = "https://jameslittle.me"
 path = "{{post.inputPath}}"
 url = "{{absolutePostUrl}}"
 title = "{{post.data.title | safe}}"
-filetype = "PlainText"
+filetype = "Markdown" # Not accurate for all pages, but will get close enough
 
 {%- endfor %}
 
