@@ -60,11 +60,20 @@ templateEngineOverride: liquid
       <label for="name">URL:</label>
       <input type="url" v-model="input.url" id="URL" name="URL" />
 
-      <label for="message" class="required">Message:</label>
-      <textarea name="message" v-model="input.message" id="message"></textarea>
+      {% raw %}
+      <div style="display: flex; justify-content: space-between; align-items:flex-end;">
+        <label for="message" class="required">Message:</label>
+        <span class="metadata">{{messageCharactersRemainingText}}</span>
+      </div>
+      {% endraw %}
+      <textarea name="message" v-model="input.message" id="message" style="height: 10rem" placeholder="Type something nice!"></textarea>
 
       {% raw %}
-      <button type="submit" :class="['submit-button', formSubmissionState]">Submit &darr;</button>
+      <button 
+        type="submit"
+        :disabled="!isFormSubmittable"
+        :class="['submit-button', formSubmissionState]"
+      >Submit &darr;</button>
       {% endraw %}
     </fieldset>
   </form>
@@ -173,12 +182,17 @@ templateEngineOverride: liquid
     font-size: 1em;
     font-weight: bold;
     border-radius: 5px;
-    transition: box-shadow 0.4s;
+    transition: box-shadow 0.4s, opacity 0.4s;
     cursor: pointer;
   }
 
-  .submit-button:hover {
+  .submit-button:not([disabled]):hover {
     box-shadow: var(--shadow);
+  }
+  
+  .submit-button[disabled] {
+    opacity: 0.5;
+    cursor: default;
   }
 
   .guestbook {

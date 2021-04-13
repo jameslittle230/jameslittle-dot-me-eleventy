@@ -29,6 +29,7 @@ hideIsoDate();
 
 var app = new Vue({
   el: "#app",
+
   data: {
     input: JSON.parse(JSON.stringify(BLANK_INPUT)),
 
@@ -36,7 +37,9 @@ var app = new Vue({
     getEntriesState: "loading", // "loading" || "error" || "success"
     formSubmissionState: "", // "" || "loading" || "error" || "success"
     formSubmissionErrorMessage: "",
+    // messageCharactersRemaining: 23,
   },
+
   computed: {
     header: function () {
       if (this.getEntriesState === "loading") {
@@ -52,7 +55,30 @@ var app = new Vue({
         );
       }
     },
+
+    messageCharactersRemaining: function () {
+      return 350 - this.input.message.length;
+    },
+
+    messageCharactersRemainingText: function () {
+      return this.messageCharactersRemaining < 50
+        ? `${count(
+            this.messageCharactersRemaining,
+            "character",
+            "characters"
+          )} remaining`
+        : "";
+    },
+
+    isFormSubmittable: function () {
+      return (
+        this.messageCharactersRemaining >= 0 &&
+        this.input.name !== "" &&
+        this.input.message !== ""
+      );
+    },
   },
+
   methods: {
     submitForm: function () {
       let validation = this.formIsValid();
@@ -67,7 +93,7 @@ var app = new Vue({
       axios
         .post("https://vipqpoael1.execute-api.us-west-1.amazonaws.com/prod", {
           ...this.input,
-          qa: (development !== "false"), /* [1] */
+          qa: development !== "false" /* [1] */,
         })
         .then((response) => {
           this.formSubmissionState = "success";
@@ -79,11 +105,11 @@ var app = new Vue({
           this.formSubmissionErrorMessage = err.response.data.errorMessage;
         });
 
-        /**
-         * [1]: // Using !== here because it's safer than === - 
-         *      it'll always default to QA except in the one scenario where
-         *      I don't want it to (in case `development` is null/not a string)
-         */
+      /**
+       * [1]: // Using !== here because it's safer than === -
+       *      it'll always default to QA except in the one scenario where
+       *      I don't want it to (in case `development` is null/not a string)
+       */
     },
 
     formIsValid: function () {
@@ -134,6 +160,7 @@ var app = new Vue({
       return fuzzy || this.toIso(date);
     },
   },
+
   mounted() {
     document.querySelectorAll(".hidden-until-js-load").forEach((e) => {
       e.classList.remove("hidden-until-js-load");
@@ -155,6 +182,7 @@ var app = new Vue({
         this.getEntriesState = "error";
       });
   },
+
   updated: function (params) {
     hideIsoDate();
   },

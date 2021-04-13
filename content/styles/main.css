@@ -230,16 +230,16 @@ h1.big-title {
   }
 }
 
-p.metadata {
+p.metadata, span.metadata {
   font-weight: bold;
   text-transform: uppercase;
   color: var(--muted-color);
   font-size: 0.8em;
-  margin-bottom: 0;
 }
 
 p.metadata + h1.big-title {
-  margin-top: 0;
+  margin-top: -1rem;
+  margin-bottom: 0;
 }
 
 .picture-placeholder {
