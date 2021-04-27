@@ -2,6 +2,6 @@
 
 set -euo pipefail
 wget https://files.stork-search.net/releases/v1.2.0/stork-ubuntu-16-04
-chmod +x stork-ubuntu-latest
+chmod +x stork-ubuntu-16-04
 ELEVENTY_ENV=production npx @11ty/eleventy --config=eleventy.js
-./stork-ubuntu-latest --build _site/stork-posts.toml
+./stork-ubuntu-16-04 --build _site/stork-posts.toml
