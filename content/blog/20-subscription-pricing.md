@@ -1,6 +1,6 @@
 ---
 title:  "The Sneaky Ubiquitousness of Subscription Pricing"
-date:   2021-03-28
+date:   2021-05-25
 layout: post
 tags: post
 blurb: "Every purchase is subscription pricing if you squint hard enough. This isn't a bad thing."
