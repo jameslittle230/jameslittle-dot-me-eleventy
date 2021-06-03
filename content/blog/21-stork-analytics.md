@@ -29,6 +29,6 @@ It's got a rolling average!
 
 ---
 
-I recon this is the most stable thing I've launched in a prod environment. This feels like the deployment with the smallest bundle of hacks I've ever created. I spent shockingly little time installing software on the EC2 box, which is a task I've easily burned weeks on before. Moreover, I can run each service independently in production or on my personal computer. I'm happy with this because I don't think I'll have to keep worrying about it forever.
+I reckon this is the most stable thing I've launched in a prod environment. This feels like the deployment with the smallest bundle of hacks I've ever created. I spent shockingly little time installing software on the EC2 box, which is a task I've easily burned weeks on before. Moreover, I can run each service independently in production or on my personal computer. I'm happy with this because I don't think I'll have to keep worrying about it forever.
 
 Acknowledgements: [Terin](https://twitter.com/terinjokes) helped reaffirm that I was using Docker correctly. Thanks, Terin!
