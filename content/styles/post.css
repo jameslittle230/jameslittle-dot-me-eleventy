@@ -108,8 +108,11 @@ img.enlarged {
   color: currentColor;
 }
 
+/*
+@TODO: Make the width based on a CSS variable so I can change it per-page
+*/
 .pull-wide {
-  width: clamp(100%, calc(100vw - 10rem), 120vh);
+  width: clamp(100%, calc(100vw - 10rem), var(--pull-wide-max-width, 120vh));
 
   /**
    * clean-css mangles the following rule by transforming `0px` to `0`, which
@@ -119,7 +122,7 @@ img.enlarged {
 
   /* clean-css ignore:start */
   margin-left: clamp(
-    ( 120vh - 45rem ) / -2,
+    ( var(--pull-wide-max-width, 120vh) - 45rem ) / -2,
     ( 100vw - 55rem ) / -2,
     0px
   );
