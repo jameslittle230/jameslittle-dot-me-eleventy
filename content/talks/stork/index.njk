@@ -108,29 +108,31 @@ body {
     },
     {
         image: 'https://files.jameslittle.me/talks/stork-slides/Stork Slides.018.jpeg',
-        caption: ""
+        caption: "This is a diagram that shows the search index's data structure. The index stores \"entries\" and \"queries\", where entries are the full text of the documents that get indexed. Queries are a reverse hash map of all the extracted words in all of those documents, pointing to the entry and word index where that word appears. The queries map also contains aliases, which are used to redirect the search algorithm to a set of words that exist in the corpus. The search algorithm does a lot of deduplication when taking results from the hash map and building up the search results."
     },
     {
         image: 'https://files.jameslittle.me/talks/stork-slides/Stork Slides.019.jpeg',
-        caption: ""
+        caption: "The Javascript library seems trivial, but the complexity lies in the three things it's doing, all of which are asynchronous. First, it's loading the WASM blob. Second, it's loading the index file. Third, it's waiting for the DOM to be available and taking over the specified DOM elements. When the WASM is loaded and the index file is fetched, Stork can begin resolving search queries, but the DOM has to be responsive before that, and has to display failures properly."
     },
     {
         image: 'https://files.jameslittle.me/talks/stork-slides/Stork Slides.020.jpeg',
-        caption: ""
+        caption: "What's next?"
     },
     {
         image: 'https://files.jameslittle.me/talks/stork-slides/Stork Slides.021.jpeg',
-        caption: ""
+        caption: "I see Stork as a <a href=\"https://destroytoday.com/blog/exploring-a-modern-cushion\">Lifetime Project</a>, where progress doesn't have to be fast. That gives me the time to think through product directions and technical design, with the expectation that Stork will be something I continuously improve over a long time. That said, I do have some goals for the project. Stork should be the \"obvious choice\" for search if you're building a static-ish site, which mostly means I want to reduce as much friction as I can when someone is setting it up or deploying it. It can also be a strong contender in other situations, like one search index per SaaS user. Finally, I want to skate to where the puck is going: use new web technologies, new design, etc. Stork should always feel a little futuristic, almost like it's pushing a boundary."
     },
     {
         image: 'https://files.jameslittle.me/talks/stork-slides/Stork Slides.022.jpeg',
-        caption: ""
-    },
-    {
-        image: 'https://files.jameslittle.me/talks/stork-slides/Stork Slides.023.jpeg',
-        caption: ""
+        caption: "Thanks! You can check out Stork at <a href=\"https://stork-search.net\">https://stork-search.net</a>."
     }
 ]%}
+
+I first gave this talk at a Fission.codes demo day in March 2021. It was recorded - you can see the video here:
+
+<iframe src="https://player.vimeo.com/video/529898007?color=6446FA&portrait=0" width="640" height="289" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+
+<hr>
 
 <div class="pull-wide">
 {% for slide in data -%}
