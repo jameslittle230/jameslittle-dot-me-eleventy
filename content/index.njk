@@ -1,23 +1,18 @@
 ---
 layout: base.njk 
-title: Home 
+title: Home
+cssFiles: [
+    "content/styles/post-listing.css",
+    "content/styles/portfolio-listing.css",
+    "content/styles/index.css"
+]
 ---
 
-{% set css %}
-{% include "content/styles/post-listing.css" %}
-{% include "content/styles/portfolio-listing.css" %}
-{% include "content/styles/index.css" %}
-{% endset %}
-
-<style>
-    {{css | cssmin | safe}}
-</style>
-
-{% autoImg 
-style="float: right; width: 40%; height: auto; margin: 0 0 2em 2em", 
-classList="headshot", 
-url="https://files.jameslittle.me/images/headshot.jpg", 
-alt="A headshot of James Little" %}
+{% autoImg
+style = "float: right; width: 40%; height: auto; margin: 0 0 2em 2em",
+classList = "headshot",
+url = "https://files.jameslittle.me/images/headshot.jpg",
+alt = "A headshot of James Little" %}
 
 <h1 style="margin-top: 0">Hi, I'm James Little!</h1>
 
