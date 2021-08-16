@@ -1,0 +1,17 @@
+{#
+
+Usage:
+
+    {{ component('button', {
+    primary: 'Hello'
+    }) }}
+
+Output:
+
+    <button type="button">Hello</button>
+
+#}
+
+{%- macro component(name, params) -%}
+  {% include "../includes/" + name + ".njk" ignore missing %}
+{%- endmacro -%}

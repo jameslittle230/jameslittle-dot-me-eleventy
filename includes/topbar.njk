@@ -1,21 +1,32 @@
-<section class="topbar">
-  <nav id="search-toggle-target">
-    <div id="nameplate">
-      <a href="/" class="back-home">jameslittle.me</a>
+<section class="topbar {{ 'nameplate-visible' if topbarShowsNameplate else 'nameplate-hidden'}}">
+  <div class="layout">
+
+    <div class="search-icon">
+      <button id="search-toggle" class="search-button" x-on:click="searchOpen = !searchOpen">
+        <span class="screen-reader">Search</span>
+          <svg width="1em" height="1em" viewBox="0 0 44 44" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+              <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                  <g id="Artboard" transform="translate(-186.000000, -75.000000)" fill="currentcolor" fill-rule="nonzero">
+                      <path d="M208,118.369629 C219.946777,118.369629 229.688965,108.627441 229.688965,96.6806641 C229.688965,84.7338867 219.946777,74.9916992 208,74.9916992 C196.053223,74.9916992 186.311035,84.7338867 186.311035,96.6806641 C186.311035,108.627441 196.053223,118.369629 208,118.369629 Z M215.789551,107.493652 C215.012695,107.493652 214.277832,107.199707 213.689941,106.632812 L209.889648,102.853516 C208.776855,103.42041 207.51709,103.714355 206.194336,103.714355 C201.344238,103.714355 197.312988,99.6831055 197.312988,94.8120117 C197.312988,89.940918 201.344238,85.909668 206.194336,85.909668 C211.06543,85.909668 215.075684,89.940918 215.075684,94.8120117 C215.075684,96.2397461 214.739746,97.5625 214.130859,98.7592773 L217.847168,102.475586 C218.477051,103.084473 218.687012,103.79834 218.687012,104.554199 C218.687012,106.212891 217.427246,107.493652 215.789551,107.493652 Z M206.194336,99.4521484 C208.755859,99.4521484 210.813477,97.3945312 210.813477,94.8120117 C210.813477,92.2294922 208.755859,90.1928711 206.194336,90.1928711 C203.653809,90.1928711 201.554199,92.2294922 201.554199,94.8120117 C201.554199,97.3945312 203.653809,99.4521484 206.194336,99.4521484 Z" id="􀒓"></path>
+                  </g>
+              </g>
+          </svg>
+      </button>
     </div>
-    <div id="topbar-caret">&darr;</div>
-    <div id="linked-list">
-      <a href="/blog">blog</a>
-      <a href="/portfolio">projects</a>
-      <a href="/books">reading log</a>
-      <a href="/guestbook">guestbook</a>
-      <button class="link undecorated" id="search-toggle">search</button>
+
+    <div class="center-col-wide">
+      {% if topbarShowsNameplate %}
+        <a href="/" class="nameplate">jameslittle.me</a>
+      {% endif %}
+
+      <nav class="topbar-nav">
+        <a href="/blog">blog</a>
+        <a href="/portfolio">portfolio</a>
+        <a href="/photos">photos</a>
+        <a href="/books">reading log</a>
+        <a href="/guestbook">guestbook</a>
+      </nav>
     </div>
-  </nav>
-  <div class="stork-wrapper">
-    <button id="manual-search-toggle-close" class="stork-close-button">&times;</button>
-    <input type="text" id="stork-input" placeholder="type to search..." data-stork="jil"/>
+
   </div>
 </section>
-
-<div class="search-results" data-stork="jil-output"></div>

@@ -1,0 +1,26 @@
+{#
+
+Yay, a component! See component.njkl
+
+Meta Text
+Image
+Title
+Blurb
+Sub Meta Text
+URL
+Icon
+Icon URL
+
+#}
+
+<li class="list-element">
+    <a href="{{ url }}" class="post-listing-flex">
+        <span>{{ metatext }}</span>
+        <div>
+            <p class="title">{{ title }}</p>
+            {% if blurb %}
+                <p class="blurb">{{ blurb }}</p>
+            {% endif %}
+        </div>
+    </a>
+</li>

@@ -24,7 +24,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.setDataDeepMerge(true);
   eleventyConfig.addPassthroughCopy({ "content/static/": "/" });
   eleventyConfig.setLibrary("md", markdownLibrary);
-  eleventyConfig.addWatchTarget("content/styles/*");
+  eleventyConfig.addWatchTarget("**/*.css");
 
   // FILTERS
   eleventyConfig.addFilter("extractPostSlug", extractPostSlug);

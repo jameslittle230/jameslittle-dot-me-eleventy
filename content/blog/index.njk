@@ -18,7 +18,7 @@ cssFiles: ["content/styles/post-index.css", "content/styles/post-listing.css"]
   <ul>
     {%- for post in collections.postsWithYears | reverse -%}
       {% if year == post.year %}
-        {% include "post-listing.njk" %}
+        {# {% include "post-listing.njk" %} #}
       {% endif %}
     {%- endfor -%}
   </ul>

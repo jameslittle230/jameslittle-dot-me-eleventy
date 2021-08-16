@@ -1,6 +1,11 @@
 ---
+topbarShowsNameplate: true
+color: "#296636"
+jsFiles: ["content/scripts/main.js"]
 cssFiles: ["content/styles/main.css", "content/styles/topbar-footbar.css"]
 ---
+
+{%- from "includes/component.njk" import component -%}
 
 <!doctype html>
 <html lang="en" data-theme="light">
@@ -15,17 +20,21 @@ cssFiles: ["content/styles/main.css", "content/styles/topbar-footbar.css"]
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" sizes="any">
     <link rel="manifest" href="/site.webmanifest">
 
-    {% set js %}{% include "content/scripts/main.js" %}{% endset %}
-    <script>
-      {{ js | jsmin | safe }}
-    </script>
+    {% for file in jsFiles %}
+      {% set js %}{% include file %}{% endset %}
+      <script data-source="{{file}}">
+        {{ js | jsmin | safe }}
+      </script>
+    {% endfor %}
 
     {% for file in cssFiles %}
       {% set css %}{% include file %}{% endset %}
-      <style>
+      <style data-source="{{file}}">
         {{css | cssmin | safe}}
       </style>
     {% endfor %}
+
+    <style>--page-primary-color: {{color}};</style>
 
     {# https://web.dev/defer-non-critical-css/ #}
     <link rel="preload" href="https://rsms.me/inter/inter.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -44,18 +53,20 @@ cssFiles: ["content/styles/main.css", "content/styles/topbar-footbar.css"]
       property="og:image"
       content="https://jameslittle.me/apple-touch-icon.png"
     />
+
+    <meta name="theme-color" content="{{color}}">
+
+    <script src="//unpkg.com/alpinejs" defer></script>
   </head>
   <body>
-    <div id="scrim"></div>
     {% include "topbar.njk" %}
+    
     <main>
       {{ content | safe }}
     </main>
+    
     {% include "footbar.njk" %}
 
-    {% set matomo %}
-      {% include "content/scripts/matomo.js" %}
-    {% endset %}
     <script src="https://files.stork-search.net/stork.js"></script>
     <script>
       stork.register(
@@ -69,6 +80,9 @@ cssFiles: ["content/styles/main.css", "content/styles/topbar-footbar.css"]
       )
     </script>
     
+    {% set matomo %}
+      {% include "content/scripts/matomo.js" %}
+    {% endset %}
     <script>
       {{ matomo | jsmin | safe }}
     </script>

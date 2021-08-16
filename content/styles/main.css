@@ -3,7 +3,7 @@
   --secondary-color: #c5369a;
   --font-color: #182b28;
   --muted-color: #535e5c;
-  --bg-color: #fff;
+  --bg-color: #d8d8d8;
   --link-color: #007e76;
   --visited-color: #9f10ac;
   --badge-color: #cfcfcf;
@@ -11,13 +11,16 @@
   --white-override: #ffffff;
   --black-override: #182b28;
 
+  --page-primary-color: #296636;
+
   --page-width: 45rem;
+
   --shadow: 0 0.9px 2.1px rgba(0, 0, 0, 0.031),
     0 2.1px 5.1px rgba(0, 0, 0, 0.039), 0 3.9px 9.7px rgba(0, 0, 0, 0.044),
     0 6.9px 17.3px rgba(0, 0, 0, 0.048), 0 13px 32.7px rgba(0, 0, 0, 0.053),
     0 31px 80px rgba(0, 0, 0, 0.07);
 
-  --font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+  --font-family: "Columba Text Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
     "Segoe UI Symbol";
   --mono-font-family: "jetbrains mono", monospace;
@@ -45,26 +48,58 @@ img {
   margin: 0;
 }
 
+:root {
+  font-size: 22px;
+}
+
+@media screen and (max-width: 1500px) {
+  :root {
+    font-size: 20px;
+  }
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
 html {
   overflow-x: hidden;
 }
 
-body,
-html {
+body {
+  font-family: var(--font-family);
+  line-height: 1.4;
   background-color: var(--bg-color);
 }
 
-body {
-  font-family: var(--font-family);
-  max-width: var(--page-width);
-  width: 90%;
-  margin: 0 auto;
-  color: var(--font-color);
-  line-height: 1.6;
+.layout, main > section {
+  display: grid;
+  grid-template-columns: 1fr 9rem 20rem 20rem 1rem 1fr;
+  grid-template-areas: "l-gutter l-margin l-content r-content r-margin r-gutter";
 }
 
-strong {
-  font-weight: 700;
+:root {
+  --left: l-margin / l-content-end;
+  --right: r-content / r-margin-end;
+  --center-column: l-content / r-content-end;
+  --center-wide: l-margin / r-margin-end;
+}
+
+.center-col {
+  grid-column: var(--center-column);
+}
+
+.center-col-wide {
+  grid-column: var(--center-wide);
+}
+
+.screen-reader {
+  position: absolute!important;
+  clip: rect(1px,1px,1px,1px);
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
 }
 
 h1,
@@ -89,258 +124,21 @@ h6 {
   opacity: 0.75;
 }
 
-/* These need the article > hx selector to override the article > * selector in
-post.css
-*/
-article > h1,
-article > h2,
-article > h3,
-article > h4,
-article > h5,
-article > h6,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  margin-bottom: 0.3em;
-  margin-top: 1.75em;
-}
-
-h1:first-child,
-h2:first-child,
-h3:first-child,
-h4:first-child,
-h5:first-child,
-h6:first-child {
-  margin-top: 0.3em;
-}
-
-ul {
-  padding: 0 0 0 1.5em;
-}
-
-code {
-  font-family: var(--mono-font-family);
-  font-size: 0.85em;
-}
-
-*:not(pre) > code {
-  background: var(--primary-color);
-  color: var(--black-override);
-  padding: 0.1em 0.4em;
-}
-
-.tabl {
-  font-feature-settings: "tnum";
-}
-
-a:link {
-  color: var(--link-color);
-}
-
-a:visited {
-  color: var(--visited-color);
-}
-
-blockquote {
-  font-size: 0.85em;
-  line-height: 1.65;
-  padding: 0 0 0 2em;
-  font-style: italic;
-}
-
-blockquote:before {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  width: 1em;
-  content: "";
-  background: left repeat-y
-    repeating-linear-gradient(
-      -30deg,
-      var(--primary-color),
-      var(--primary-color) 0.5em,
-      var(--bg-color) 0.5em,
-      var(--bg-color) 1.3em
-    );
-}
-
-input {
-  width: 100%;
-}
-
-.color-box {
-  background: var(--primary-color);
-  color: var(--black-override);
-  font-weight: 400;
-
-  /* The 3px and 3.5px values seem pretty magic-number-y,
-but they look a whole lot better than what came before.
-There's no reason these values should be derived from
-the size of the typography.
-*/
-  box-shadow: 3px 3px 0 var(--bg-color), 7px 7px 0 var(--secondary-color);
-
-  padding: 1em;
-  margin-bottom: 2em;
-  margin-top: 0.5em;
-  width: calc(100% - 7px);
-}
-
-.back-home {
-  font-weight: bold;
-}
-
-button.link {
-  background: none;
-  border: none;
-  font-family: inherit;
-  font-size: inherit;
-  text-transform: inherit;
-  letter-spacing: inherit;
-  color: var(--link-color);
-  text-decoration: underline;
-  text-align: left;
-  margin: 0;
+.bigTitle {
   padding: 0;
+  background: var(--page-primary-color);
 }
 
-button.link.undecorated {
-  color: inherit;
-  text-decoration: inherit;
+.bigTitle > .yikes {
+  grid-column: var(--center-wide);
 }
 
-button.link:hover {
-  cursor: pointer;
-}
-
-h1.big-title {
-  font-size: 3em;
-  letter-spacing: -0.03em;
-  margin: 1rem 0;
-  line-height: 1.1;
-}
-
-@media (max-width: 600px) {
-  h1.big-title {
-    font-size: 2.4em;
-  }
-}
-
-p.metadata, span.metadata {
-  font-weight: bold;
-  text-transform: uppercase;
-  color: var(--muted-color);
-  font-size: 0.8em;
-}
-
-p.metadata + h1.big-title {
-  margin-top: -1rem;
-  margin-bottom: 0;
-}
-
-.picture-placeholder {
-  background-color: gray;
-}
-
-.over-placeholder {
-  position: absolute;
-  top: 0;
-}
-
-pre {
-  max-height: 50vh;
-  overflow-y: scroll;
-  background-color: #2d2d2d;
-  color: #ccc;
-  padding: 1em;
-  margin: 0.5em 0;
-}
-
-figcaption {
-  margin-top: 0.5em;
-  font-size: 0.8em;
-  color: var(--muted-color);
-  text-transform: uppercase;
-  /* text-align: center; */
-  letter-spacing: 0.02em;
-  font-weight: bold;
-}
-
-.badge {
-  background: var(--badge-color);
-  border-radius: 5px;
-  padding: 0.1em 0.4em;
-  /* margin: 0 0.8em; */
-  font-size: 0.8em;
-  line-height: 1.25;
-  /* Offset 0.8em font size */
-}
-
-/* Class names have to appear twice to override the above rule's specificity */
-
-.badge-red.badge-red {
-  background: hsl(355, 67%, 37%);
-  color: white;
-}
-
-.badge-green.badge-green {
-  background: hsl(148, 65%, 32%);
-  color: white;
-}
-
-.boxed-list-element {
-  transition: box-shadow 0.15s ease-out, background-color 0.15s ease-out;
-  border: 1px solid hsla(0, 0%, 50%, 0.3);
-  border-radius: 6px;
-  padding: 0.7em;
-  margin: 0 -0.3em 1em;
-}
-
-.boxed-list-element:hover {
-  box-shadow: var(--shadow);
-  background-color: hsla(0, 0%, 50%, 0.05);
-}
-
-#scrim {
-  opacity: 0;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: black;
-  /* z-index is one less than img z-index in post.css */
-  z-index: 9;
-  pointer-events: none;
-}
-
-hr {
-  border: none;
-  border-top: 1px dashed var(--secondary-color);
-}
-
-.header-anchor {
-  font-family: var(--mono-font-family);
-  font-weight: 200;
-  opacity: 0;
-  transition: opacity 0.1s ease;
-  margin: 0 0.5em;
-}
-
-h1:hover .header-anchor,
-h2:hover .header-anchor,
-h3:hover .header-anchor,
-h4:hover .header-anchor,
-h5:hover .header-anchor,
-h6:hover .header-anchor {
-  opacity: 1;
-}
-
-.header-anchor {
-  transition: opacity 0.3s ease;
-  text-decoration: none;
+.yikes {
+  font-family: "Okay Type - for webfont use only";
+  font-size: 5rem;
+  line-height: 1;
+  margin: 0;
+  margin-bottom: 0.1em;
+  padding: 0;
+  color: hsla(0, 0%, 100%, 0.85)
 }
