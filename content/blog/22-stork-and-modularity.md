@@ -1,4 +1,10 @@
-# Stork and Modularity
+---
+title:  "Stork and Modularity"
+date: 2021-09-19
+layout: post
+tags: post
+blurb: "Splitting code into crates, the benefits of small public interface, and a combinatorial explosion."
+---
 
 I've been working on making [Stork](https://stork-search.net) a more modular project. Stork has a lot of code in it; to make it more readable, I've been putting that code in different files. With Rust, every file is a different module (for the most part), so this winds up with lots of stacked modules. Rust also lets you only reference modules absolutely (starting from the crate) or relatively (by ascending up the module stack and then descending down), so my imports were getting kind of unwieldy. 
 
