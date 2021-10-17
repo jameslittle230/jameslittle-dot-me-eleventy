@@ -27,7 +27,7 @@ templateEngineOverride: liquid
 <div id="app">
   {% if environment.development %}
   <p class="form-submission-message">
-    Development mode enabled. Guestbook posts will not be saved to the production bucket.
+    QA mode enabled. Guestbook posts will not be saved.
   </p>
   {% endif %}
 
@@ -52,7 +52,7 @@ templateEngineOverride: liquid
   <form v-on:submit.prevent="submitForm">
     <fieldset>
       <label for="name" class="required">Name:</label>
-      <input type="text" v-model="input.name" id="name" name="name" />
+      <input type="text" v-model="input.name" id="name" name="name" autocomplete="off" />
 
       <label for="name">Email (never displayed):</label>
       <input type="email" v-model="input.email" id="email" name="email" />
@@ -93,8 +93,8 @@ templateEngineOverride: liquid
         <div class="guestbook-metadata">
           <span class="name">{{entry.name}}</span>
           <span class="timestamp metadata">
-            {{entry.date | relative}}
-            <span class="absolute">{{entry.date | toIso}}</span>
+            {{entry.created_at | relative}}
+            <span class="absolute">{{entry.created_at | toIso}}</span>
           </span>
         </div>
         <span class="url"><a v-bind:href="entry.url">{{entry.url}}</a></span>
@@ -109,8 +109,8 @@ templateEngineOverride: liquid
         <div class="guestbook-metadata">
           <span class="name">{{entry.name}}</span>
           <span class="timestamp metadata">
-            {{entry.date | relativeDate}}
-            <span class="absolute">{{entry.date | dateformat}}</span>
+            {{entry.created_at | relativeDate}}
+            <span class="absolute">{{entry.created_at | dateformat}}</span>
           </span>
         </div>
         <span class="url">
@@ -265,7 +265,7 @@ templateEngineOverride: liquid
 <!-- The following are populated at build time, by the liquid templater: -->
 <script>
   var staticLength = {{guestbook.size}};
-  var latestEntryDate = {{guestbook[0].date}};
+  var latestEntryDate = {{guestbook[0].created_at}};
   var development = "{{environment.development}}";
 </script>
 

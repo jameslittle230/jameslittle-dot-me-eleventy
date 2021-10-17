@@ -37,7 +37,6 @@ var app = new Vue({
     getEntriesState: "loading", // "loading" || "error" || "success"
     formSubmissionState: "", // "" || "loading" || "error" || "success"
     formSubmissionErrorMessage: "",
-    // messageCharactersRemaining: 23,
   },
 
   computed: {
@@ -88,16 +87,15 @@ var app = new Vue({
       }
 
       this.formSubmissionState = "loading";
-      this.input["date"] = Date.now();
 
       axios
-        .post("https://vipqpoael1.execute-api.us-west-1.amazonaws.com/prod", {
+        .post("https://api.jameslittle.me/guestbook", {
           ...this.input,
           qa: development !== "false" /* [1] */,
         })
         .then((response) => {
           this.formSubmissionState = "success";
-          this.dynamicGuestbook.unshift(this.input);
+          this.dynamicGuestbook.unshift({...this.input, created_at: new Date()});
           this.input = JSON.parse(JSON.stringify(BLANK_INPUT));
         })
         .catch((err) => {
@@ -121,11 +119,11 @@ var app = new Vue({
     },
 
     toIso: function (date) {
-      return new Date(date).toISOString().split("T")[0];
+      return new Date(Number(date)).toISOString().split("T")[0];
     },
 
     relative: function (date) {
-      date = new Date(date);
+      date = new Date(Number(date));
       var delta = Math.round((+new Date() - date) / 1000);
 
       var minute = 60,
@@ -154,7 +152,7 @@ var app = new Vue({
       } else if (delta < day * 14) {
         fuzzy = "last week";
       } else if (delta < day * 31) {
-        fuzzy = "within a month";
+        fuzzy = "this month";
       }
 
       return fuzzy || this.toIso(date);
@@ -171,14 +169,21 @@ var app = new Vue({
     });
 
     axios
-      .get("https://vipqpoael1.execute-api.us-west-1.amazonaws.com/prod")
+      .get("https://api.jameslittle.me/guestbook")
       .then((response) => {
-        this.getEntriesState = "success";
-        this.dynamicGuestbook = response.data.filter(
-          (e) => e.date > latestEntryDate
+        var items = response.data["Items"]
+
+        items.forEach(i => {
+          i.created_at = new Date(Number(i.created_at))
+        });
+
+        this.dynamicGuestbook = response.data["Items"].filter(
+          (i) => i.created_at > latestEntryDate
         );
+        this.getEntriesState = "success";
       })
       .catch((err) => {
+        console.error(err);
         this.getEntriesState = "error";
       });
   },
