@@ -1,17 +1,18 @@
 const axios = require("axios");
 
 async function fetchGuestbookEntries() {
-  const response = await axios.get(
-    "https://vipqpoael1.execute-api.us-west-1.amazonaws.com/prod"
-  );
+  const response = await axios.get("https://api.jameslittle.me/guestbook");
 
-  if(process.env.ELEVENTY_ENV === "development") {
-    response.data.shift();
-  }
+  var entries = response.data["Items"];
 
-  console.log(`Found ${response.data.length} guestbook entries`)
+  entries.forEach((e) => {
+    e.created_at = Number(e.created_at);
+  });
+  entries = entries.sort((l, r) => r.created_at - l.created_at);
 
-  return response.data;
+  console.log(`Found ${entries.length} guestbook entries`);
+
+  return entries;
 }
 
 module.exports = async function () {

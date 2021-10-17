@@ -29,21 +29,28 @@ const getAirtableEntries = new Promise((resolve, reject) => {
       (records, fetchNextPage) => {
         // called for each page of records (100 records/page)
 
-        for (const record of records) {
-          const completed = utcToZonedTime(
-            new Date(record.get("Completion Date"))
-          );
-          const year = format(completed, "yyyy", { timeZone: "Etc/GMT" });
-          const datum = {
-            title: record.get("Title"),
-            author: record.get("Author"),
-            completed,
-            year,
-          };
-          books.push(datum);
-        }
+        try {
+          for (const record of records) {
+            if (!record.get("Completion Date")) {
+              break;
+            }
+            const completed = utcToZonedTime(
+              new Date(record.get("Completion Date"))
+            );
+            const year = format(completed, "yyyy", { timeZone: "Etc/GMT" });
+            const datum = {
+              title: record.get("Title"),
+              author: record.get("Author"),
+              completed,
+              year,
+            };
+            books.push(datum);
+          }
 
-        fetchNextPage();
+          fetchNextPage();
+        } catch (e) {
+          console.error(e);
+        }
       },
       (err) => {
         if (err) reject(err);
@@ -73,7 +80,9 @@ const processAirtableEntries = (data) => {
 
 async function fetchBookData() {
   const airtableEntries = await getAirtableEntries;
-  return processAirtableEntries(airtableEntries);
+  const processedEntries = processAirtableEntries(airtableEntries);
+  console.log(`Found ${processedEntries.count} books read`);
+  return processedEntries;
 }
 
 module.exports = async function () {
