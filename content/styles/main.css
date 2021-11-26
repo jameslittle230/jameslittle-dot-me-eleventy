@@ -24,8 +24,8 @@
 }
 
 [data-theme="dark"] {
-  --font-color: #d7dfdd;
-  --muted-color: #7d8885;
+  --font-color: #c0cac8;
+  --muted-color: #5f6b68;
   --bg-color: #1d1d20;
   --link-color: #26d5c9;
   --visited-color: #cfa4f4;
@@ -77,7 +77,9 @@ h6 {
   font-family: var(--header-font-family);
 }
 
-h4, h5, h6 {
+h4,
+h5,
+h6 {
   font-size: 1rem;
 }
 
@@ -119,6 +121,14 @@ h6:first-child {
 
 ul {
   padding: 0 0 0 1.5em;
+}
+
+li {
+  margin-bottom: 0.75em;
+}
+
+li::marker {
+  color: var(--muted-color);
 }
 
 code {
@@ -230,7 +240,8 @@ h1.big-title {
   }
 }
 
-p.metadata, span.metadata {
+p.metadata,
+span.metadata {
   font-weight: bold;
   text-transform: uppercase;
   color: var(--muted-color);
