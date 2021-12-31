@@ -40,27 +40,33 @@
   box-sizing: border-box;
 }
 
-img {
-  max-width: 100%;
-  margin: 0;
-}
-
 html {
   overflow-x: hidden;
 }
 
-body,
-html {
-  background-color: var(--bg-color);
-}
-
 body {
+  background-color: var(--bg-color);
   font-family: var(--font-family);
   max-width: var(--page-width);
   width: 90%;
   margin: 0 auto;
   color: var(--font-color);
   line-height: 1.6;
+}
+
+img {
+  max-width: 100%;
+  margin: 0;
+  height: auto;
+  content-visibility: auto;
+}
+
+.lazy-img {
+  filter: blur(8px);
+  transition: filter 0.1s ease-in;
+}
+.lazy-picture[data-loaded] .lazy-img {
+  filter: unset;
 }
 
 strong {

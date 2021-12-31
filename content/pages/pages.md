@@ -3,7 +3,7 @@ layout: page.njk
 slug: "pages"
 ---
 
-# Pages off jameslittle.me:
+# Website Index
 
 [/blog](/blog) and [/portfolio](/portfolio) are modeled as collections, not pages.
 
@@ -12,6 +12,4 @@ slug: "pages"
 - [/guestbook](/guestbook)
 - [/pages](/pages)
 - [/timeline](/timeline)
-- [/webpic](/webpic)
-- [/wishlist](/wishlist)
-- [/404.html](/404)
+- [404 Page](/404)
