@@ -1,6 +1,6 @@
 ---
-title:  "How to train the Tensorflow Object Detection API with custom training data"
-date:   2019-01-25
+title: "How to train the Tensorflow Object Detection API with custom training data"
+date: 2019-01-25
 popular: true
 layout: post
 tags: post
@@ -64,7 +64,7 @@ $ cp -r models/research/slim my_project
 $ cp models/research/setup.py my_project
 ```
 
-The Object Detection API uses [Protocol Buffers](https://developers.google.com/protocol-buffers/) (Protobufs), a message serialization and transmission framework, for some reason I’m not entirely sure about. We need to download and compile Protobufs, however, to get the API to work. 
+The Object Detection API uses [Protocol Buffers](https://developers.google.com/protocol-buffers/) (Protobufs), a message serialization and transmission framework, for some reason I’m not entirely sure about. We need to download and compile Protobufs, however, to get the API to work.
 
 Downloading and unzipping Protobufs will create a `bin` directory in your `obj_detection` directory.
 
@@ -128,14 +128,13 @@ For completion’s sake, I also include the line `export LD_LIBRARY_PATH=$LD_LIB
 
 ## Step Two: Preparing the Datasets
 
-Since the API we’re using is based on object detection, you’ll need to have a dataset you want to work with. This dataset should be comprised of images and annotations in whatever format you choose: I had JPGs numbered `0.jpg` through `9999.jpg` and a CSV file with the coordinates of the objects I’m detecting.[^2] 
+Since the API we’re using is based on object detection, you’ll need to have a dataset you want to work with. This dataset should be comprised of images and annotations in whatever format you choose: I had JPGs numbered `0.jpg` through `9999.jpg` and a CSV file with the coordinates of the objects I’m detecting.[^2]
 
-{% img "75.278%", "https://files.jameslittle.me/images/files" %}
+{% image "files.png" %}
 
 For each object in an image, you should have `x1`, `x2`, `y1` and `y2` coordinates available, where `(x1, y1)` is the upper left corner of the rectangle and `(x2, y2)` is the lower right corner of the rectangle.
 
-{% img "40.83%", "https://files.jameslittle.me/images/box" %}
-
+{% image "box.png" %}
 
 You’ll probably have two of these datasets, one large one for training and one smaller one for testing. We’ll be taking the two datasets and transforming each of them into [`.tfrecord` files:](https://medium.com/mostly-ai/tensorflow-records-what-they-are-and-how-to-use-them-c46bc4bbb564) large binary files that contain a complete representation of the entire dataset.
 
@@ -158,7 +157,7 @@ FLAGS = flags.FLAGS
 def create_tfrecord(filename, coords):
     # You can read these in from your image, or you can hack it and
     # hardcode the dimensions in.
-    height = 480 
+    height = 480
     width = 640
 
     filename = str.encode(filename)
@@ -199,7 +198,7 @@ def create_tfrecord(filename, coords):
 def main(_):
     writer = tf.python_io.TFRecordWriter(FLAGS.output_path)
 
-    with open("annotations.csv") as fp:  
+    with open("annotations.csv") as fp:
         line = fp.readline()
         while line:
             data = line.split(",")
@@ -208,7 +207,7 @@ def main(_):
             line = fp.readline()
         writer.close()
 
-	print("Done.")
+  print("Done.")
 
 
 if __name__ == '__main__':
@@ -456,7 +455,7 @@ I wrote this up because I couldn’t find a tutorial online that went through th
 
 I’m also sure I got some things wrong; reach out if I have an error and I’ll work to correct it.
 
----- 
+---
 
 ## Other Resources
 
@@ -467,7 +466,5 @@ I clearly looked up a lot of ways other people were doing this. Unfortunately, d
 - [This Medium article](https://medium.com/@WuStangDan/step-by-step-tensorflow-object-detection-api-tutorial-part-1-selecting-a-model-a02b6aabe39e) by Daniel Stang, and [its sequel](https://medium.com/@WuStangDan/step-by-step-tensorflow-object-detection-api-tutorial-part-2-converting-dataset-to-tfrecord-47f24be9248d)
 - An [O’Reilly article](https://www.oreilly.com/ideas/object-detection-with-tensorflow) by Justin Francis
 
-
-[^1]:	Don’t @ me
-
-[^2]:	Getting this dataset and figuring out how to annotate it is up to you — since we’re dealing with *your* dataset here, it wouldn’t make sense for me to give you instructions for doing this.
+[^1]: Don’t @ me
+[^2]: Getting this dataset and figuring out how to annotate it is up to you — since we’re dealing with _your_ dataset here, it wouldn’t make sense for me to give you instructions for doing this.

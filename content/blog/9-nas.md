@@ -1,6 +1,6 @@
 ---
-title:  "How I Use my Network-Attached Storage"
-date:   2019-10-21
+title: "How I Use my Network-Attached Storage"
+date: 2019-10-21
 layout: post
 tags: post
 blurb: "What do I use my Synology DS418j for? How did I get it all set up? What's running on it right now? Let's talk about Plex, Time Machine, file hoarding, and (for some reason) the Pi-Hole."
@@ -8,9 +8,8 @@ blurb: "What do I use my Synology DS418j for? How did I get it all set up? What'
 
 I got, as a gift a few years back, a [Synology DiskStation DS418j](https://www.synology.com/en-us/products/DS418j) along with three Western Digital 8TB Red hard drives. This allowed me to put together a NAS (Network-Attached Storage): a relatively low-powered storage server that lives on my local network. Now that I've moved into an apartment, I've been able to tweak my setup to something relatively enjoyable.
 
-
 <figure>
-{% img "66%", "https://files.jameslittle.me/images/synology" %}
+{% image "synology.jpg" %}
 <figcaption>I dusted it to take the photo, and the photo <em>still</em> looks like trash.</figcaption>
 </figure>
 

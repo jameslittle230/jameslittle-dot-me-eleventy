@@ -1,5 +1,5 @@
 ---
-title:  "Building Internal Analytics for Stork"
+title: "Building Internal Analytics for Stork"
 date: 2021-06-02
 layout: post
 tags: post
@@ -16,14 +16,14 @@ I can write SQL queries and get stats about the HTTP requests coming into the St
 
 ---
 
-I think [Observable](https://observablehq.com) released [Plot](https://observablehq.com/@observablehq/plot) about one day after I got Datasette working. Suddenly, I wanted—nay, needed—to do some fancy visualization with my Stork data so I can really *see* the stats.
+I think [Observable](https://observablehq.com) released [Plot](https://observablehq.com/@observablehq/plot) about one day after I got Datasette working. Suddenly, I wanted—nay, needed—to do some fancy visualization with my Stork data so I can really _see_ the stats.
 
 I tweaked my Datasette Dockerfile to install a [token-based authentication plugin](https://github.com/simonw/datasette-auth-tokens). Now my data is secure, but accessible via an API. I wrote an Observable notebook that fetches the most recent usage data and plots it. Now I have a usage dashboard with a graph showing how many hits `stork.js` got per day this year.
 
 It's got a rolling average!
 
 <figure>
-{% img "68.85%", "https://files.jameslittle.me/images/stork-stats" %}
+{% image "stork-stats.png" %}
 <figcaption>I don't think I'm ready to share the y-axis here, sorry.</figcaption>
 </figure>
 

@@ -17,6 +17,13 @@ ul {
   padding: 0;
 }
 
+.headshot {
+  float: right;
+  width: 40%;
+  height: auto;
+  margin: 0 0 2em 2em;
+}
+
 @media (max-width: 500px) {
   .headshot {
     display: none;

@@ -1,6 +1,6 @@
 ---
-title:  "Why do we encounter CORS errors?"
-date:   2019-08-18
+title: "Why do we encounter CORS errors?"
+date: 2019-08-18
 layout: post
 tags: post
 blurb: "An explainer describing what a Cross-Origin Resource Sharing error is, why they exist, and how to fix one once you come across it."
@@ -9,7 +9,7 @@ blurb: "An explainer describing what a Cross-Origin Resource Sharing error is, w
 "CORS" errors are a certain type of web development errors that can be pretty confusing. _Cross-Origin Resource Sharing_ related errors pop up when the web browser is trying to protect you from potential security vulnerabilities. When you don't expect them, though, they can be pretty irritating—the error messages don't make it entirely clear what you need to do to resolve the problem, and CORS itself is a complex enough topic that you won't find any quick resolution steps on the internet.
 
 <figure>
-{% img "9.15%", "https://files.jameslittle.me/images/inspector-error" %}
+{% image "inspector-error.png" %}
 <figcaption>An image of a CORS error in the Firefox developer tools</figcaption>
 </figure>
 
@@ -42,7 +42,7 @@ What happens when you go to a website, like `https://jameslittle.me`? On a high 
 Every time a web page loads, several of these HTTP requests are sent: the first one is for the HTML document that was requested, and the rest are for any images, scripts, fonts, or stylesheets that the HTML document says is needed. The first one is directly related to the page you asked for in your browser's address bar; any others are automatically sent by the browser as specified by the first document the browser gets back. For each request that gets sent, the server to which it gets sent responds with the data the browser asked for. Those request/response pairs make up the contents of the web page, and control what your browser displays to you.
 
 <figure>
-{% img "122.3%", "https://files.jameslittle.me/images/inspector-headers" %}
+{% image "inspector-headers.png" %}
 <figcaption>The HTTP headers for both a request (on the bottom) and a response (on the top).</figcaption>
 </figure>
 
@@ -57,7 +57,7 @@ We can dig into the request/response pairs in greater depth by looking at them i
 For more information about what HTTP requests and responses look like (and what they can do), [Julia Evans](https://jvns.ca) has a zine coming out that does a fantastic job explaining it. When she publishes it, I'll update this post with the link here.
 
 Update: Julia has been tweeting about HTTP like crazy! Here are some tweets:
- 
+
 [Using HTTP APIs](https://twitter.com/b0rk/status/1160933788949655552), [HTTP headers](https://twitter.com/b0rk/status/1164181027469832196), [HTTP Response headers](https://twitter.com/b0rk/status/1161262574031265793), [Security headers](https://twitter.com/b0rk/status/1160185182323970050), [custom headers](https://twitter.com/b0rk/status/1161283690925834241), Request methods [part one](https://twitter.com/b0rk/status/1161679906415218690) and [part two](https://twitter.com/b0rk/status/1161680137865367553), [HTTP request methods](https://twitter.com/b0rk/status/1161679906415218690), [the Same Origin policy](https://twitter.com/b0rk/status/1155493682885341184) and [why it matters](https://twitter.com/b0rk/status/1163460967067541504).
 
 Update 2: [Here is the zine!](https://wizardzines.com/zines/http/)

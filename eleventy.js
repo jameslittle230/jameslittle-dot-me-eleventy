@@ -39,9 +39,8 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addNunjucksAsyncFilter("jsmin", jsmin);
 
   // SHORTCODES
-  eleventyConfig.addShortcode("img", imagePartial.img);
   eleventyConfig.addShortcode("bigTitle", shortcodes.bigTitle);
-  eleventyConfig.addAsyncShortcode("autoImg", imagePartial.autoImg);
+  eleventyConfig.addAsyncShortcode("image", imagePartial.imageShortcode);
 
   // COLLECTIONS
   eleventyConfig.addCollection("uniquePostYears", uniquePostYears);

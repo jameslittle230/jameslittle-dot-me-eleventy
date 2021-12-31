@@ -1,114 +1,73 @@
-const urlParser = require("url");
-const http = require("http");
-const https = require("https");
-const sizeOf = require("image-size");
-const sharp = require("sharp");
+const Image = require("@11ty/eleventy-img");
+const outdent = require("outdent");
 
-exports.img = function img(r, urlbase, classList, style) {
-  var ratio = r;
-  var classList = classList;
-  var style = style;
-  var urlbase = urlbase;
+const ImageWidths = {
+  ORIGINAL: null,
+  PLACEHOLDER: 24,
+};
 
-  if (typeof r == "object") {
-    urlbase = r.urlbase;
-    classList = r.classList;
-    style = r.style;
-    ratio = r.ratio;
-  }
+const imageShortcode = async (
+  path,
+  alt = "",
+  className = "",
+  widths = [null, 400, 800, 1280, 1920],
+  baseFormat = "jpeg",
+  optimalFormats = ["avif", "webp"],
+  sizes = "100vw"
+) => {
+  console.log(path);
+  const fullS3Path = `https://files.jameslittle.me/images/${path}`;
 
-  return `<div style="${style || ""}" class="${classList || ""}">
-    <div class="picture-placeholder" style="padding-top: ${ratio}"></div>
-    <picture class="over-placeholder">
-        <source type="image/webp" srcset="${urlbase}.webp">
-        <source type="image/jpeg" srcset="${urlbase}.jpg">
-        <img src="${urlbase}.jpg" alt="">
+  const metadata = await Image(fullS3Path, {
+    widths: [ImageWidths.ORIGINAL, ImageWidths.PLACEHOLDER, ...widths],
+    formats: [...optimalFormats, baseFormat],
+    outputDir: "_site/images",
+    urlPath: "/images",
+    // dryRun: true,
+  });
+
+  const lowSrc = metadata[baseFormat][0];
+  const highSrc = metadata[baseFormat][metadata[baseFormat].length - 1];
+
+  return outdent`
+    <picture class="lazy-picture" data-lazy-state="unseen">
+    ${Object.values(metadata)
+      .map((entry) => {
+        return `<source type="${entry[0].sourceType}" srcset="${
+          entry[0].srcset
+        }" data-srcset="${entry
+          .filter((imageObject) => imageObject.width !== 1)
+          .map((filtered) => filtered.srcset)
+          .join(", ")}" sizes="${sizes}" class="lazy">`;
+      })
+      .join("\n")}
+    <img
+      src="${lowSrc.url}"
+      data-src="${highSrc.url}"
+      width="${highSrc.width}"
+      height="${highSrc.height}"
+      alt="${alt}"
+      class="lazy-img ${className}"
+      loading="lazy">
     </picture>
-    </div>`;
+    <noscript>
+    <picture>
+    ${Object.values(metadata)
+      .map((entry) => {
+        return `<source type="${entry[0].sourceType}" srcset="${entry
+          .filter((imageObject) => imageObject.width !== 1)
+          .map((filtered) => filtered.srcset)
+          .join(", ")}" sizes="${sizes}">`;
+      })
+      .join("\n")}
+    <img
+      src="${highSrc.url}"
+      width="${highSrc.width}"
+      height="${highSrc.height}"
+      alt="${alt}"
+      class="${className}">
+    </picture>
+    </noscript>`;
 };
 
-exports.autoImg = async ({
-  url,
-  variants = [],
-  alt = null,
-  style = "",
-  classList = [],
-}) => {
-  // Step 1: Fetch image
-  const imageBuffer = await new Promise((resolve, reject) => {
-    const options = new urlParser.URL(url);
-    https.get(options, (response) => {
-      if (response.statusCode != 200) {
-        reject(`Could not fetch ${url}, status code ${response.statusCode}`);
-      }
-      const chunks = [];
-      response
-        .on("data", (chunk) => {
-          chunks.push(chunk);
-        })
-        .on("end", () => {
-          const buffer = Buffer.concat(chunks);
-          resolve(buffer);
-        });
-    });
-  });
-
-  const urlBase = (() => {
-    let arr = url.split(".");
-    arr.pop();
-    return arr.join(".");
-  })();
-
-  // Step 2: Get dimensions
-  const { width, height } = sizeOf(imageBuffer);
-
-  // create blurry placeholder
-  const smallBufferBase64 = await new Promise((resolve, reject) => {
-    sharp(imageBuffer)
-      .resize({ height: 64 })
-      .toFormat("png")
-      .toBuffer((err, buf, info) => {
-        if (err) reject(err);
-        if (!err && buf) resolve(buf.toString("base64"));
-      });
-  });
-
-  const wrappedSmallBufferBase64 = `data:image/png;base64, ${smallBufferBase64}`;
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg" 
-  xmlns:xlink= "http://www.w3.org/1999/xlink" viewBox="0 0 ${width} ${height}">
-  <image filter="url(#blur)" width="${width}" height="${height}" xlink:href="${wrappedSmallBufferBase64}" />
-  <filter id="blur">
-      <feGaussianBlur stdDeviation=".5" />
-  </filter>
-</svg>`;
-
-  const wrappedSvgBase64 = `data:image/svg+xml;base64,${Buffer.from(
-    svg
-  ).toString("base64")}`;
-
-  classListString =
-    typeof classList === "string" ? classList : classList.join(" ");
-
-  return `
-        <picture>
-            ${variants
-              .map((v) => {
-                if (["avif", "webp", "png", "jpg"].includes(v)) {
-                  return `<source type="image/${v}" srcset="${urlBase}.${v}">`;
-                }
-                return v;
-              })
-              .join("\n")}
-            <img 
-                width="${width}"
-                height="${height}"
-                style="background-size: cover; background-image:url('${wrappedSvgBase64}'); ${style}"
-                class="${classListString}"
-                loading="lazy" 
-                decoding="async" 
-                src="${url}"
-                ${alt ? `alt="${alt}"` : ""} 
-            />
-        </picture>
-    `;
-};
+module.exports = { imageShortcode };

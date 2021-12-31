@@ -2,8 +2,9 @@ var jlGlobals = {};
 
 function recomputeComputedValue() {
   const storedSetting = localStorage.getItem("theme");
-  const osThemeIsDark = window.matchMedia("(prefers-color-scheme: dark)")
-    .matches;
+  const osThemeIsDark = window.matchMedia(
+    "(prefers-color-scheme: dark)"
+  ).matches;
 
   /*
   Light by default
@@ -101,6 +102,51 @@ function toggleSearchVisibility(override = null) {
   }
 }
 
+const lazyLoad = (targets, onIntersection) => {
+  const observer = new IntersectionObserver((entries, self) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        console.log("intersecting", entry.target);
+        onIntersection(entry.target);
+        self.unobserve(entry.target);
+      }
+    });
+  });
+  targets.forEach((target) => observer.observe(target));
+};
+
+const lazyLoadImages = () => {
+  const lazyPictures = document.querySelectorAll(".lazy-picture");
+  console.log(lazyPictures);
+  lazyLoad(lazyPictures, (pictureElement) => {
+    console.log(pictureElement);
+    const img = pictureElement.querySelector("img");
+    const sources = pictureElement.querySelectorAll("source");
+
+    // Cleanup tasks after the image loads. Important to
+    // define this handler before setting src/srcsets.
+    img.onload = () => {
+      console.log("loaded", pictureElement);
+      pictureElement.dataset.loaded = true;
+      img.removeAttribute("data-src");
+    };
+    img.onerror = () => {
+      pictureElement.dataset.loaded = false;
+    };
+
+    // Swap in the media sources
+    sources.forEach((source) => {
+      source.sizes = source.dataset.sizes;
+      source.srcset = source.dataset.srcset;
+      source.removeAttribute("data-srcset");
+      source.removeAttribute("data-sizes");
+    });
+
+    // Swap in the image
+    img.src = img.dataset.src;
+  });
+};
+
 window.addEventListener("DOMContentLoaded", () => {
   document
     .getElementById("dark-mode-switch")
@@ -123,4 +169,6 @@ window.addEventListener("DOMContentLoaded", () => {
       e.preventDefault();
       toggleSearchVisibility(false);
     });
+
+  lazyLoadImages();
 });
