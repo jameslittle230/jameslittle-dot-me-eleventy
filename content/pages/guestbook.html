@@ -265,7 +265,7 @@ templateEngineOverride: liquid
 <!-- The following are populated at build time, by the liquid templater: -->
 <script>
   var staticLength = {{guestbook.size}};
-  var latestEntryDate = {{guestbook[0].created_at}};
+  var latestEntryDate = new Date("{{guestbook[0].created_at | strictIsoDateFormat}}");
   var development = "{{environment.development}}";
 </script>
 

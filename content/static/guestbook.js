@@ -95,7 +95,10 @@ var app = new Vue({
         })
         .then((response) => {
           this.formSubmissionState = "success";
-          this.dynamicGuestbook.unshift({...this.input, created_at: new Date()});
+          this.dynamicGuestbook.unshift({
+            ...this.input,
+            created_at: new Date(),
+          });
           this.input = JSON.parse(JSON.stringify(BLANK_INPUT));
         })
         .catch((err) => {
@@ -171,13 +174,13 @@ var app = new Vue({
     axios
       .get("https://api.jameslittle.me/guestbook")
       .then((response) => {
-        var items = response.data["Items"]
+        var items = response.data.items;
 
-        items.forEach(i => {
-          i.created_at = new Date(Number(i.created_at))
+        items.forEach((i) => {
+          i.created_at = new Date(i.created_at);
         });
 
-        this.dynamicGuestbook = response.data["Items"].filter(
+        this.dynamicGuestbook = response.data.items.filter(
           (i) => i.created_at > latestEntryDate
         );
         this.getEntriesState = "success";
