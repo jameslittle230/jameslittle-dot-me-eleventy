@@ -6,6 +6,10 @@ function dateFormat(value, fmtstring = "yyyy-MM-dd") {
   return format(zonedDate, fmtstring);
 }
 
+function strictIsoDateFormat(value) {
+  return Date.toISOString();
+}
+
 function relativeDate(value) {
   return formatDistanceToNow(new Date(Number(value)), { addSuffix: true });
 }
@@ -14,4 +18,9 @@ function dateOlderThan1y(value) {
   return differenceInDays(new Date(), new Date(Number(value))) > 365;
 }
 
-module.exports = { dateFormat, relativeDate, dateOlderThan1y };
+module.exports = {
+  dateFormat,
+  strictIsoDateFormat,
+  relativeDate,
+  dateOlderThan1y,
+};

@@ -4,6 +4,7 @@ const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
 const extractPostSlug = require("./11ty/extractPostSlug.js");
 const {
   dateFormat,
+  strictIsoDateFormat,
   relativeDate,
   dateOlderThan1y,
 } = require("./11ty/dateFilters.js");
