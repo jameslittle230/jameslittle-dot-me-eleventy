@@ -30,6 +30,7 @@ module.exports = function (eleventyConfig) {
   // FILTERS
   eleventyConfig.addFilter("extractPostSlug", extractPostSlug);
   eleventyConfig.addFilter("dateformat", dateFormat);
+  eleventyConfig.addFilter("strictIsoDateFormat", dateFormat);
   eleventyConfig.addFilter("relativeDate", relativeDate);
   eleventyConfig.addFilter("dateOlderThan1y", dateOlderThan1y);
   eleventyConfig.addFilter("leftpad", leftpad);
