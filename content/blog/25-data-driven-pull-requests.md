@@ -72,9 +72,11 @@ It's not perfect, but I try to isolate for this jitter by running the two compar
 
 There's a cost to running this system: CI takes much longer for every PR. Even so, I've found it to be "worth it" - these metrics let me create data-driven decisions for each pull request that I wasn't making before. Even though the tools were all available for me to make this comparison on my own, the automatic Github report has changed by development behavior.
 
-With this system in place, I'm much less afraid of experimentation. If I have an idea for an optimization, I'll put up a PR that hacks it together. If one of my metrics goes in a bad direction, I'll know that it's not worth continuing to pursue. I've also started putting up competing PRs that both solve the same problem in different ways, which lets me
+With this system in place, I'm much less afraid of experimentation. If I have an idea for an optimization, I'll put up a PR that hacks it together. If one of my metrics goes in a bad direction, I'll know that it's not worth continuing to pursue. I've also started putting up competing PRs that both solve the same problem in different ways, which lets me explore and compare both solutions in parallel and then have less uncertainty when I decide to move forward with one over the other.
 
-I also feel more energy to make optimizations since the impact of my work is made very clear to me. Putting up a PR that reduces search duration by 5% is notable, and it's nicer to anticipate being able to celebrate that when I'm in the throes of algorithm optimization.
+In a more *emotional* sense, I also have more energy to make optimizations with this system in place, since the impact of my work is made very clear to me. Putting up a PR that reduces search duration by 5% is notable, and it's nicer to anticipate being able to celebrate that when I'm in the throes of algorithm optimization. It's nice to see improvements, dangit, and it makes the work I put in worth it.
+
+In summary: data is good, and it feels exciting to drive metrics in one direction. Anything I can do to add that those warm fuzzies by seeing a number go down after putting in the work is a welcome addition to my life.
 
 ## Appendix: How it all works
 
