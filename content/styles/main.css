@@ -61,14 +61,6 @@ img {
   content-visibility: auto;
 }
 
-.lazy-img {
-  filter: blur(8px);
-  transition: filter 0.1s ease-in;
-}
-.lazy-picture[data-loaded] .lazy-img {
-  filter: unset;
-}
-
 strong {
   font-weight: 700;
 }
