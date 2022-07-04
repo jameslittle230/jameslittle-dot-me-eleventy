@@ -1,73 +1,78 @@
 const Image = require("@11ty/eleventy-img");
 const outdent = require("outdent");
 
-const ImageWidths = {
-  ORIGINAL: null,
-  PLACEHOLDER: 24,
+const stringifyAttributes = (attributeMap) => {
+  return Object.entries(attributeMap)
+    .map(([attribute, value]) => {
+      if (typeof value === "undefined") return "";
+      return `${attribute}="${value}"`;
+    })
+    .join(" ");
 };
 
 const imageShortcode = async (
-  path,
-  alt = "",
-  className = "",
-  widths = [null, 400, 800, 1280, 1920],
-  baseFormat = "jpeg",
-  optimalFormats = ["avif", "webp"],
+  src,
+  alt,
+  className = undefined,
+  widths = [400, 800, 1280],
+  formats = ["webp", "jpeg"],
   sizes = "100vw"
 ) => {
-  console.log(path);
-  const fullS3Path = `https://files.jameslittle.me/images/${path}`;
+  const imageMetadata = await Image(
+    `https://files.jameslittle.me/images/${src}`,
+    {
+      widths: [...widths, null],
+      formats: [...formats, null],
+      outputDir: "_site/assets/images",
+      urlPath: "/assets/images",
+    }
+  );
 
-  const metadata = await Image(fullS3Path, {
-    widths: [ImageWidths.ORIGINAL, ImageWidths.PLACEHOLDER, ...widths],
-    formats: [...optimalFormats, baseFormat],
-    outputDir: "_site/images",
-    urlPath: "/images",
-    // dryRun: true,
+  const sourceHtmlString = Object.values(imageMetadata)
+    // Map each format to the source HTML markup
+    .map((images) => {
+      // The first entry is representative of all the others
+      // since they each have the same shape
+      const { sourceType } = images[0];
+
+      // Use our util from earlier to make our lives easier
+      const sourceAttributes = stringifyAttributes({
+        type: sourceType,
+        // srcset needs to be a comma-separated attribute
+        srcset: images.map((image) => image.srcset).join(", "),
+        sizes,
+      });
+
+      // Return one <source> per format
+      return `<source ${sourceAttributes}>`;
+    })
+    .join("\n");
+
+  const getLargestImage = (format) => {
+    const images = imageMetadata[format];
+    return images[images.length - 1];
+  };
+
+  const largestUnoptimizedImg = getLargestImage(formats[0]);
+  const imgAttributes = stringifyAttributes({
+    src: largestUnoptimizedImg.url,
+    width: largestUnoptimizedImg.width,
+    height: largestUnoptimizedImg.height,
+    alt,
+    loading: "lazy",
+    decoding: "async",
   });
+  const imgHtmlString = `<img ${imgAttributes}>`;
 
-  const lowSrc = metadata[baseFormat][0];
-  const highSrc = metadata[baseFormat][metadata[baseFormat].length - 1];
+  const pictureAttributes = stringifyAttributes({
+    class: className,
+  });
+  const picture = `<picture ${pictureAttributes}>
+    ${sourceHtmlString}
+    ${imgHtmlString}
+  </picture>`;
 
-  return outdent`
-    <picture class="lazy-picture" data-lazy-state="unseen">
-    ${Object.values(metadata)
-      .map((entry) => {
-        return `<source type="${entry[0].sourceType}" srcset="${
-          entry[0].srcset
-        }" data-srcset="${entry
-          .filter((imageObject) => imageObject.width !== 1)
-          .map((filtered) => filtered.srcset)
-          .join(", ")}" sizes="${sizes}" class="lazy">`;
-      })
-      .join("\n")}
-    <img
-      src="${lowSrc.url}"
-      data-src="${highSrc.url}"
-      width="${highSrc.width}"
-      height="${highSrc.height}"
-      alt="${alt}"
-      class="lazy-img ${className}"
-      loading="lazy">
-    </picture>
-    <noscript>
-    <picture>
-    ${Object.values(metadata)
-      .map((entry) => {
-        return `<source type="${entry[0].sourceType}" srcset="${entry
-          .filter((imageObject) => imageObject.width !== 1)
-          .map((filtered) => filtered.srcset)
-          .join(", ")}" sizes="${sizes}">`;
-      })
-      .join("\n")}
-    <img
-      src="${highSrc.url}"
-      width="${highSrc.width}"
-      height="${highSrc.height}"
-      alt="${alt}"
-      class="${className}">
-    </picture>
-    </noscript>`;
+  return outdent`${picture}`;
 };
 
 module.exports = { imageShortcode };
