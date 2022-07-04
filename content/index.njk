@@ -4,6 +4,7 @@ title: Home
 cssFiles: [
     "content/styles/post-listing.css",
     "content/styles/portfolio-listing.css",
+    "content/styles/portfolio-index.css",
     "content/styles/index.css"
 ]
 ---
@@ -48,7 +49,7 @@ cssFiles: [
     <a href="/portfolio">See more →</a>
 </div>
 
-<ul class="portfolio-list">
+<ul class="portfolio-index">
     {% for project in collections.portfolio | reverse %}
         {% if loop.index <= 3 %}
             {% include "portfolio-listing.njk" %}
@@ -58,4 +59,4 @@ cssFiles: [
 
 <h2>Contact</h2>
 
-<p>I'd love to get in touch. Send me an email — my address is hello@&lt;this domain&gt; — or tweet something at me @jameslittle230. I'm also on other various places on the internet, which are listed in the page's footer. &darr;</p>
+<p>I'd love to get in touch. Send me an email — my address is <code>hello@&lt;this domain&gt;</code> — or <a href="https://twitter.com/messages/compose?recipient_id=2798914670">DM me on Twitter</a>. I'm also on other various places on the internet, which are listed in the page's footer. &darr;</p>

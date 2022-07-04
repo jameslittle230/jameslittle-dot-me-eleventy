@@ -3,33 +3,20 @@
   font-size: 0.9em;
 }
 
-.portfolio-listing:hover {
-  box-shadow: var(--shadow);
-  background-color: hsla(0, 0%, 50%, 0.05);
-}
-
 .portfolio-listing a {
   color: currentColor;
   text-decoration: none;
 }
 
-.portfolio-listing img {
-  width: 100%;
-  border-radius: 3px;
-}
-
-.portfolio-listing .image {
-  flex-basis: 25%;
-  flex-shrink: 0;
-}
-
-.portfolio-listing .text {
-  padding-left: 1.5em
-}
-
-.portfolio-listing h2 {
-  margin-top: 0.5em;
+.portfolio-listing .title {
+  margin: 0 0 0.5em;
   line-height: 1.2;
+  font-size: 1.4em;
+  font-weight: 700;
+}
+
+.portfolio-listing .blurb {
+  margin: 0.25em 0;
 }
 
 .portfolio-listing .stats {
@@ -37,14 +24,7 @@
   text-transform: uppercase;
   letter-spacing: 0.02em;
   opacity: 0.7;
-}
-
-.portfolio-listing *:first-child {
-  margin-top: 0;
-}
-
-.portfolio-listing *:last-child {
-  margin-bottom: 0;
+  margin: 0.25em 0;
 }
 
 .github-link path {
