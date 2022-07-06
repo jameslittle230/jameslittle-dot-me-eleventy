@@ -1,9 +1,13 @@
-const axios = require("axios");
+const EleventyFetch = require("@11ty/eleventy-fetch");
 
 async function fetchGuestbookEntries() {
-  const response = await axios.get("https://api.jameslittle.me/guestbook");
+  const url = "https://api.jameslittle.me/guestbook";
+  const response = await EleventyFetch(url, {
+    duration: "1d",
+    type: "json",
+  });
 
-  var entries = response.data.items;
+  var entries = response.items;
 
   entries.forEach((e) => {
     e.created_at = new Date(e.created_at);

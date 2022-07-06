@@ -23,9 +23,10 @@ module.exports = function (eleventyConfig) {
 
   // CONFIGURATIONS
   eleventyConfig.setDataDeepMerge(true);
-  eleventyConfig.addPassthroughCopy({ "content/static/": "/" });
+  eleventyConfig.addPassthroughCopy({ "statics/assets/": "/" });
+  eleventyConfig.addPassthroughCopy({ "statics/scripts/": "/" });
   eleventyConfig.setLibrary("md", markdownLibrary);
-  eleventyConfig.addWatchTarget("content/styles/*");
+  eleventyConfig.addWatchTarget("statics/*");
 
   // FILTERS
   eleventyConfig.addFilter("extractPostSlug", extractPostSlug);
@@ -52,6 +53,7 @@ module.exports = function (eleventyConfig) {
     dir: {
       input: "./content",
       includes: "../includes",
+      layouts: "../layouts",
       output: "./_site",
     },
   };

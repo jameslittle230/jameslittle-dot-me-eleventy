@@ -1,6 +1,7 @@
 require("dotenv").config();
 const Airtable = require("airtable");
 const { utcToZonedTime, format } = require("date-fns-tz");
+const { AssetCache } = require("@11ty/eleventy-fetch");
 
 Airtable.configure({
   endpointUrl: "https://api.airtable.com",
@@ -20,7 +21,14 @@ Array.prototype.uniqued = function () {
 const booksBaseKey = "appktTl97d89xOZQa";
 var base = Airtable.base(booksBaseKey);
 
+let asset = new AssetCache("airtable_books");
+
 const getAirtableEntries = new Promise((resolve, reject) => {
+  if (asset.isCacheValid("1d")) {
+    // return cached data.
+    asset.getCachedValue().then(resolve);
+  }
+
   var books = [];
 
   base("Reading List")
@@ -54,7 +62,11 @@ const getAirtableEntries = new Promise((resolve, reject) => {
       },
       (err) => {
         if (err) reject(err);
-        else resolve(books);
+        else {
+          asset.save(books, "json").then(() => {
+            resolve(books);
+          });
+        }
       }
     );
 });
