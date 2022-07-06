@@ -12,9 +12,14 @@ url_prefix = "https://jameslittle.me"
 {% set absolutePostUrl %}{{ post.url | url | absoluteUrl(metadata.url) }}{% endset %}
 
 [[input.files]] 
-path = "{{post.inputPath}}"
+contents = '''
+<main>
+{{post.templateContent | safe}}
+</main>
+'''
+
 url = "{{absolutePostUrl}}"
 title = "{{post.data.title | safe}}"
-filetype = "Markdown" # Not accurate for all pages, but will get close enough
+filetype = "HTML"
 
 {%- endfor %}

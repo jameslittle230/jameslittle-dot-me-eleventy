@@ -1,5 +1,5 @@
 ---
-cssFiles: ["content/styles/main.css", "content/styles/topbar-footbar.css"]
+cssFiles: ["main.css", "topbar-footbar.css"]
 ---
 
 <!doctype html>
@@ -15,13 +15,13 @@ cssFiles: ["content/styles/main.css", "content/styles/topbar-footbar.css"]
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" sizes="any">
     <link rel="manifest" href="/site.webmanifest">
 
-    {% set js %}{% include "content/scripts/main.js" %}{% endset %}
+    {% set js %}{% include "statics/scripts/main.js" %}{% endset %}
     <script>
       {{ js | jsmin | safe }}
     </script>
 
     {% for file in cssFiles %}
-      {% set css %}{% include file %}{% endset %}
+      {% set css %}{% include "statics/styles/" + file %}{% endset %}
       <style>
         {{css | cssmin | safe}}
       </style>
@@ -53,9 +53,6 @@ cssFiles: ["content/styles/main.css", "content/styles/topbar-footbar.css"]
     </main>
     {% include "footbar.njk" %}
 
-    {% set matomo %}
-      {% include "content/scripts/matomo.js" %}
-    {% endset %}
     <script src="https://files.stork-search.net/stork.js"></script>
     <script>
       stork.register(
@@ -69,6 +66,9 @@ cssFiles: ["content/styles/main.css", "content/styles/topbar-footbar.css"]
       )
     </script>
     
+    {% set matomo %}
+      {% include "statics/scripts/matomo.js" %}
+    {% endset %}
     <script>
       {{ matomo | jsmin | safe }}
     </script>

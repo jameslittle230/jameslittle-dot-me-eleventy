@@ -3,10 +3,10 @@
   --secondary-color: #c5369a;
   --font-color: #182b28;
   --muted-color: #535e5c;
-  --bg-color: #fff;
+  --bg-color: #f6f5ec;
   --link-color: #007e76;
   --visited-color: #9f10ac;
-  --badge-color: #cfcfcf;
+  --badge-color: #d7d5ce;
   --heading-color: #163833;
   --white-override: #ffffff;
   --black-override: #182b28;
@@ -287,6 +287,7 @@ figcaption {
   padding: 0.1em 0.4em;
   /* margin: 0 0.8em; */
   font-size: 0.8em;
+  letter-spacing: -0.3px;
   line-height: 1.25;
   /* Offset 0.8em font size */
 }
@@ -334,24 +335,12 @@ hr {
   border-top: 1px dashed var(--secondary-color);
 }
 
-.header-anchor {
-  font-family: var(--mono-font-family);
-  font-weight: 200;
-  opacity: 0;
-  transition: opacity 0.1s ease;
-  margin: 0 0.5em;
-}
-
-h1:hover .header-anchor,
-h2:hover .header-anchor,
-h3:hover .header-anchor,
-h4:hover .header-anchor,
-h5:hover .header-anchor,
-h6:hover .header-anchor {
-  opacity: 1;
-}
-
-.header-anchor {
-  transition: opacity 0.3s ease;
+a:link.header-anchor,
+a:visited.header-anchor {
+  color: var(--heading-color);
   text-decoration: none;
+}
+
+a:hover.header-anchor {
+  text-decoration: underline;
 }

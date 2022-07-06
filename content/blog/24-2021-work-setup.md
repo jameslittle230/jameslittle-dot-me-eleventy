@@ -36,6 +36,12 @@ I usually end up with two to four windows tiled on the primary monitor and two m
 
 Because my desk isn't terribly large, I try to mount as many things to its edge as I can to give myself as much usable surface space as I can. The two most important things I mount are my monitors. I use two monitors. The first is an [LG 27UL500](https://www.lg.com/us/monitors/lg-27UL500-W-4k-uhd-led-monitor), a 27" 4K monitor that was standard-issue in the Stripe offices of 2019. On its left, rotated vertically, is a [Dell P2415Q](https://pcmonitors.info/reviews/dell-p2415q/), a 24" 4K monitor that was my primary until I realized that this pandemic was probably going to last a while. They live on two independent arms clamped to the back of my desk, so they take up ~no desk space and I can use the entire area underneath them to put other stuff. I have no complaints with either (except for the fact that I only get 30 FPS on the 24" one—I think it's because I'm using an HDMI connection instead of a DisplayPort one), but I'm looking forward to the ever-rumored general purpose Apple monitor that everyone hopes is getting released soon.
 
+<div class="note">
+
+**March 2022 update:** I upgraded to an M1 Pro 14" Macbook Pro for both my personal and work computer, making the next paragraph redundant. I think I didn't find the laptop → desktop transition jarring because the 16" computers I had been using previously were so chunky that it was kind of annoying to take them from place to place. It's much nicer to have a 14" laptop that I can use from the couch or throw in my bag.
+
+</div>
+
 I have two computers on my desk: my personal computer and my work laptop. I got an M1 Mac Mini (16 GB memory, 1 TB storage) pretty much immediately after the Apple event when they were announced, and it absolutely screams through anything I throw at it. I got the Mac Mini because it was the only M1 machine that could drive two external displays. At first, I was nervous about switching to a desktop-only machine after using laptops for nearly ten years, but it hasn't been nearly as disruptive as I expected.[^laptop] My work laptop lives in a vertical stand and I pretty much constantly use it in clamshell mode, mostly to save space.
 
 {% image "2021-desk-post/DSC05397.jpg" %}
@@ -67,6 +73,12 @@ For a while, I used a Blue Yeti, but wanted to upgrade when I started getting fe
 {% image "2021-desk-post/IMG_5827.jpg" %}
 
 Today, I use a [Rode PodMic](https://www.rode.com/podmic). It sounds a whole lot better than the Blue Yeti (in my opinion), and when I put the Rode pop filter over it (per [Tom Buck's suggestion](https://www.youtube.com/watch?v=NFzVwl2N0iA) I can almost imagine that it sounds like a Shure SM7B. I keep it mounted on a stand clamped to the back of my desk; the stand isn't a [Rode PSA1](https://www.bhphotovideo.com/c/product/484972-REG/Rode_PSA1_PSA_1_Studio_Boom_Arm.html?sts=pi-ps&pim=Y), but if I were to start over, that's what I would get. When I'm talking, I swing it out so it's about six inches from my mouth (unfortunately blocking my view of the vertical second monitor), but when I'm not talking it hangs out at the side of my desk.
+
+<div class="note">
+
+**March 2022 update:** When I got new computers, I put the microphone on the other side of my desk. I also got the first-party wind screen for the Podmic which makes it sound slightly nicer.
+
+</div>
 
 The Rode PodMic is an XLR microphone, so it needs to go into a USB audio interface to connect to my computer. It works well with the [Focusrite Scarlett Solo](https://focusrite.com/en/audio-interface/scarlett/scarlett-solo), though the Focusrite's gain knob has to be turned up to nearly the maximum. The Focusrite connects to my CalDigit dock, which connects to my computer, and it works just like any audio input. This setup has been rock solid, and I've gotten much improved reviews from people on the other end of the video calls.
 

@@ -1,18 +1,20 @@
 .pre-article {
-  margin-bottom: 3em;
+  margin-bottom: 2.25em;
 }
 
 article {
   line-height: 1.75;
+  max-width: 38em;
 }
 
 article > * {
   margin: 0;
-  margin-bottom: 2.5em;
+  margin-bottom: 2em;
 }
 
 article > pre {
   box-shadow: 3px 3.5px 0 var(--bg-color), 0.7em 0.7em 0 var(--secondary-color);
+  margin-bottom: 3em; /* override - the shadow adds some height. This gets un-overrided in dark mode. */
 }
 
 .metadata > *:last-child {
@@ -25,6 +27,7 @@ article > pre {
 [data-theme="dark"] article > pre {
   box-shadow: none;
   border: 1px solid var(--secondary-color);
+  margin-bottom: 2em;
 }
 
 .whoami-text {
@@ -35,6 +38,7 @@ article > pre {
 
 .related-links {
   padding: 1.5em 0;
+  display: flex;
 }
 
 .related-links a {

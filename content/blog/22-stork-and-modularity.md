@@ -1,12 +1,13 @@
 ---
-title:  "Stork and Modularity"
+title: "Stork and Modularity"
 date: 2021-09-19
 layout: post
 tags: post
 blurb: "Splitting code into crates, the benefits of small public interface, and a combinatorial explosion."
+outdated: true
 ---
 
-I've been working on making [Stork](https://stork-search.net) a more modular project. Stork has a lot of code in it; to make it more readable, I've been putting that code in different files. With Rust, every file is a different module (for the most part), so this winds up with lots of stacked modules. Rust also lets you only reference modules absolutely (starting from the crate) or relatively (by ascending up the module stack and then descending down), so my imports were getting kind of unwieldy. 
+I've been working on making [Stork](https://stork-search.net) a more modular project. Stork has a lot of code in it; to make it more readable, I've been putting that code in different files. With Rust, every file is a different module (for the most part), so this winds up with lots of stacked modules. Rust also lets you only reference modules absolutely (starting from the crate) or relatively (by ascending up the module stack and then descending down), so my imports were getting kind of unwieldy.
 
 ```rust
 super::super::super::config::file::SRTSubtitleFormat // :(
@@ -25,9 +26,6 @@ And yet, this project seemed futile for a good portion of it. Stork still doesn'
 I want to keep hacking on this, mostly because I'm _so close_ and because it'd be nice to be able to give Andrew a working binary. But I think I realized that spending a weekend on my build configurations doesn't spark as much joy as building something new.
 
 [^0]: This seems like a bug? I'll have to go back and reproduce it and file it later, probably on [this repo](https://github.com/sfackler/rust-openssl).
-
-[^1]: Or 100%! I don't have the analytics to determine, though none of the indexes I've seen through the analytics I _do_have are using the old format.
-
+[^1]: Or 100%! I don't have the analytics to determine, though none of the indexes I've seen through the analytics I \_do_have are using the old format.
 [^2]: This isn't a bad thing! Compiler admonition is much better than runtime failure; that's one of the reasons I like writing Rust so much.
-
 [^3]: In Rust, "Crate" is its own visibility level. Now that there are more crate boundaries in the project, I can be a lot more granular about what symbols are visible, so I can make more symbols private (or make symbols private more easily) than I could before. That makes me more likely to write documentation for my public interfaces (or even care about them when I previously hadn't), since those public interfaces are now more logical and meaningful than they were before.
