@@ -3,10 +3,10 @@
   --secondary-color: #c5369a;
   --font-color: #182b28;
   --muted-color: #535e5c;
-  --bg-color: #fff;
+  --bg-color: #f6f5ec;
   --link-color: #007e76;
   --visited-color: #9f10ac;
-  --badge-color: #cfcfcf;
+  --badge-color: #d7d5ce;
   --heading-color: #163833;
   --white-override: #ffffff;
   --black-override: #182b28;
@@ -287,6 +287,7 @@ figcaption {
   padding: 0.1em 0.4em;
   /* margin: 0 0.8em; */
   font-size: 0.8em;
+  letter-spacing: -0.3px;
   line-height: 1.25;
   /* Offset 0.8em font size */
 }
@@ -334,7 +335,8 @@ hr {
   border-top: 1px dashed var(--secondary-color);
 }
 
-a:link.header-anchor, a:visited.header-anchor {
+a:link.header-anchor,
+a:visited.header-anchor {
   color: var(--heading-color);
   text-decoration: none;
 }

@@ -38,6 +38,7 @@ article > pre {
 
 .related-links {
   padding: 1.5em 0;
+  display: flex;
 }
 
 .related-links a {

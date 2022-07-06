@@ -1,9 +1,10 @@
 ---
-title:  "About the Guestbook"
+title: "About the Guestbook"
 date: 2020-03-16
 layout: post
 tags: post
 blurb: "It's interesting to think that a feature that seems so intuitively simple can have so many challenges, questions, and choices once you start building it. Here are the ones I faced while building /guestbook."
+outdated: true
 ---
 
 Adding the [guestbook](/guestbook) to my site was really fun: it was the kind of project that seemed easy at first, but had a lot of complexity under the hood. I kept thinking I was done, then realizing there was some edge case I hadn't quite thought of. I wanted to write down some of those edge cases and subtle challenges I faced, mostly to show that features that seem simple on the outset might actually take a while to put together.

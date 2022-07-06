@@ -143,6 +143,8 @@
   letter-spacing: 0.035em;
   line-height: 1.5;
   clear: both;
+  margin-top: 3em;
+  border-top: 1px solid var(--secondary-color);
 }
 
 .footbar p {
@@ -234,7 +236,8 @@
   padding: 0.1em;
 }
 
-.stork-close-button, .stork-close-button-position {
-  grid-row:  1 / 2;
+.stork-close-button,
+.stork-close-button-position {
+  grid-row: 1 / 2;
   grid-column: 2 / 3;
 }

@@ -4,6 +4,7 @@ date: 2021-06-02
 layout: post
 tags: post
 blurb: "A Docker love letter? An admission that I'm bad at dev-ops? Maybe I just did something I want to brag about. This is that brag."
+outdated: true
 ---
 
 I wrote a little Node application that downloads all the Cloudfront logs that [Stork](https://stork-search.net) generates, and sticks the data in a SQLite database. I stuck a Dockerfile in front of that application. Then, I added another directory that has a Dockerfile pointing to [Datasette](https://datasette.io). Now my project is a monorepo that contains multiple services.
