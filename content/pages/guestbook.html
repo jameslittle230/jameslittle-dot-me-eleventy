@@ -2,7 +2,8 @@
 layout: page.njk
 title: Guestbook
 permalink: "guestbook/index.html"
-templateEngineOverride: liquid
+templateEngineOverride: njk
+cssFiles: ["guestbook.css"]
 ---
 
 <h1>Guestbook</h1>
@@ -24,101 +25,230 @@ templateEngineOverride: liquid
   that sort of thing.
 </p>
 
-<div id="app">
-  {% if environment.development %}
-  <p class="form-submission-message">
-    QA mode enabled. Guestbook posts will not be saved.
-  </p>
-  {% endif %}
+<script>
+  function count(quantity, singular, plural) {
+    return `${quantity} ${quantity === 1 ? singular : plural}`;
+  }
 
-  <p class="form-submission-message hidden-until-js-load" v-if="formSubmissionState === 'error'">
-    {{formSubmissionErrorMessage}}
-  </p>
+  function toIso(date) {
+    return new Date(Number(date)).toISOString().split("T")[0];
+  }
 
-  <p class="form-submission-message hidden-until-js-load" v-if="formSubmissionState === 'loading'">
-    Submitting...
-  </p>
+  function relative(date) {
+    date = new Date(Number(date));
+    var delta = Math.round((+new Date() - date) / 1000);
 
-  <p class="form-submission-message hidden-until-js-load" v-if="formSubmissionState === 'success'">
-    Success!
-  </p>
-  
-  <noscript>
-  <p class="form-submission-message">
-    You need Javascript to get this form to work.
-  </p>
-  </noscript>
+    var minute = 60,
+      hour = minute * 60,
+      day = hour * 24,
+      week = day * 7;
 
-  <form v-on:submit.prevent="submitForm">
+    var fuzzy = null;
+
+    if (delta < 30) {
+      fuzzy = "just now";
+    } else if (delta < minute) {
+      fuzzy = delta + " seconds ago";
+    } else if (delta < 2 * minute) {
+      fuzzy = "a minute ago";
+    } else if (delta < hour) {
+      fuzzy = Math.floor(delta / minute) + " minutes ago";
+    } else if (Math.floor(delta / hour) == 1) {
+      fuzzy = "1 hour ago";
+    } else if (delta < day) {
+      fuzzy = Math.floor(delta / hour) + " hours ago";
+    } else if (delta < day * 2) {
+      fuzzy = "yesterday";
+    } else if (delta < day * 7) {
+      fuzzy = "this week";
+    } else if (delta < day * 14) {
+      fuzzy = "last week";
+    } else if (delta < day * 31) {
+      fuzzy = "this month";
+    }
+
+    return fuzzy || toIso(date);
+  }
+</script>
+
+<div>
+  <form
+    x-data='{
+      name: "", 
+      email: "", 
+      url: "", 
+      message: "",
+
+      submissionState: null,
+      submissionError: null,
+
+      submitButtonText() {
+        if (!this.submissionState) {
+          return "Submit &darr;"
+        } else if (this.submissionState === "submitting") {
+          return "Submitting..."
+        } else if (this.submissionState === "success") {
+          return "Thanks!"
+        } else if (this.submissionState === "error") {
+          return "Try again..."
+        }
+      },
+
+      messageCharactersRemaining() {
+        return 350 - this.message.length;
+      },
+
+      messageCharactersRemainingText() {
+        return this.messageCharactersRemaining() <= 50 
+          ? `${count(
+              this.messageCharactersRemaining(),
+              "character",
+              "characters"
+            )} remaining` 
+          : ""
+      },
+
+      isFormSubmittable() {
+        return (
+          this.messageCharactersRemaining() >= 0 &&
+          this.name !== "" &&
+          this.message !== ""
+        );
+      },
+
+      handleSubmit(data) {
+        if(!this.isFormSubmittable()) { return }
+        this.submissionState = "submitting"
+        fetch("https://api.jameslittle.me/guestbook", {
+          method: "post",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+
+          //make sure to serialize your JSON body
+          body: JSON.stringify(data)
+        }).then((response) => {
+          return Promise.all([response, response.text()]);
+        }).then(([response, text]) => {
+          console.log(text)
+          if(response.ok) {
+            this.submissionState = "success"
+          } else {
+            this.submissionState = "error"
+            this.submissionError = text
+          }
+        })
+      }
+    }'
+    @submit.prevent="handleSubmit({name, email, url, message})"
+  >
+    <p
+      class="form-submission-message"
+      x-cloak
+      x-show="!!submissionError"
+      x-text="submissionError"
+    ></p>
+
     <fieldset>
       <label for="name" class="required">Name:</label>
-      <input type="text" v-model="input.name" id="name" name="name" autocomplete="off" />
+      <input
+        type="text"
+        x-model="name"
+        id="name"
+        name="name"
+        autocomplete="off"
+      />
 
       <label for="name">Email (never displayed):</label>
-      <input type="email" v-model="input.email" id="email" name="email" />
+      <input type="email" x-model="email" id="email" name="email" />
 
       <label for="name">URL:</label>
-      <input type="url" v-model="input.url" id="URL" name="URL" />
+      <input type="url" x-model="url" id="URL" name="URL" />
 
-      {% raw %}
-      <div style="display: flex; justify-content: space-between; align-items:flex-end;">
+      <div
+        style="
+          display: flex;
+          justify-content: space-between;
+          align-items: flex-end;
+        "
+      >
         <label for="message" class="required">Message:</label>
-        <span class="metadata">{{messageCharactersRemainingText}}</span>
+        <span class="metadata" x-text="messageCharactersRemainingText"></span>
       </div>
-      {% endraw %}
-      <textarea name="message" v-model="input.message" id="message" style="height: 10rem" placeholder="Type something nice!"></textarea>
 
-      {% raw %}
-      <button 
+      <textarea
+        name="message"
+        x-model="message"
+        id="message"
+        style="height: 10rem"
+        placeholder="Type something nice!"
+      ></textarea>
+
+      <button
         type="submit"
-        :disabled="!isFormSubmittable"
-        :class="['submit-button', formSubmissionState]"
-      >Submit &darr;</button>
-      {% endraw %}
+        class="submit-button"
+        disabled
+        :disabled="!isFormSubmittable()"
+        x-text="submitButtonText()"
+      >
+        Submit &darr;
+      </button>
     </fieldset>
   </form>
-
-  <div style="margin-top: 4rem;">
-    <h2 class="hidden-when-js-load">{{guestbook.size}} entries</h2>
-    {% raw %}
-    <h2 class="hidden-until-js-load">{{header}}</h2>
-    {% endraw %}
+  <div
+    style="margin-top: 4rem"
+    x-data='{
+      dynamicData: {},
+      
+      init() {
+        fetch("https://api.jameslittle.me/guestbook?after={{(guestbook | first).id}}")
+          .then(r => r.json())
+          .then(data => {this.dynamicData = data; hideIsoDate()})
+      }
+    }'
+  >
+    <h2 x-show="false">Loading newest entries...</h2>
+    <h2
+      x-cloak
+      x-text="dynamicData.total_count ? `${dynamicData.total_count} entries` : 'Loading newest entries...'"
+    ></h2>
 
     <ul class="guestbook">
-      <li
-        class="guestbook-entry dynamic-guestbook-entry boxed-list-element"
-        v-for="entry in dynamicGuestbook"
-      >
-        {% raw %}
-        <div class="guestbook-metadata">
-          <span class="name">{{entry.name}}</span>
-          <span class="timestamp metadata">
-            {{entry.created_at | relative}}
-            <span class="absolute">{{entry.created_at | toIso}}</span>
-          </span>
-        </div>
-        <span class="url"><a v-bind:href="entry.url">{{entry.url}}</a></span>
-        <div class="message">
-          <p>{{entry.message}}</p>
-        </div>
-        {% endraw %}
-      </li>
+      <template x-if="dynamicData.items">
+        <template x-for="dynamicItem in dynamicData.items.reverse()">
+          <li
+            :id="dynamicItem.id"
+            class="guestbook-entry dynamic-guestbook-entry boxed-list-element"
+          >
+            <div class="guestbook-metadata">
+              <span class="name" x-text="dynamicItem.name"></span>
+              <span
+                class="timestamp metadata"
+                x-text="relative(new Date(dynamicItem.created_at))"
+              ></span>
+            </div>
+            <span class="url">
+              <a x-bind:href="dynamicItem.url" x-text="dynamicItem.url"></a>
+            </span>
+            <div class="message">
+              <p x-text="dynamicItem.message"></p>
+            </div>
+          </li>
+        </template>
+      </template>
 
       {% for entry in guestbook %}
-      <li class="guestbook-entry boxed-list-element">
+      <li class="guestbook-entry boxed-list-element" id="{{entry.id}}">
         <div class="guestbook-metadata">
           <span class="name">{{entry.name}}</span>
           <span class="timestamp metadata">
-            {{entry.created_at | relativeDate}}
+            <span>{{entry.created_at | relativeDate}}</span>
             <span class="absolute">{{entry.created_at | dateformat}}</span>
           </span>
         </div>
         <span class="url">
-          {% comment %} 
-            The replace filter is because danj added quotes to a URL once and 
-            it messed up everything.
-          {% endcomment %}
-          <a href="{{entry.url | replace: '"', ""}}">{{entry.url}}</a>
+          <a href="{{entry.url}}">{{entry.url}}</a>
         </span>
         <div class="message">
           <p>{{entry.message}}</p>
@@ -129,151 +259,14 @@ templateEngineOverride: liquid
   </div>
 </div>
 
-<style>
-  form {
-    max-width: 32em;
-    margin: 0 auto;
-  }
-  fieldset {
-    border: none;
-    padding: 0;
-  }
-  input,
-  textarea {
-    font-family: inherit;
-    display: block;
-    font-size: 1.2em;
-    width: 100%;
-    background: none;
-    border: 1px solid hsla(0, 0%, 50%, 0.7);
-    padding: 0.5em;
-    border-radius: 2px;
-    color: var(--font-color);
-  }
+<script src="//unpkg.com/alpinejs" defer></script>
 
-  textarea {
-    font-size: 0.9em;
-    min-height: 5em;
-  }
+<!-- prettier-ignore -->
+{% set guestbookscript %}
+  {% include "statics/scripts/guestbook.js" %}
+{% endset %}
 
-  label {
-    display: block;
-    opacity: 0.8;
-    text-transform: uppercase;
-    font-weight: bold;
-    font-size: 0.8em;
-    letter-spacing: 0.02em;
-    margin-top: 1.7em;
-  }
-
-  label.required:after {
-    content: " \2605";
-    color: var(--secondary-color);
-  }
-
-  .submit-button {
-    display: block;
-    width: 100%;
-    margin-top: 1.7em;
-    background: var(--secondary-color);
-    color: var(--white-override);
-    padding: 1em;
-    border: none;
-    font-size: 1em;
-    font-weight: bold;
-    border-radius: 5px;
-    transition: box-shadow 0.4s, opacity 0.4s;
-    cursor: pointer;
-  }
-
-  .submit-button:not([disabled]):hover {
-    box-shadow: var(--shadow);
-  }
-  
-  .submit-button[disabled] {
-    opacity: 0.5;
-    cursor: default;
-  }
-
-  .guestbook {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-  }
-
-  .guestbook-entry {
-    padding: 1.4em;
-    margin: 0 -0.6em 2em;
-    overflow: hidden; /* for absolute timestamp transition */
-  }
-
-  .guestbook-entry p {
-    margin: 0;
-  }
-
-  .guestbook-metadata {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .author {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .name {
-    color: #0b9b4e;
-    font-weight: bold;
-    font-size: 1.3em;
-  }
-
-  .url {
-    font-size: 0.8em;
-  }
-
-  .timestamp {
-    transition: transform 0.4s;
-  }
-
-  .absolute {
-    display: inline-block;
-    padding-left: 1em;
-    transition: opacity 0.4s;
-    opacity: 0;
-  }
-
-  .timestamp:hover .absolute {
-    opacity: 1;
-    transform: translateX(0);
-  }
-
-  .form-submission-message {
-    background-color: var(--secondary-color);
-    color: var(--white-override);
-    padding: 1em;
-    font-size: 0.9em;
-  }
-
-  .hidden-until-js-load,
-  /* this class added by guestbook.js */
-  .hidden {
-    display: none;
-  }
-</style>
-
-<!-- The following are populated at build time, by the liquid templater: -->
+<!-- prettier-ignore -->
 <script>
-  var staticLength = {{guestbook.size}};
-  var latestEntryDate = new Date("{{guestbook[0].created_at | strictIsoDateFormat}}");
-  var development = "{{environment.development}}";
+  {{ guestbookscript | jsmin | safe }}
 </script>
-
-{% if environment.development %}
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-{% else %}
-<script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
-{% endif %}
-
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script src="/guestbook.js"></script>

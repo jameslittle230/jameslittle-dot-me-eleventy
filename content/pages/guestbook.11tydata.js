@@ -7,17 +7,13 @@ async function fetchGuestbookEntries() {
     type: "json",
   });
 
-  var entries = response.items;
-
-  entries.forEach((e) => {
-    e.created_at = new Date(e.created_at);
+  var { items } = response;
+  items.forEach((i) => {
+    i.created_at = new Date(i.created_at);
   });
-
-  entries = entries.sort((l, r) => r.created_at - l.created_at);
-
-  console.log(`Found ${entries.length} guestbook entries`);
-
-  return entries;
+  items = items.reverse();
+  console.log(`Found ${items.length} guestbook entries`);
+  return items;
 }
 
 module.exports = async function () {

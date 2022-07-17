@@ -30,14 +30,16 @@ article > pre {
   margin-bottom: 2em;
 }
 
-.whoami-text {
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  font-size: 0.8em;
+.whoami-box {
+  padding: 1em 0;
+}
+
+.whoami-box p {
+  margin: 0;
 }
 
 .related-links {
-  padding: 1.5em 0;
+  padding: 1em 0;
   display: flex;
 }
 
