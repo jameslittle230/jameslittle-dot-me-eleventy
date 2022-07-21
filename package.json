@@ -28,7 +28,7 @@
     "markdown-it-footnote": "^3.0.2",
     "outdent": "^0.8.0",
     "sharp": "^0.30.5",
-    "terser": "^5.6.0-beta",
+    "terser": "^5.14.2",
     "uslug": "^1.0.4"
   }
 }
