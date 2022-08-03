@@ -53,6 +53,7 @@ cssFiles: ["main.css", "topbar-footbar.css"]
     </main>
     {% include "footbar.njk" %}
 
+    <script data-goatcounter="https://jil.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
     <script src="https://files.stork-search.net/stork.js"></script>
     <script>
       stork.register(
@@ -64,13 +65,6 @@ cssFiles: ["main.css", "topbar-footbar.css"]
           onResultsHidden: () => toggleSearchVisibility(false)
         }
       )
-    </script>
-    
-    {% set matomo %}
-      {% include "statics/scripts/matomo.js" %}
-    {% endset %}
-    <script>
-      {{ matomo | jsmin | safe }}
     </script>
   </body>
 </html>
