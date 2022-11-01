@@ -1,0 +1,24 @@
+body {
+  --pull-wide-max-width: calc(42rem + 600px + 1rem);
+}
+
+.row {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 1em;
+}
+
+@media screen and (max-width: calc(36rem + 600px + 1rem)) {
+  .row {
+    flex-direction: column;
+  }
+}
+
+.slide {
+  flex-shrink: 0;
+  border: 1px solid black;
+  margin: 0 1em 1em 0;
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+}
