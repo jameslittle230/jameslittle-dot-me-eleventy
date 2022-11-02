@@ -1,0 +1,20 @@
+---
+permalink: "talks/{{page.fileSlug}}/"
+layout: base.njk
+cssFiles: ["post.css", "talk.css"]
+---
+
+{{ content | safe }}
+
+{% if slides %}
+    <hr style="margin: 3rem 0">
+{% endif %}
+
+<div class="pull-wide">
+    {% for slide in slides -%}
+        <div class="row">
+            <img src="{{slide.image}}" alt="" class="slide">
+            <div class="caption">{{slide.caption | safe}}</div>
+        </div>
+    {% endfor %}
+</div>
